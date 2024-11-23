@@ -10,7 +10,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'temp'
+    database: 'online_diary'
 })
 
 // connect and log the state of connection 
@@ -27,14 +27,60 @@ app.get('/', (req, res) => {
     res.send("Online diary")
 })
 
-app.get("/books", (req, res) => {
-    const sql = "SELECT * FROM books"
+// signup into database 
+app.post('/signup', (req, res) => {
+    const checkEmailSql = "SELECT * FROM users WHERE `email` = ?";
 
-    db.query(sql, (err, data) => {
-        if (err) return res.send(err)
-        return res.send(data)
-    })
-})
+    // Check if the email already exists
+    db.query(checkEmailSql, [req.body.email], (err, data) => {
+        if (err) {
+            return res.json({ message: "Error occurred", error: err });
+        }
+
+        if (data.length > 0) {
+            return res.json({ message: "Account already exists" });
+        }
+
+        // If the email does not exist, proceed with the signup
+        const sql = "INSERT INTO users (`name`, `email`, `password`) VALUES (?)";
+        const values = [
+            req.body.name,
+            req.body.email,
+            req.body.password
+        ];
+
+        db.query(sql, [values], (err, data) => {
+            if (err) {
+                return res.json({ message: "Error occurred", error: err });
+            }
+            return res.json({ message: "Signup successful", data: data });
+        });
+    });
+});
+
+// login into database 
+app.post('/login', (req, res) => {
+    const sql = "SELECT * FROM users WHERE `email` = ?";
+
+    //check for email exits 
+    db.query(sql, [req.body.email], (err, data) => {
+        if (err) {
+            return res.json({ message: "Error occurred", error: err });
+        }
+
+        if (data.length === 0) {
+            return res.json({ message: "Email not found" });
+        }
+
+        // if email exists then check password 
+        const user = data[0];
+        if (user.password !== req.body.password) {
+            return res.json({ message: "Wrong password" });
+        }
+
+        return res.json({ message: "Success login" });
+    });
+});
 
 // connection listen 
 app.listen(8080, () => {
