@@ -28,11 +28,20 @@ router.post('/signup', (req, res) => {
             req.body.password
         ];
 
-        db.query(sql, [values], (err, data) => {
+        db.query(sql, [values], (err, result) => {
             if (err) {
                 return res.json({ message: "Error occurred", error: err });
             }
-            return res.json({ message: "Signup successful", data: data });
+
+            const newUserId = result.insertId;
+            const getUserSql = "SELECT * FROM users WHERE id = ?";
+            db.query(getUserSql, [newUserId], (err, userData) => {
+                if (err) {
+                    return res.json({ message: "Error occurred while fetching user details", error: err });
+                }
+
+                return res.json({ message: "Signup successful", user: userData[0] });
+            });
         });
     });
 });
@@ -41,7 +50,7 @@ router.post('/signup', (req, res) => {
 router.post('/login', (req, res) => {
     const sql = "SELECT * FROM users WHERE `email` = ?";
 
-    //check for email exits 
+    // Check for email existence 
     db.query(sql, [req.body.email], (err, data) => {
         if (err) {
             return res.json({ message: "Error occurred", error: err });
@@ -51,13 +60,20 @@ router.post('/login', (req, res) => {
             return res.json({ message: "Email not found" });
         }
 
-        // if email exists then check password 
+        // If email exists, then check the password 
         const user = data[0];
         if (user.password !== req.body.password) {
             return res.json({ message: "Wrong password" });
         }
 
-        return res.json({ message: "Success login" });
+        // If login is successful, return user details
+        const userDetails = {
+            id: user.id,
+            name: user.name,
+            email: user.email
+        };
+
+        return res.json({ message: "Success login", user: userDetails });
     });
 });
 
