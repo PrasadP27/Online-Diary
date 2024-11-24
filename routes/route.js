@@ -114,7 +114,7 @@ router.post('/logout', (req, res) => {
     });
 });
 
-router.get('/profile', (req, res) => {
+router.get('/diary', (req, res) => {
     // Check if the user is logged in
     if (!req.session.user) {
         return res.status(401).json({ message: "Unauthorized" });

@@ -10,7 +10,7 @@ app.use(session({
     secret: process.env.SECRET_KEY,
     cookie: { maxAge: 24 * 60 * 60 * 1000 }, //one day 24hrs
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
     // cookie: { secure: false }
 }))
 
