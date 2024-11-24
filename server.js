@@ -4,9 +4,10 @@ const path = require('path')
 const cors = require('cors');
 const app = express()
 const session = require('express-session');
+require('dotenv').config()
 
 app.use(session({
-    secret: 'secretkey',
+    secret: process.env.SECRET_KEY,
     // cookie: { maxAge: 24 * 60 * 60 * 1000 }, //one day 24hrs
     cookie: { maxAge: 30000 }, //30sec
     resave: true,
@@ -20,10 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // MySQL database connection 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'online_diary'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 })
 
 // connect and log the state of connection 
