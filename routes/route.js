@@ -3,7 +3,12 @@ const db = require("../server")
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    res.send("Online diary")
+    // res.send("Online diary")
+
+    if (!req.session.user) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+    return res.json({ user: req.user });
 })
 
 // signup into database 
@@ -33,15 +38,23 @@ router.post('/signup', (req, res) => {
                 return res.json({ message: "Error occurred", error: err });
             }
 
-            const newUserId = result.insertId;
-            const getUserSql = "SELECT * FROM users WHERE id = ?";
-            db.query(getUserSql, [newUserId], (err, userData) => {
-                if (err) {
-                    return res.json({ message: "Error occurred while fetching user details", error: err });
-                }
+            // const newUserId = result.insertId;
+            // const getUserSql = "SELECT * FROM users WHERE id = ?";
+            // db.query(getUserSql, [newUserId], (err, userData) => {
+            //     if (err) {
+            //         return res.json({ message: "Error occurred while fetching user details", error: err });
+            //     }
 
-                return res.json({ message: "Signup successful", user: userData[0] });
-            });
+            //     return res.json({ message: "Signup successful", user: userData[0] });
+            // });
+
+            req.session.user = {
+                id: result.insertId,
+                name: req.body.name,
+                email: req.body.email
+            };
+
+            return res.json({ message: "Signup successful", user: req.session.user });
         });
     });
 });
@@ -67,15 +80,34 @@ router.post('/login', (req, res) => {
         }
 
         // If login is successful, return user details
-        const userDetails = {
+        // const userDetails = {
+        //     id: user.id,
+        //     name: user.name,
+        //     email: user.email
+        // };
+
+        // return res.json({ message: "Success login", user: userDetails });
+
+        // Store user info in session
+        req.session.user = {
             id: user.id,
             name: user.name,
             email: user.email
         };
 
-        return res.json({ message: "Success login", user: userDetails });
+        return res.json({ message: "Success login", user: req.session.user });
     });
 });
+
+router.get('/profile', (req, res) => {
+    // Check if the user is logged in
+    if (!req.session.user) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    return res.json({ user: req.user });
+});
+
 
 
 module.exports = router
