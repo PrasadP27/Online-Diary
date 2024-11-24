@@ -120,7 +120,57 @@ router.get('/diary', (req, res) => {
         return res.status(401).json({ message: "Unauthorized" });
     }
 
-    return res.json({ user: req.user });
+    // Fetch all diaries for the logged-in user
+    const fetchDiariesSql = "SELECT * FROM diaries WHERE userId = ?";
+    db.query(fetchDiariesSql, [req.user.id], (err, diaries) => {
+        if (err) {
+            return res.status(500).json({ message: err });
+        }
+
+        return res.json(diaries);
+    });
+});
+
+// generate diaryid randomly in frontend
+// if duplicate id then generate new id 
+router.post('/diary/:diaryid', (req, res) => {
+    // Check if the user is logged in
+    if (!req.session.user) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const diaryId = req.params.diaryid;
+
+    // First, check if the diary already exists
+    const fetchSql = "SELECT * FROM diaries WHERE diaryId = ? AND userId = ?";
+    db.query(fetchSql, [diaryId, req.user.id], (err, diaryResult) => {
+        if (err) {
+            return res.status(500).json({ message: err });
+        }
+
+        if (diaryResult.length > 0) {
+            return res.json(diaryResult[0]);
+        } else {
+            // Diary does not exist, create a new one
+            const insertSql = "INSERT INTO diaries (`diaryId`, `userId`, `date`) VALUES (?, ?, NOW())";
+            const values = [diaryId, req.user.id];
+
+            db.query(insertSql, values, (err) => {
+                if (err) {
+                    return res.status(500).json({ message: err });
+                }
+
+                // Fetch the newly created diary
+                db.query(fetchSql, [diaryId, req.user.id], (err, newDiaryResult) => {
+                    if (err) {
+                        return res.status(500).json({ message: err });
+                    }
+
+                    return res.json(newDiaryResult[0]);
+                });
+            });
+        }
+    });
 });
 
 module.exports = router
