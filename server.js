@@ -8,8 +8,7 @@ require('dotenv').config()
 
 app.use(session({
     secret: process.env.SECRET_KEY,
-    // cookie: { maxAge: 24 * 60 * 60 * 1000 }, //one day 24hrs
-    cookie: { maxAge: 30000 }, //30sec
+    cookie: { maxAge: 24 * 60 * 60 * 1000 }, //one day 24hrs
     resave: true,
     saveUninitialized: true,
     // cookie: { secure: false }

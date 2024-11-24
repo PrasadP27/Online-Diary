@@ -99,6 +99,21 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ message: "Could not log out" });
+        }
+
+        // Clear the session cookie
+        res.clearCookie('connect.sid');
+
+        req.user = null;
+
+        return res.status(200).json({ message: "Logged out successfully" });
+    });
+});
+
 router.get('/profile', (req, res) => {
     // Check if the user is logged in
     if (!req.session.user) {
@@ -107,7 +122,5 @@ router.get('/profile', (req, res) => {
 
     return res.json({ user: req.user });
 });
-
-
 
 module.exports = router
