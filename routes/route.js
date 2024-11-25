@@ -186,7 +186,7 @@ router.put('/diary/:diaryid', (req, res) => {
     const diaryId = req.params.diaryid;
     const { content, heading } = req.body;
 
-    const updateSql = "UPDATE diaries SET content = ?, heading = ? WHERE diaryId = ? AND userId = ?";
+    const updateSql = "UPDATE diaries SET date = NOW(), content = ?, heading = ? WHERE diaryId = ? AND userId = ?";
     const values = [content, heading, diaryId, req.user.id];
 
     db.query(updateSql, values, (err, result) => {
@@ -210,7 +210,7 @@ router.put('/diary/:diaryid', (req, res) => {
             }
 
             // Return the updated diary entry
-            return res.json(diaryResult[0], { message: "Diary updated successfully" });
+            return res.json({ message: "Diary updated successfully", diary: diaryResult[0] });
         });
     });
 })
