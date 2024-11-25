@@ -127,6 +127,10 @@ router.get('/diary', (req, res) => {
             return res.status(500).json({ message: err });
         }
 
+        if (diaries.length === 0) {
+            return res.json({ message: "No diaries found." })
+        }
+
         return res.json(diaries);
     });
 });
@@ -172,5 +176,43 @@ router.post('/diary/:diaryid', (req, res) => {
         }
     });
 });
+
+router.put('/diary/:diaryid', (req, res) => {
+
+    if (!req.session.user) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const diaryId = req.params.diaryid;
+    const { content, heading } = req.body;
+
+    const updateSql = "UPDATE diaries SET content = ?, heading = ? WHERE diaryId = ? AND userId = ?";
+    const values = [content, heading, diaryId, req.user.id];
+
+    db.query(updateSql, values, (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: "Error occurred while updating diary", error: err });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Diary not found or does not belong to the user" });
+        }
+
+        // Fetch the updated diary entry
+        const fetchSql = "SELECT * FROM diaries WHERE diaryId = ? AND userId = ?";
+        db.query(fetchSql, [diaryId, req.user.id], (err, diaryResult) => {
+            if (err) {
+                return res.status(500).json({ message: "Error occurred while fetching updated diary", error: err });
+            }
+
+            if (diaryResult.length === 0) {
+                return res.status(404).json({ message: "Diary not found or does not belong to the user" });
+            }
+
+            // Return the updated diary entry
+            return res.json(diaryResult[0], { message: "Diary updated successfully" });
+        });
+    });
+})
 
 module.exports = router
