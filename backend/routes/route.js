@@ -215,4 +215,28 @@ router.put('/diary/:diaryid', (req, res) => {
     });
 })
 
+// Delete a diary entry
+router.delete('/diary/:diaryid', (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const diaryId = req.params.diaryid;
+
+    const deleteSql = "DELETE FROM diaries WHERE diaryId = ? AND userId = ?";
+    const values = [diaryId, req.user.id];
+
+    db.query(deleteSql, values, (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: "Error occurred while deleting diary", error: err });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Diary not found or does not belong to the user" });
+        }
+
+        return res.json({ message: "Diary deleted successfully" });
+    });
+});
+
 module.exports = router
