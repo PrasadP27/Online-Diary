@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Login = () => {
-  const [values, setValues] = useState({ email: "", password: "" });
+const Register = () => {
+  const [values, setValues] = useState({ name: "", email: "", password: "" });
   const [user, setUser] = useState(null);
 
   const handelsubmit = (e) => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8080/login", values, { withCredentials: true })
+      .post("http://localhost:8080/signup", values, { withCredentials: true })
       .then((res) => {
         console.log(res);
         if (res.data) {
           setUser(res.data);
-          setValues({ email: "", password: "" });
+          setValues({ name: "", email: "", password: "" });
         }
       })
       .catch((err) => {
@@ -22,15 +22,34 @@ const Login = () => {
       });
   };
 
-  const handelLogout = () => {};
+  const handelLogout = () => {
+    axios
+      .post("http://localhost:8080/logout", {}, { withCredentials: true })
+      .then((res) => console.log(res));
+  };
 
   return (
     <section className="bg-slate-950 h-screen flex items-center justify-start gap-4 flex-col p-12">
-      <h1 className="text-5xl pb-7 font-bold text-red-500">Login page</h1>
+      <h1 className="text-5xl pb-7 font-bold text-red-500">Register page</h1>
+      <h4
+        className="absolute top-7 right-14 text-slate-100 cursor-pointer capitalize"
+        onClick={handelLogout}
+      >
+        logout
+      </h4>
       <form
         onSubmit={handelsubmit}
         className="flex items-center gap-4 flex-col w-1/3"
       >
+        <input
+          type="text"
+          placeholder="name"
+          className="drop-shadow-sm rounded-lg p-2 w-full"
+          name="name"
+          value={values.name}
+          required
+          onChange={(e) => setValues({ ...values, name: e.target.value })}
+        />
         <input
           type="email"
           placeholder="email"
@@ -59,15 +78,11 @@ const Login = () => {
           Submit
         </button>
       </form>
-      <h4
-        className="absolute top-7 right-14 text-slate-100 cursor-pointer capitalize"
-        onClick={handelLogout}
-      >
-        logout
-      </h4>
       <h3
         className={`text-4xl ${
-          user?.message !== "Success login" ? "text-red-500" : "text-green-500"
+          user?.message !== "Signup successful"
+            ? "text-red-500"
+            : "text-green-500"
         }`}
       >
         {user?.message}
@@ -83,4 +98,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
