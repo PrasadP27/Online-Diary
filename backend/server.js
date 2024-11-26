@@ -6,15 +6,18 @@ const app = express()
 const session = require('express-session');
 require('dotenv').config()
 
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
+
 app.use(session({
     secret: process.env.SECRET_KEY,
     cookie: { maxAge: 24 * 60 * 60 * 1000 }, //one day 24hrs
     resave: true,
     saveUninitialized: false,
-    // cookie: { secure: false }
 }))
 
-app.use(cors())
 app.use(express.json()); // Middleware for parsing JSON
 app.use(express.urlencoded({ extended: true }));
 
