@@ -1,8 +1,16 @@
 import React from "react";
+import { Route, Routes, useLocation } from "react-router";
+
+import Login from "./pages/Login";
 
 const App = () => {
+  const location = useLocation();
   return (
-    <h1 className="text-3xl font-bold underline text-red-500">Hello world!</h1>
+    <Routes location={location} key={location.pathname}>
+      {/* <Route index element={<Home />} /> */}
+      <Route path="/login" element={<Login />} />
+      {/* <Route path="/register" element={<Register />} /> */}
+    </Routes>
   );
 };
 
