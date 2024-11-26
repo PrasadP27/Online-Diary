@@ -110,7 +110,7 @@ router.post('/logout', (req, res) => {
 
         req.user = null;
 
-        return res.status(200).json({ message: "Logged out successfully" });
+        return res.status(200).json({ message: "Logged out successfully", user: req.user });
     });
 });
 
@@ -131,7 +131,7 @@ router.get('/diary', (req, res) => {
             return res.json({ message: "No diaries found." })
         }
 
-        return res.json(diaries);
+        return res.json({ diary: diaries, user: req.user });
     });
 });
 
