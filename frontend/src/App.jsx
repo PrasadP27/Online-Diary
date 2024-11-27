@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import NewDiary from "./pages/NewDiary";
 
 const App = () => {
   const location = useLocation();
@@ -11,6 +12,7 @@ const App = () => {
       {/* <Route index element={<Home />} /> */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/diary/12345" element={<NewDiary />} />
     </Routes>
   );
 };
