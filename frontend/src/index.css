@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Unbounded";
+  src: url("fonts/Unbounded-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
 body {
   height: 100%;
   width: 100%;
@@ -9,17 +23,6 @@ body {
   background: linear-gradient(45deg, #d3dfe3 25%, #f1fcff 50%, #f7f0fc 80%);
   background-attachment: fixed;
   background-size: 130%;
-  animation: bgAnimation 10s infinite alternate;
-}
-
-@keyframes bgAnimation {
-  0% {
-    background-position: left;
-  }
-
-  100% {
-    background-position: right;
-  }
 }
 
 .simple-btn {
