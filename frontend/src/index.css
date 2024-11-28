@@ -2,33 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: 'Unbounded';
-    src: url("/Unbounded-VariableFont_wght.ttf") format('truetype');
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Nunito";
-    src: url("/frontend/public/assets/fonts/Nunito-VariableFont_wght.ttf") format('truetype');
-}
-
 body {
-    height: 100%;
-    width: 100%;
-    background: rgb(244, 251, 254);
-    background: linear-gradient(45deg, #d3dfe3 25%, #f1fcff 50%, #f7f0fc 80%);
-    background-attachment: fixed;
-    background-size: 130%;
-    animation: bgAnimation 10s infinite alternate;
+  height: 100%;
+  width: 100%;
+  background: rgb(244, 251, 254);
+  background: linear-gradient(45deg, #d3dfe3 25%, #f1fcff 50%, #f7f0fc 80%);
+  background-attachment: fixed;
+  background-size: 130%;
+  animation: bgAnimation 10s infinite alternate;
 }
 
 @keyframes bgAnimation {
-    0% {
-        background-position: left;
-    }
+  0% {
+    background-position: left;
+  }
 
-    100% {
-        background-position: right;
-    }
+  100% {
+    background-position: right;
+  }
+}
+
+.simple-btn {
+  @apply px-3 py-2 bg-secondary text-primary rounded transition duration-300 hover:bg-indigo-300 hover:text-secondary active:bg-indigo-200;
+}
+
+.underline-text {
+  position: relative;
+  z-index: 1;
+}
+
+.underline-text::after {
+  content: "";
+  position: absolute;
+  bottom: 0.1em;
+  left: 0;
+  width: 100%;
+  height: 0.5em;
+  z-index: -1;
+  transform: scaleX(0);
+  @apply bg-indigo-300;
+  transform-origin: bottom right;
+  transition: transform 0.5s cubic-bezier(0.9, 0, 0.1, 1);
+}
+
+.underline-text:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
