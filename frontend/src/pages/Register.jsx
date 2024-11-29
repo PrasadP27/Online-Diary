@@ -57,8 +57,8 @@ const Register = () => {
 
             <button
               onClick={handleClick}
-              className={`cursor-pointer mx-auto my-5 h-12 bg-indigo-500 font-semibold text-lg text-white 
-                  hover:bg-indigo-600 transition-all 
+              className={`cursor-pointer mx-auto my-5 h-12 bg-indigo-400 font-semibold text-lg text-white 
+                  hover:bg-indigo-500 transition-all 
                   ${
                     isLoading
                       ? "w-11 h-11 rounded-full duration-500"
@@ -93,7 +93,7 @@ const Register = () => {
           </form>
           <Link
             to={"/login"}
-            className="block mx-auto my-5 w-3/5 px-3 py-3 text-lg cursor-pointer font-semibold bg-green-400  text-white rounded-lg transition duration-300 hover:bg-green-500 hover:text-white active:bg-green-200"
+            className="block mx-auto my-5 w-3/5 px-3 py-3 text-lg cursor-pointer font-semibold bg-green-400  text-white rounded-lg transition duration-500 hover:bg-green-500 hover:text-white active:bg-green-200"
           >
             Login
           </Link>
