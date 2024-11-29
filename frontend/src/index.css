@@ -29,6 +29,10 @@ section {
   @apply p-10 pt-24 max-w-7xl mx-auto;
 }
 
+h1 {
+  @apply font-unbounded text-7xl font-bold;
+}
+
 .simple-btn {
   @apply px-3 py-2 bg-secondary text-primary rounded transition duration-300 hover:bg-indigo-300 hover:text-secondary active:bg-indigo-200;
 }
