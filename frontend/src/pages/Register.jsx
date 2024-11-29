@@ -15,7 +15,7 @@ const Register = () => {
 
   return (
     <section className="h-dvh">
-      <div className=" register-container flex items-center justify-around h-full w-full">
+      <div className="register-container flex items-center justify-around h-full w-full">
         <div className="register-left border-s-8 border-secondary w-2/4 py-5">
           <div className="logo mb-3 ml-4 flex items-center font-unbounded text-gray-700">
             <svg
@@ -28,9 +28,7 @@ const Register = () => {
             </svg>
             Inkwell
           </div>
-          <h1 className="font-unbounded text-7xl font-bold mb-3 ml-4">
-            Register
-          </h1>
+          <h1 className="mb-3 ml-4">Register</h1>
           <h4 className="font-nunito text-xl font-medium ml-4">
             Every great journey begins with a single step. Let's get started!
           </h4>
@@ -59,12 +57,12 @@ const Register = () => {
 
             <button
               onClick={handleClick}
-              className={`cursor-pointer w-3/5 mx-auto my-5 h-12 bg-indigo-500 font-semibold text-lg text-white 
+              className={`cursor-pointer mx-auto my-5 h-12 bg-indigo-500 font-semibold text-lg text-white 
                   hover:bg-indigo-600 transition-all 
                   ${
                     isLoading
                       ? "w-11 h-11 rounded-full duration-500"
-                      : "rounded-lg duration-500"
+                      : "w-3/5 rounded-lg duration-500"
                   }`}
             >
               <svg
