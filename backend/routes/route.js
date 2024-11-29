@@ -11,8 +11,8 @@ router.get('/', (req, res) => {
     return res.json({ user: req.user });
 })
 
-// signup into database 
-router.post('/signup', (req, res) => {
+// register into database 
+router.post('/register', (req, res) => {
     const checkEmailSql = "SELECT * FROM users WHERE `email` = ?";
 
     // Check if the email already exists
