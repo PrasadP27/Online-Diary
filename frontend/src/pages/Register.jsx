@@ -57,6 +57,7 @@ const Register = () => {
     setPassVisible(!passVisible);
   };
 
+  // data validation
   const dataValidCheck = () => {
     if (
       values.name.length === 0 ||
@@ -110,7 +111,7 @@ const Register = () => {
               name="name"
               placeholder="Enter Name"
               className="font-nunito px-5 py-3 m-3 border-2 rounded-lg shadow-sm focus:outline-indigo-200 outline-2"
-              // required
+              required
               value={values.name}
               onChange={(e) => setValues({ ...values, name: e.target.value })}
             />
@@ -120,7 +121,7 @@ const Register = () => {
               placeholder="Enter your Email"
               autoComplete="username"
               className="font-nunito px-5 py-3 m-3 border-2 rounded-lg shadow-sm focus:outline-indigo-200 outline-2"
-              // required
+              required
               value={values.email}
               onChange={(e) => setValues({ ...values, email: e.target.value })}
             />
@@ -131,7 +132,7 @@ const Register = () => {
                 placeholder="Password"
                 autoComplete="current-password"
                 className="w-full font-nunito px-5 py-3 border-2 rounded-lg shadow-sm focus:outline-indigo-200 outline-2"
-                // required
+                required
                 value={values.password}
                 onChange={(e) =>
                   setValues({ ...values, password: e.target.value })
