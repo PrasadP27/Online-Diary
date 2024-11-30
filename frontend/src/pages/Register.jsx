@@ -5,7 +5,6 @@ import axios from "axios";
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({ name: "", email: "", password: "" });
-  const [user, setUser] = useState(null);
   const [error, setError] = useState("");
   const [passVisible, setPassVisible] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");

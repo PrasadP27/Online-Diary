@@ -181,9 +181,7 @@ const Login = () => {
                   fill="white"
                 ></path>
               </svg>
-              <span className={`${isLoading ? "hidden" : "block"}`}>
-                Register
-              </span>
+              <span className={`${isLoading ? "hidden" : "block"}`}>Login</span>
             </button>
 
             <h4 className="font-nunito text-red-600 font-semibold ">{error}</h4>
