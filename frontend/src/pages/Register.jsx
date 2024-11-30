@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import axios from "axios";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -7,19 +8,75 @@ const Register = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
   const [passVisible, setPassVisible] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
+    setSuccessMessage("");
 
-    setTimeout(() => {
+    const isvalid = dataValidCheck();
+    if (!isvalid) {
       setIsLoading(false);
-      console.log(values);
-    }, 1000);
+      return;
+    }
+
+    axios
+      .post("http://localhost:8080/register", values, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res); // ---
+
+        if (res.data) {
+          setSuccessMessage(res.data.message);
+          setValues({ name: "", email: "", password: "" });
+          setTimeout(() => {
+            navigate("/");
+          }, 500);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.response) {
+          setError(err.response.data.message);
+        } else {
+          setError("An error occurred during registration.");
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
+  // show hide password toggle
   const passtoggle = () => {
     setPassVisible(!passVisible);
+  };
+
+  const dataValidCheck = () => {
+    if (
+      values.name.length === 0 ||
+      values.email.length === 0 ||
+      values.password.length === 0
+    ) {
+      setError("Fields cannot be null.");
+      return false;
+    } else if (values.name.length > 30) {
+      setError("Name is too long.");
+      return false;
+    } else if (values.email.length > 40) {
+      setError("Email is too long");
+      return false;
+    } else if (values.password.length > 30) {
+      setError("Pssword is too long");
+      return false;
+    } else {
+      return true;
+    }
   };
 
   return (
@@ -53,7 +110,7 @@ const Register = () => {
               name="name"
               placeholder="Enter Name"
               className="font-nunito px-5 py-3 m-3 border-2 rounded-lg shadow-sm focus:outline-indigo-200 outline-2"
-              required
+              // required
               value={values.name}
               onChange={(e) => setValues({ ...values, name: e.target.value })}
             />
@@ -63,18 +120,18 @@ const Register = () => {
               placeholder="Enter your Email"
               autoComplete="username"
               className="font-nunito px-5 py-3 m-3 border-2 rounded-lg shadow-sm focus:outline-indigo-200 outline-2"
-              required
+              // required
               value={values.email}
               onChange={(e) => setValues({ ...values, email: e.target.value })}
             />
             <div className="password relative m-3">
               <input
-                type={passVisible ? "password" : "text"}
+                type={passVisible ? "text" : "password"}
                 name="password"
                 placeholder="Password"
                 autoComplete="current-password"
                 className="w-full font-nunito px-5 py-3 border-2 rounded-lg shadow-sm focus:outline-indigo-200 outline-2"
-                required
+                // required
                 value={values.password}
                 onChange={(e) =>
                   setValues({ ...values, password: e.target.value })
@@ -164,6 +221,9 @@ const Register = () => {
             </button>
 
             <h4 className="font-nunito text-red-600 font-semibold ">{error}</h4>
+            <h4 className="font-nunito text-green-600 font-semibold ">
+              {successMessage}
+            </h4>
           </form>
           <Link
             to={"/login"}
