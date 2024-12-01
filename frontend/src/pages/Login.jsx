@@ -75,7 +75,7 @@ const Login = () => {
   return (
     <section className="h-dvh">
       <div className="login-container flex items-center justify-around h-full w-full">
-        <div className="login-left shadow-2xl w-5/12 p-3 bg-white rounded-3xl text-center">
+        <div className="login-left shadow-2xl w-5/12 p-3 bg-primary rounded-3xl text-center">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col border-b-2 py-3 relative"
@@ -154,7 +154,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className={`cursor-pointer mx-auto my-5 h-12 bg-indigo-400 font-semibold text-lg text-white 
+              className={`cursor-pointer mx-auto my-5 h-12 bg-indigo-400 font-semibold text-lg text-primary 
                   hover:bg-indigo-500 transition-all 
                   ${
                     isLoading
@@ -191,7 +191,7 @@ const Login = () => {
           </form>
           <Link
             to={"/register"}
-            className="block mx-auto my-5 w-3/5 px-3 py-3 text-lg cursor-pointer font-semibold bg-green-400  text-white rounded-lg transition duration-300 hover:bg-green-500 hover:text-white active:bg-green-200"
+            className="block mx-auto my-5 w-3/5 px-3 py-3 text-lg cursor-pointer font-semibold bg-green-400  text-primary rounded-lg transition duration-300 hover:bg-green-500 hover:text-white active:bg-green-200"
           >
             Register
           </Link>

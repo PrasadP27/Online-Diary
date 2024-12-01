@@ -24,6 +24,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
   font-family: "Nunito", "sans-serif";
+  @apply text-secondary
 }
 
 section {
@@ -31,7 +32,7 @@ section {
 }
 
 h1 {
-  @apply font-unbounded text-7xl font-bold;
+  @apply font-unbounded text-7xl font-extrabold
 }
 
 .simple-btn {

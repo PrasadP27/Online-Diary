@@ -100,7 +100,7 @@ const Register = () => {
           </h4>
         </div>
 
-        <div className="register-right shadow-2xl w-5/12 p-3 bg-white rounded-3xl text-center">
+        <div className="register-right shadow-2xl w-5/12 p-3 bg-primary rounded-3xl text-center">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col border-b-2 py-3 relative"
@@ -188,7 +188,7 @@ const Register = () => {
 
             <button
               type="submit"
-              className={`cursor-pointer mx-auto my-5 h-12 bg-indigo-400 font-semibold text-lg text-white 
+              className={`cursor-pointer mx-auto my-5 h-12 bg-indigo-400 font-semibold text-lg text-primary 
                   hover:bg-indigo-500 transition-all 
                   ${
                     isLoading
@@ -227,7 +227,7 @@ const Register = () => {
           </form>
           <Link
             to={"/login"}
-            className="block mx-auto my-5 w-3/5 px-3 py-3 text-lg cursor-pointer font-semibold bg-green-400  text-white rounded-lg transition duration-500 hover:bg-green-500 hover:text-white active:bg-green-200"
+            className="block mx-auto my-5 w-3/5 px-3 py-3 text-lg cursor-pointer font-semibold bg-green-400  text-primary rounded-lg transition duration-500 hover:bg-green-500 hover:text-white active:bg-green-200"
           >
             Login
           </Link>
