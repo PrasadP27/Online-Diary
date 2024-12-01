@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NewDiary from "./pages/NewDiary";
 import Navbar from "./component/Navbar";
+import Diaries from "./pages/Diaries";
 
 const App = () => {
   const location = useLocation();
@@ -15,6 +16,7 @@ const App = () => {
         {/* <Route index element={<Home />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/diaries" element={<Diaries />} />
         <Route path="/diary/12345" element={<NewDiary />} />
       </Routes>
     </>
