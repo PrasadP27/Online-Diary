@@ -95,7 +95,7 @@ const Navbar = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
               xmlSpace="preserve"
-              className="h-11 p-1 rounded-full bg-white cursor-pointer border-2 transition duration-200 hover:shadow-md"
+              className="h-11 p-1 rounded-full bg-primary cursor-pointer border-2 transition duration-200 hover:shadow-md"
               style={
                 profDropDown
                   ? { boxShadow: "0px 0px 0px 4px rgb(165 180 252)" }
@@ -107,7 +107,7 @@ const Navbar = () => {
             </svg>
 
             {profDropDown && (
-              <div className="profile-drown absolute top-20 right-0 rounded-xl bg-white p-2 pt-7 text-center min-w-56">
+              <div className="profile-drown absolute top-20 right-0 rounded-xl bg-primary p-2 pt-7 text-center min-w-56">
                 {user && (
                   <span className="id font-nunito px-2 py-1 bg-indigo-200 rounded-md">
                     ID: {user.id}
