@@ -41,7 +41,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 flex items-center justify-between max-w-7xl mx-auto backdrop-blur-sm bg-white/30 rounded-b-xl drop-shadow-md px-14 py-5">
+    <header className="fixed top-0 left-0 right-0 flex items-center justify-between max-w-7xl mx-auto backdrop-blur-sm bg-white/30 rounded-b-xl drop-shadow-md px-14 py-5 z-50">
       <Link
         to={"/"}
         className="logo font-unbounded font-medium flex items-center text-xl"
@@ -70,6 +70,14 @@ const Navbar = () => {
             About
           </a>
         </li>
+
+        {user && (
+          <li className="mr-8">
+            <Link to={"/diaries"} className="underline-text">
+              My Diaries
+            </Link>
+          </li>
+        )}
 
         {!user ? (
           <li className="mr-3">
