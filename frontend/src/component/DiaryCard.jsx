@@ -1,0 +1,96 @@
+import React from "react";
+
+const DiaryCard = (props) => {
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+
+    // Format the date components
+    const day = date.getUTCDate();
+    const month = date.toLocaleString("default", { month: "short" });
+    const year = date.getUTCFullYear();
+
+    // Format the time
+    const hours = String(date.getUTCHours()).padStart(2, "0");
+    const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+    const formattedTime = `${hours}:${minutes}`;
+
+    return (
+      //   <>
+      //     <p>{day}</p>
+      //     <p>{month}</p>
+      //     <p>{year}</p>
+      //     <br />
+      //     <p>{formattedTime}</p>
+      //   </>
+      day, month, year, formattedTime
+    );
+  };
+
+  const gotoDiaryPage = () => {
+    console.log("diary");
+  };
+
+  const truncateText = (text, maxLength) => {
+    return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+  };
+
+  // Highlight function
+  const highlightText = (text, query) => {
+    if (!query) return text;
+
+    const parts = text.split(new RegExp(`(${query})`, "gi"));
+    return parts.map((part, index) =>
+      part.toLowerCase() === query.toLowerCase() ? (
+        <span key={index} style={{ backgroundColor: "yellow" }}>
+          {part}
+        </span>
+      ) : (
+        part
+      )
+    );
+  };
+
+  return (
+    <article
+      className=" w-full lg:w-[45%] min-h-[245px] border-2 flex items-start justify-evenly px-5 py-7 rounded-3xl shadow-xl bg-primary text-secondary cursor-pointer  active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4"
+      onClick={gotoDiaryPage}
+    >
+      <div className="text-center mr-3">
+        <div className="border-2 flex flex-col items-center mr-3 p-1 rounded w-full shadow-md text-secondary">
+          <p className="text-sm uppercase font-nunito font-bold tracking-wider text-secondary">
+            Sep
+          </p>
+          <p className="text-2xl font-unbounded font-medium text-secondary">
+            27
+          </p>
+        </div>
+        <p className="text-xs uppercase font-nunito font-semibold tracking-widest text-gray-500 mt-2">
+          2024
+        </p>
+      </div>
+
+      <div className="entry-content border-2w-5/6 px-2 w-full">
+        <h3 className="text-2xl font-unbounded font-medium mb-3 underline-text-highlight">
+          {highlightText(truncateText(props.heading, 15), props.query)}
+        </h3>
+        <p className="text-base font-nunito font-medium tracking-tight text-gray-500 mb-3">
+          &emsp; {truncateText(props.content, 200)}
+        </p>
+
+        <div className="flex items-center justify-start flex-wrap">
+          <p className="bg-blue-100 px-3 py-[2px] rounded-full font-semibold text-sm inline m-1">
+            #{truncateText("tagone", 7)}
+          </p>
+          <p className="bg-green-100 px-3 py-[2px] rounded-full font-semibold text-sm inline m-1">
+            #{truncateText("tagtwo", 7)}
+          </p>
+          <p className="bg-red-100 px-3 py-[2px] rounded-full font-semibold text-sm inline m-1">
+            #{truncateText("tagthree", 7)}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export default DiaryCard;
