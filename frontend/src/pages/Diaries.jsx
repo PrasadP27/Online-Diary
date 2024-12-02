@@ -46,14 +46,32 @@ const Diary = () => {
     navigate(`/diaries/${randomString}`);
   };
 
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   // filter diaries
   const filteredDiaries = diaries.filter((diary) =>
     diary.heading.toLowerCase().includes(query.toLowerCase())
   );
+
+  if (error) {
+    return (
+      <section className="mt-10">
+        {error === "No diaries avaliable." ? <h1>My Diaries</h1> : ""}
+        <div className="text-center mt-14 flex items-center justify-center">
+          <h3 className="text-2xl font-nunito font-bold text-secondary">
+            {error}
+          </h3>
+          <svg
+            viewBox="0 0 24 24"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            className="size-11 ml-3"
+          >
+            <path d="M12,2 C17.523,2 22,6.478 22,12 C22,17.522 17.523,22 12,22 C6.477,22 2,17.522 2,12 C2,6.478 6.477,2 12,2 Z M12,3.667 C7.405,3.667 3.667,7.405 3.667,12 C3.667,16.595 7.405,20.333 12,20.333 C16.595,20.333 20.333,16.595 20.333,12 C20.333,7.405 16.595,3.667 12,3.667 Z M11.9986626,14.5022358 C12.5502088,14.5022358 12.9973253,14.9493523 12.9973253,15.5008984 C12.9973253,16.0524446 12.5502088,16.4995611 11.9986626,16.4995611 C11.4471165,16.4995611 11,16.0524446 11,15.5008984 C11,14.9493523 11.4471165,14.5022358 11.9986626,14.5022358 Z M11.9944624,7 C12.3741581,6.99969679 12.6881788,7.28159963 12.7381342,7.64763535 L12.745062,7.7494004 L12.7486629,12.2509944 C12.7489937,12.6652079 12.4134759,13.0012627 11.9992625,13.0015945 C11.6195668,13.0018977 11.3055461,12.7199949 11.2555909,12.3539592 L11.2486629,12.2521941 L11.245062,7.7506001 C11.2447312,7.33638667 11.580249,7.00033178 11.9944624,7 Z"></path>
+          </svg>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section>
@@ -93,7 +111,7 @@ const Diary = () => {
                 y2="12"
               ></line>
             </svg>
-            <h4 className="ml-2 font-nunito font-bold">New Entry</h4>
+            <h4 className="ml-2 font-nunito font-semibold">New Entry</h4>
           </div>
 
           <div className="relative text-primary">
@@ -125,53 +143,22 @@ const Diary = () => {
       </div>
 
       <div className="diaries-content mt-10 relative">
-        {/* <div
-          className="font-unbounded font-normal text-sm text-secondary inline-flex items-center justify-center bg-primary border-2 border-secondary px-5 py-2 rounded-lg  transition duration-500 shadow-sm hover:border-indigo-400 hover:text-indigo-500"
-          onClick={handleNewEntryClick}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            className="size-7"
-          >
-            <line
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              x1="12"
-              x2="12"
-              y1="19"
-              y2="5"
-            ></line>
-            <line
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              x1="5"
-              x2="19"
-              y1="12"
-              y2="12"
-            ></line>
-          </svg>
-          <h4 className="ml-2">New Entry</h4>
-        </div> */}
         <div className="entries mt-12 md:px-4 flex items-center justify-around flex-wrap gap-3">
-          {filteredDiaries.map((diary) => {
-            console.log(diary);
-
-            return (
+          {filteredDiaries.length > 0 ? (
+            filteredDiaries.map((diary) => (
               <DiaryCard
                 key={diary.diaryId}
                 query={query}
                 link={`/diaries/${diary.diaryId}`}
                 {...diary}
               />
-            );
-          })}
+            ))
+          ) : (
+            <h4 className="text-xl font-nunito font-bold text-secondary">
+              No diaries found for{" "}
+              <span className="text-indigo-400">"{query}"</span>
+            </h4>
+          )}
         </div>
       </div>
     </section>
