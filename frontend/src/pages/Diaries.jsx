@@ -27,6 +27,7 @@ const Diary = () => {
     fetchDiaries();
   }, []);
 
+  // random string generate
   const generateRandomString = () => {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -39,6 +40,7 @@ const Diary = () => {
     return result;
   };
 
+  // new entry
   const handleNewEntryClick = () => {
     const randomString = generateRandomString();
     navigate(`/diaries/${randomString}`);
@@ -48,18 +50,12 @@ const Diary = () => {
     return <div>{error}</div>;
   }
 
+  // filter diaries
+  const filteredDiaries = diaries.filter((diary) =>
+    diary.heading.toLowerCase().includes(query.toLowerCase())
+  );
+
   return (
-    // <div>
-    //   <h1>Your Diaries</h1>
-    //   <ul>
-    //     {diaries.map((diary) => {
-    //       console.log(diary);
-
-    //       return <li key={diary.diaryId}>date:{formatDate(diary.date)}</li>;
-    //     })}
-    //   </ul>
-    // </div>
-
     <section>
       <div className="diaries-header flex items-center justify-between mt-10">
         <h1>My Diaries</h1>
@@ -164,7 +160,7 @@ const Diary = () => {
           <h4 className="ml-2">New Entry</h4>
         </div> */}
         <div className="entries mt-12 md:px-4 flex items-center justify-around flex-wrap gap-3">
-          {diaries.map((diary) => {
+          {filteredDiaries.map((diary) => {
             console.log(diary);
 
             return (
