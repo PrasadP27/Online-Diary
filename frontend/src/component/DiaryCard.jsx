@@ -78,7 +78,7 @@ const DiaryCard = (props) => {
       </div>
 
       <div className="entry-content border-2w-5/6 px-2 w-full">
-        <h3 className="text-2xl font-unbounded font-medium mb-3 underline-text-highlight">
+        <h3 className="text-2xl font-unbounded font-medium mb-3">
           {highlightText(truncateText(props.heading, 15), props.query)}
         </h3>
         <p className="text-base font-nunito font-medium tracking-tight text-gray-500 mb-3">

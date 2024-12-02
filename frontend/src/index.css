@@ -39,12 +39,14 @@ h1 {
   @apply px-3 py-2 bg-secondary text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300;
 }
 
-.underline-text {
+.underline-text,
+.underline-text-highlight {
   position: relative;
   z-index: 1;
 }
 
-.underline-text::after {
+.underline-text::after,
+.underline-text-highlight::after {
   content: "";
   position: absolute;
   bottom: 0.1em;
@@ -58,7 +60,8 @@ h1 {
   transition: transform 0.5s cubic-bezier(0.9, 0, 0.1, 1);
 }
 
-.underline-text:hover::after {
+.underline-text:hover::after,
+.underline-text-highlight::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
