@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import axios from "axios";
 
 const Navbar = () => {
   const [profDropDown, setProfDropDown] = useState(false);
   const [user, setUser] = useState([]);
 
+  const naviagte = useNavigate();
   const location = useLocation();
 
   // fetch user details
@@ -38,6 +39,8 @@ const Navbar = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    naviagte("/");
   };
 
   return (

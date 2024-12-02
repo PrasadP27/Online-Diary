@@ -18,13 +18,6 @@ const DiaryCard = (props) => {
     const formattedTime = `${hours}:${minutes}`;
 
     return {
-      //   <>
-      //     <p>{day}</p>
-      //     <p>{month}</p>
-      //     <p>{year}</p>
-      //     <br />
-      //     <p>{formattedTime}</p>
-      //   </>
       day,
       month,
       year,
@@ -63,7 +56,7 @@ const DiaryCard = (props) => {
   const tagsArray = props.tags ? props.tags.split(",") : [];
 
   // Array of color options
-  const colors = ["blue", "green", "red"];
+  const colors = ["bg-blue-100", "bg-green-100", "bg-red-100"];
 
   return (
     <article
@@ -96,22 +89,13 @@ const DiaryCard = (props) => {
           {tagsArray.map((tag, index) => (
             <p
               key={index}
-              className={`bg-${colors[index]}-100 px-3 py-[2px] rounded-full font-semibold text-sm inline m-1`}
+              className={`${colors[index]} px-3 py-[2px] rounded-full font-semibold text-sm inline m-1`}
             >
               #{truncateText(tag.trim(), 7)}
             </p>
           ))}
         </div>
       </div>
-
-      {/* {tagsArray.map((tag, index) => (
-        <p
-          key={index}
-          className={`${getRandomColor()} px-3 py-[2px] rounded-full font-semibold text-sm inline m-1`}
-        >
-          #{truncateText(tag.trim(), 7)}
-        </p>
-      ))} */}
     </article>
   );
 };
