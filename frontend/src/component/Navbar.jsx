@@ -24,7 +24,7 @@ const Navbar = () => {
     };
 
     fetchUser();
-  }, [location.pathname]);
+  }, [location]);
   // console.log(user);
 
   // logout user

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DiaryCard from "../component/DiaryCard";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 const Diary = () => {
   const [diaries, setDiaries] = useState([]);
@@ -9,6 +9,7 @@ const Diary = () => {
   const [query, setQuery] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchDiaries = async () => {
@@ -25,7 +26,7 @@ const Diary = () => {
     };
 
     fetchDiaries();
-  }, []);
+  }, [location]);
 
   // random string generate
   const generateRandomString = () => {
