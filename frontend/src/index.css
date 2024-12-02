@@ -24,7 +24,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
   font-family: "Nunito", "sans-serif";
-  @apply text-secondary
+  @apply text-secondary;
 }
 
 section {
@@ -32,11 +32,11 @@ section {
 }
 
 h1 {
-  @apply font-unbounded text-7xl font-extrabold
+  @apply font-unbounded text-7xl font-extrabold;
 }
 
 .simple-btn {
-  @apply px-3 py-2 bg-secondary text-primary rounded-lg transition duration-300 hover:bg-indigo-300 hover:text-secondary active:bg-indigo-200;
+  @apply px-3 py-2 bg-secondary text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300;
 }
 
 .underline-text {
