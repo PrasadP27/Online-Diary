@@ -60,7 +60,7 @@ const DiaryCard = (props) => {
 
   return (
     <article
-      className=" w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-5 py-7 rounded-3xl shadow-xl bg-primary text-secondary cursor-pointer  active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4"
+      className=" w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-5 py-7 rounded-3xl shadow-xl bg-primary text-secondary cursor-pointer  active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4 hover:bg-[#f9faff]"
       onClick={gotoDiaryPage}
     >
       <div className="text-center mr-3">
