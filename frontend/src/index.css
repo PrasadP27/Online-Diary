@@ -36,7 +36,12 @@ h1 {
 }
 
 .simple-btn {
-  @apply px-3 py-2 bg-secondary text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300;
+  @apply px-3 py-2 bg-secondary text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer;
+}
+
+.notallowed {
+  pointer-events: none;
+  @apply bg-indigo-200;
 }
 
 .underline-text,
@@ -64,4 +69,41 @@ h1 {
 .underline-text-highlight::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.error {
+  @apply font-nunito text-red-600 font-semibold text-base mt-2;
+}
+
+/* quill editor styles  */
+.ql-toolbar {
+  border: none !important;
+  border-bottom: 2px solid #d1d5db !important;
+  background: #f9faff !important;
+  padding: 20px !important;
+  @apply shadow-inner text-center rounded-xl border-2 z-[5] sticky top-24 bg-gradient-to-tr from-[#d3dfe3] to-[#f7f0fc] w-full sm:w-4/5 sm:mx-auto;
+}
+
+.ql-toolbar button {
+  height: 30px !important;
+  padding: 5px !important;
+  border-radius: 8px;
+  margin: 5px !important;
+}
+
+.ql-toolbar button.ql-active {
+  background: #c7d2fe !important;
+}
+
+.ql-container {
+  border: none !important;
+  min-height: 100vh !important;
+  font-size: 1.05rem !important;
+  padding: 8px !important;
+  font-family: "Nunito", "sans-serif" !important;
+  color: #333333;
+}
+
+.ql-container img {
+  height: 300px;
 }
