@@ -2,16 +2,21 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import React, { useState } from "react";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const DetailDiary = () => {
   const params = useParams();
   const currentDiaryId = params.diaryid;
 
-  const [values, setValues] = useState({ heading: "", content: "" });
+  const [values, setValues] = useState({
+    heading: "",
+    content: "",
+    saveDate: "",
+  });
   const [loading, setLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [allowSave, setAllowSave] = useState(false);
   const [hedingError, setHeadingError] = useState("");
 
   const [tags, setTags] = useState([]);
@@ -28,17 +33,22 @@ const DetailDiary = () => {
             withCredentials: true,
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
 
         setValues({
           heading: response.data.heading,
           content: response.data.content,
+          saveDate: response.data.date,
         });
+
+        console.log(values);
 
         const fetchedTags = response.data.tags
           ? response.data.tags.split(",")
           : [];
         setTags(fetchedTags);
+
+        setAllowSave(false);
       } catch (err) {
         console.log(err);
       } finally {
@@ -47,27 +57,18 @@ const DetailDiary = () => {
     };
 
     createDiary();
-  }, [currentDiaryId]);
+  }, [isSaving]);
 
   const toolbarOptions = [
-    ["bold", "italic", "underline", "strike"], // toggled buttons
-    // ["blockquote", "code-block"],
-    // ["link", "image", "video", "formula"],
+    ["bold", "italic", "underline", "strike"],
 
-    [{ header: 1 }, { header: 2 }], // custom button values
-    [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
-    // [{ script: "sub" }, { script: "super" }], // superscript/subscript
-    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-    [{ direction: "rtl" }], // text direction
+    [{ header: 1 }, { header: 2 }],
+    [{ list: "ordered" }, { list: "bullet" }],
 
-    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-    [{ font: [] }],
+    [{ color: [] }, { background: [] }],
     [{ align: [] }],
 
-    ["clean"], // remove formatting button
+    ["clean"],
   ];
 
   const module = {
@@ -76,31 +77,35 @@ const DetailDiary = () => {
 
   // save to database
   const handleSaveClick = async () => {
-    setIsSaving(true);
+    // setIsSaving(true);
 
-    if (values.heading.length === 0) {
-      return setHeadingError("Heading cannot be null");
-    }
+    setAllowSave(false);
 
-    try {
-      const tagsString = tags.join(",");
+    // if (values.heading.length === 0) {
+    //   return setHeadingError("Heading cannot be null");
+    // }
 
-      await axios.put(
-        `http://localhost:8080/diary/${currentDiaryId}`,
-        {
-          heading: values.heading,
-          content: values.content,
-          tags: tagsString,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsSaving(false);
-    }
+    // try {
+    //   const tagsString = tags.join(",");
+
+    //   await axios.put(
+    //     `http://localhost:8080/diary/${currentDiaryId}`,
+    //     {
+    //       heading: values.heading,
+    //       content: values.content,
+    //       tags: tagsString,
+    //     },
+    //     {
+    //       withCredentials: true,
+    //     }
+    //   );
+
+    //   console.log("saved successfull");
+    // } catch (err) {
+    //   console.log(err);
+    // } finally {
+    //   setIsSaving(false);
+    // }
   };
 
   if (loading) {
@@ -109,6 +114,7 @@ const DetailDiary = () => {
 
   // limit heading
   const headingLimit = (e) => {
+    setAllowSave(true);
     const newHeading = e.target.value;
 
     if (newHeading.length <= 30) {
@@ -136,24 +142,55 @@ const DetailDiary = () => {
     setTags(newTags);
   };
   const handleChange = (e) => {
+    setAllowSave(true);
     const value = e.target.value;
     if (value.length <= 30) {
       setTagInput(value);
     }
   };
 
+  // formatted date and time
+  const formatDate = () => {
+    const date = new Date(values.saveDate);
+
+    // Format the date components
+    const day = date.getUTCDate();
+    const month = date.toLocaleString("default", { month: "short" });
+    const year = date.getUTCFullYear();
+
+    // Format the time
+    const hours = String(date.getUTCHours()).padStart(2, "0");
+    const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+    const formattedTime = `${hours}:${minutes}`;
+
+    return {
+      day,
+      month,
+      year,
+      formattedTime,
+    };
+  };
+
+  const { day, month, year, formattedTime } = formatDate();
+  console.log(formattedTime);
+
   return (
     <section>
       <div className=" bg-primary rounded-2xl px-10 py-8 max-w-5xl mx-auto mt-8 border-2 shadow-lg">
+        {/* time and letters */}
         <div className="flex items-center justify-between mb-5">
           <div className="px-3 py-0 bg-indigo-100 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
-            <span className="font-normal">Sept 27 ' 2024</span> : 12:23 am
+            <span className="font-normal">
+              {month} {day} ' {year}
+            </span>{" "}
+            : {formattedTime}
           </div>
           <div className="px-3 py-0 bg-indigo-100 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
-            <span className="font-normal">120</span> words
+            <span className="font-normal">120</span> letters
           </div>
         </div>
 
+        {/* heading and save btn */}
         <div className="flex items-center justify-between">
           <div className="flex flex-col items-start w-4/5">
             <textarea
@@ -172,16 +209,19 @@ const DetailDiary = () => {
             <h2 className="error">{hedingError}</h2>
           </div>
           <div className="flex flex-col items-center w-1/5">
-            <div
-              className="simple-btn w-4/5 text-center"
+            <button
+              className={`simple-btn ${
+                allowSave ? "" : "notallowed"
+              } w-4/5 text-center`}
               onClick={handleSaveClick}
             >
               Save
-            </div>
+            </button>
             {/* <h4 className="error">error</h4> */}
           </div>
         </div>
 
+        {/* tags */}
         <div className="relative mt-5">
           <div className="flex flex-wrap items-center justify-center">
             {tags.map((tag, index) => (
@@ -211,14 +251,18 @@ const DetailDiary = () => {
           </div>
         </div>
 
+        {/* editor */}
         <div className="editor mt-8">
           <ReactQuill
             modules={module}
             value={values.content}
-            onChange={(content) => setValues({ ...values, content })}
+            onChange={(content) => {
+              setValues({ ...values, content });
+              setAllowSave(true);
+            }}
+            placeholder="Enter your content..."
           />
         </div>
-
         {/* <button
           className="simple-btn"
           onClick={handleSaveClick}
