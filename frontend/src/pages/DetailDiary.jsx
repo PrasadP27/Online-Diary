@@ -14,6 +14,10 @@ const DetailDiary = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [hedingError, setHeadingError] = useState("");
 
+  const [tags, setTags] = useState([]);
+  const [tagInput, setTagInput] = useState("");
+
+  // create new entry or fetch entry details
   useEffect(() => {
     const createDiary = async () => {
       try {
@@ -25,10 +29,16 @@ const DetailDiary = () => {
           }
         );
         console.log(response.data);
+
         setValues({
           heading: response.data.heading,
           content: response.data.content,
         });
+
+        const fetchedTags = response.data.tags
+          ? response.data.tags.split(",")
+          : [];
+        setTags(fetchedTags);
       } catch (err) {
         console.log(err);
       } finally {
@@ -64,14 +74,23 @@ const DetailDiary = () => {
     toolbar: toolbarOptions,
   };
 
+  // save to database
   const handleSaveClick = async () => {
     setIsSaving(true);
+
+    if (values.heading.length === 0) {
+      return setHeadingError("Heading cannot be null");
+    }
+
     try {
+      const tagsString = tags.join(",");
+
       await axios.put(
         `http://localhost:8080/diary/${currentDiaryId}`,
         {
           heading: values.heading,
           content: values.content,
+          tags: tagsString,
         },
         {
           withCredentials: true,
@@ -100,12 +119,32 @@ const DetailDiary = () => {
     }
   };
 
+  // tags logic
+  const colors = ["bg-blue-100", "bg-green-100", "bg-red-100"];
+
+  const handleKeyDown = (e) => {
+    if (e.key === " " && tagInput.trim() !== "") {
+      e.preventDefault();
+      if (tags.length < 3) {
+        setTags([...tags, tagInput.trim()]);
+        setTagInput("");
+      }
+    }
+  };
+  const handleDelete = (index) => {
+    const newTags = tags.filter((_, i) => i !== index);
+    setTags(newTags);
+  };
+  const handleChange = (e) => {
+    const value = e.target.value;
+    if (value.length <= 30) {
+      setTagInput(value);
+    }
+  };
+
   return (
     <section>
       <div className=" bg-primary rounded-2xl px-10 py-8 max-w-5xl mx-auto mt-8 border-2 shadow-lg">
-        {/* <h2 className="font-unbounded text-3xl font-medium first-letter:uppercase">
-          heading heasdinf asdhf haosdifh oasidhf
-        </h2> */}
         <div className="flex items-center justify-between mb-5">
           <div className="px-3 py-0 bg-indigo-100 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
             <span className="font-normal">Sept 27 ' 2024</span> : 12:23 am
@@ -133,24 +172,52 @@ const DetailDiary = () => {
             <h2 className="error">{hedingError}</h2>
           </div>
           <div className="flex flex-col items-center w-1/5">
-            <div className="simple-btn w-4/5 text-center">Save</div>
+            <div
+              className="simple-btn w-4/5 text-center"
+              onClick={handleSaveClick}
+            >
+              Save
+            </div>
             {/* <h4 className="error">error</h4> */}
           </div>
         </div>
 
-        <div className="tags flex items-center">
-          <div className="tag1"></div>
-          <div className="tag2"></div>
-          <div className="tag3"></div>
+        <div className="relative mt-5">
+          <div className="flex flex-wrap items-center justify-center">
+            {tags.map((tag, index) => (
+              <span
+                key={index}
+                className={`inline-flex items-center ${colors[index]} px-3 py-[2px] rounded-full font-semibold text-base inline m-1`}
+              >
+                #{tag}
+                <button
+                  className="ml-2 text-secondary"
+                  onClick={() => handleDelete(index)}
+                >
+                  &times;
+                </button>
+              </span>
+            ))}
+            {tags.length < 3 && (
+              <input
+                type="text"
+                value={tagInput}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                className="border-b-2 border-gray-300 focus:outline-none px-2 py-1 w-full sm:w-2/4"
+                placeholder="Enter 3 tag"
+              />
+            )}
+          </div>
         </div>
 
-        {/* <div className="editor">
+        <div className="editor mt-8">
           <ReactQuill
             modules={module}
             value={values.content}
             onChange={(content) => setValues({ ...values, content })}
           />
-        </div> */}
+        </div>
 
         {/* <button
           className="simple-btn"
