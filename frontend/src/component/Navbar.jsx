@@ -107,7 +107,7 @@ const Navbar = () => {
             </svg>
 
             {profDropDown && (
-              <div className="profile-drown absolute top-20 right-0 rounded-xl bg-primary p-2 pt-7 text-center min-w-56">
+              <div className="profile-drown absolute top-20 right-0 rounded-xl bg-primary p-2 pt-7 text-center min-w-56 shadow-xl border-2">
                 {user && (
                   <span className="id font-nunito px-2 py-1 bg-indigo-200 rounded-md">
                     ID: {user.id}

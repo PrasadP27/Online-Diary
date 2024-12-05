@@ -38,7 +38,6 @@ const DetailDiary = () => {
             withCredentials: true,
           }
         );
-        // console.log(response.data);
 
         setValues({
           heading: response.data.heading,
@@ -46,7 +45,6 @@ const DetailDiary = () => {
           saveDate: response.data.date,
         });
 
-        // console.log(values);
         const sanitizedContent = response.data.content
           .replace(/<[^>]*>/g, "")
           .trim();
@@ -56,12 +54,11 @@ const DetailDiary = () => {
           ? response.data.tags.split(",")
           : [];
         setTags(fetchedTags);
-
-        setAllowSave(false);
       } catch (err) {
         setError(err.response ? err.response.data.message : "Error");
       } finally {
         setLoading(false);
+        setAllowSave(false);
       }
     };
 
@@ -211,50 +208,6 @@ const DetailDiary = () => {
   if (error) {
     return (
       <section className="mt-10">
-        {/* {error === "No diaries avaliable." ? (
-          <div className="diaries-header flex items-center justify-between mt-10">
-            <h1>My Diaries</h1>
-
-            <div className="flex items-center">
-              <div
-                className="p-2 px-5 mx-3 border-2 rounded-full bg-primary shadow-lg flex items-center transition-all duration-500 hover:border-indigo-300 hover:text-indigo-400 hover:px-10 cursor-pointer active:scale-[0.98]"
-                onClick={handleNewEntryClick}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  className="size-7"
-                >
-                  <line
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    x1="12"
-                    x2="12"
-                    y1="19"
-                    y2="5"
-                  ></line>
-                  <line
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    x1="5"
-                    x2="19"
-                    y1="12"
-                    y2="12"
-                  ></line>
-                </svg>
-                <h4 className="ml-2 font-nunito font-semibold">New Entry</h4>
-              </div>
-            </div>
-          </div>
-        ) : (
-          ""
-        )} */}
         <div className="text-center mt-14 flex items-center justify-center">
           <h3 className="text-2xl font-nunito font-bold text-secondary underline-text-highlight">
             {error}

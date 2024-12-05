@@ -28,7 +28,6 @@ const DiaryCard = (props) => {
   const { day, month, year, formattedTime } = formatDate();
 
   const gotoDiaryPage = () => {
-    console.log("diary");
     navigate(`/diaries/${props.diaryId}`);
   };
 
