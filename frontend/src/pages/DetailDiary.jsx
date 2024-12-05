@@ -85,10 +85,12 @@ const DetailDiary = () => {
   // limit heading
   const headingLimit = (e) => {
     setAllowSave(true);
-    const newHeading = e.target.value;
+    const inputValue = e.target.value;
+    const capitalizedValue =
+      inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
 
-    if (newHeading.length <= 30) {
-      setValues({ ...values, heading: newHeading });
+    if (inputValue.length <= 30) {
+      setValues({ ...values, heading: capitalizedValue });
       setHeadingError("");
     } else {
       setHeadingError("Max length reached (30 characters)");

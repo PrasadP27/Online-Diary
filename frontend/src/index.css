@@ -82,6 +82,7 @@ h1 {
   background: #f9faff !important;
   padding: 20px !important;
   @apply shadow-inner text-center rounded-xl border-2 z-[5] sticky top-24 bg-gradient-to-tr from-[#d3dfe3] to-[#f7f0fc] w-full sm:w-4/5 sm:mx-auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .ql-toolbar button {

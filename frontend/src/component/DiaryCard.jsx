@@ -57,6 +57,13 @@ const DiaryCard = (props) => {
   // Array of color options
   const colors = ["bg-blue-100", "bg-green-100", "bg-red-100"];
 
+  // Function to convert HTML to plain text
+  const convertHtmlToPlainText = (html) => {
+    const tempElement = document.createElement("div");
+    tempElement.innerHTML = html;
+    return tempElement.innerText || tempElement.textContent;
+  };
+
   return (
     <article
       className=" w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-5 py-7 rounded-3xl shadow-xl bg-primary text-secondary cursor-pointer  active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4 hover:bg-[#f9faff]"
@@ -76,12 +83,12 @@ const DiaryCard = (props) => {
         </p>
       </div>
 
-      <div className="entry-content border-2w-5/6 px-2 w-full">
+      <div className="entry-content border-2w-5/6 px-2 w-full overflow-hidden">
         <h3 className="text-2xl font-unbounded font-medium mb-3">
           {highlightText(truncateText(props.heading, 15), props.query)}
         </h3>
         <p className="text-base font-nunito font-medium tracking-tight text-gray-500 mb-3">
-          &emsp; {truncateText(props.content, 200)}
+          &emsp; {truncateText(convertHtmlToPlainText(props.content), 200)}
         </p>
 
         <div className="flex items-center justify-start flex-wrap">
