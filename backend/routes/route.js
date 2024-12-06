@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require("../server");
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 router.get('/', (req, res) => {
 
@@ -10,12 +11,12 @@ router.get('/', (req, res) => {
     return res.status(200).json({ user: req.session.user });
 });
 
-// Register into database 
-router.post('/register', (req, res) => {
+// Register a new user
+router.post('/register', async (req, res) => {
     const checkEmailSql = "SELECT * FROM users WHERE `email` = ?";
 
     // Check if the email already exists
-    db.query(checkEmailSql, [req.body.email], (err, data) => {
+    db.query(checkEmailSql, [req.body.email], async (err, data) => {
         if (err) {
             return res.status(500).json({ message: "Server error. Please try again soon.", error: err });
         }
@@ -25,11 +26,12 @@ router.post('/register', (req, res) => {
         }
 
         // If the email does not exist, proceed with the signup
+        const hashedPassword = await bcrypt.hash(req.body.password, 10); // Hash the password
         const sql = "INSERT INTO users (`name`, `email`, `password`) VALUES (?)";
         const values = [
             req.body.name,
             req.body.email,
-            req.body.password
+            hashedPassword // Store the hashed password
         ];
 
         db.query(sql, [values], (err, result) => {
@@ -53,7 +55,7 @@ router.post('/login', (req, res) => {
     const sql = "SELECT * FROM users WHERE `email` = ?";
 
     // Check for email existence 
-    db.query(sql, [req.body.email], (err, data) => {
+    db.query(sql, [req.body.email], async (err, data) => {
         if (err) {
             return res.status(500).json({ message: "Server error. Please try again soon.", error: err });
         }
@@ -64,7 +66,9 @@ router.post('/login', (req, res) => {
 
         // If email exists, then check the password 
         const user = data[0];
-        if (user.password !== req.body.password) {
+        const isPasswordValid = await bcrypt.compare(req.body.password, user.password); // Compare hashed password
+
+        if (!isPasswordValid) {
             return res.status(401).json({ message: "Password is incorrect." });
         }
 
