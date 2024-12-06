@@ -12,7 +12,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <body>
+      <main>
         <Routes location={location} key={location.pathname}>
           {/* <Route index element={<Home />} /> */}
           <Route path="/login" element={<Login />} />
@@ -20,7 +20,7 @@ const App = () => {
           <Route path="/diaries" element={<Diaries />} />
           <Route path="/diaries/:diaryid" element={<DetailDiary />} />
         </Routes>
-      </body>
+      </main>
     </>
   );
 };
