@@ -28,8 +28,6 @@ const Register = () => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res); // ---
-
         if (res.data) {
           setSuccessMessage(res.data.message);
           setValues({ name: "", email: "", password: "" });
@@ -39,7 +37,6 @@ const Register = () => {
         }
       })
       .catch((err) => {
-        console.error(err);
         if (err.response) {
           setError(err.response.data.message);
         } else {

@@ -28,8 +28,6 @@ const Login = () => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res); // ---
-
         if (res.data) {
           setSuccessMessage(res.data.message);
           setValues({ email: "", password: "" });
@@ -39,7 +37,6 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.error(err);
         if (err.response) {
           setError(err.response.data.message);
         } else {
