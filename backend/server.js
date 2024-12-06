@@ -16,6 +16,7 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 60 * 1000 }, //one day 24hrs
     resave: true,
     saveUninitialized: false,
+    name: "Inkwell.user"
 }))
 
 app.use(express.json()); // Middleware for parsing JSON
@@ -40,21 +41,6 @@ db.connect((err) => {
 
 // Export the db connection
 module.exports = db;
-
-// Middleware to attach user info to the request object
-const attachUserToRequest = (req, res, next) => {
-    if (req.session && req.session.user) {
-        req.user = {
-            id: req.session.user.id,
-            name: req.session.user.name,
-            email: req.session.user.email,
-        };
-    } else {
-        req.user = null;
-    }
-    next();
-};
-app.use(attachUserToRequest);
 
 // routes
 app.use("/", require(path.join(__dirname, "routes/route.js")));

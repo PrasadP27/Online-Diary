@@ -1,28 +1,27 @@
 const express = require('express');
-const db = require("../server")
-const router = express.Router()
+const db = require("../server");
+const router = express.Router();
 
 router.get('/', (req, res) => {
-    // res.send("Online diary")
 
     if (!req.session.user) {
-        return res.status(401).json({ message: "Unauthorized" });
+        return res.json({ message: "Unauthorized" });
     }
-    return res.json({ user: req.user });
-})
+    return res.status(200).json({ user: req.session.user });
+});
 
-// register into database 
+// Register into database 
 router.post('/register', (req, res) => {
     const checkEmailSql = "SELECT * FROM users WHERE `email` = ?";
 
     // Check if the email already exists
     db.query(checkEmailSql, [req.body.email], (err, data) => {
         if (err) {
-            return res.json({ message: "Error occurred", error: err });
+            return res.status(500).json({ message: "Server error. Please try again soon.", error: err });
         }
 
         if (data.length > 0) {
-            return res.json({ message: "Account already exists" });
+            return res.status(409).json({ message: "Account already exists" });
         }
 
         // If the email does not exist, proceed with the signup
@@ -35,18 +34,8 @@ router.post('/register', (req, res) => {
 
         db.query(sql, [values], (err, result) => {
             if (err) {
-                return res.json({ message: "Error occurred", error: err });
+                return res.status(500).json({ message: "Server error. Please try again later.", error: err });
             }
-
-            // const newUserId = result.insertId;
-            // const getUserSql = "SELECT * FROM users WHERE id = ?";
-            // db.query(getUserSql, [newUserId], (err, userData) => {
-            //     if (err) {
-            //         return res.json({ message: "Error occurred while fetching user details", error: err });
-            //     }
-
-            //     return res.json({ message: "Signup successful", user: userData[0] });
-            // });
 
             req.session.user = {
                 id: result.insertId,
@@ -54,123 +43,130 @@ router.post('/register', (req, res) => {
                 email: req.body.email
             };
 
-            return res.json({ message: "Signup successful", user: req.session.user });
+            return res.status(201).json({ message: "Signup successful", user: req.session.user });
         });
     });
 });
 
-// login into database 
+// Login into database 
 router.post('/login', (req, res) => {
     const sql = "SELECT * FROM users WHERE `email` = ?";
 
     // Check for email existence 
     db.query(sql, [req.body.email], (err, data) => {
         if (err) {
-            return res.json({ message: "Error occurred", error: err });
+            return res.status(500).json({ message: "Server error. Please try again soon.", error: err });
         }
 
         if (data.length === 0) {
-            return res.json({ message: "Email not found" });
+            return res.status(404).json({ message: "Email does not exist." });
         }
 
         // If email exists, then check the password 
         const user = data[0];
         if (user.password !== req.body.password) {
-            return res.json({ message: "Wrong password" });
+            return res.status(401).json({ message: "Password is incorrect." });
         }
-
-        // If login is successful, return user details
-        // const userDetails = {
-        //     id: user.id,
-        //     name: user.name,
-        //     email: user.email
-        // };
-
-        // return res.json({ message: "Success login", user: userDetails });
 
         // Store user info in session
         req.session.user = {
             id: user.id,
             name: user.name,
-            email: user.email
+            email: user.email,
         };
 
-        return res.json({ message: "Success login", user: req.session.user });
+        return res.status(200).json({ message: "Login successful", user: req.session.user });
     });
 });
 
 router.post('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
-            return res.status(500).json({ message: "Could not log out" });
+            return res.status(500).json({ message: "Server error. Could not log out" });
         }
 
         // Clear the session cookie
-        res.clearCookie('connect.sid');
+        res.clearCookie('Inkwell.user');
 
-        req.user = null;
-
-        return res.status(200).json({ message: "Logged out successfully", user: req.user });
+        return res.status(200).json({ message: "Logged out successfully" });
     });
 });
 
+// diary 
 router.get('/diary', (req, res) => {
-    // Check if the user is logged in
+    // console.log(req.session.user);
+
     if (!req.session.user) {
-        return res.status(401).json({ message: "Unauthorized" });
+        return res.status(401).json({ message: "No user Found" });
     }
 
     // Fetch all diaries for the logged-in user
     const fetchDiariesSql = "SELECT * FROM diaries WHERE userId = ?";
-    db.query(fetchDiariesSql, [req.user.id], (err, diaries) => {
+    db.query(fetchDiariesSql, [req.session.user.id], (err, diaries) => {
         if (err) {
-            return res.status(500).json({ message: err });
+            return res.status(500).json({ message: "Server error. Please try again later.", error: err });
         }
 
-        if (diaries.length === 0) {
-            return res.json({ message: "No diaries found." })
+        if (!diaries || diaries.length === 0) {
+            return res.status(404).json({ message: "No diaries avaliable." });
         }
 
-        return res.json({ diary: diaries, user: req.user });
+        return res.status(200).json({ diary: diaries, user: req.session.user });
     });
 });
 
-// generate diaryid randomly in frontend
-// if duplicate id then generate new id 
+// Function to get the current date and time in IST
+function getCurrentISTDate() {
+    const now = new Date();
+    now.setHours(now.getHours() + 5);
+    now.setMinutes(now.getMinutes() + 30);
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+// create new entry route
 router.post('/diary/:diaryid', (req, res) => {
     // Check if the user is logged in
     if (!req.session.user) {
-        return res.status(401).json({ message: "Unauthorized" });
+        return res.status(401).json({ message: "No user Found" });
     }
 
     const diaryId = req.params.diaryid;
 
     // First, check if the diary already exists
     const fetchSql = "SELECT * FROM diaries WHERE diaryId = ? AND userId = ?";
-    db.query(fetchSql, [diaryId, req.user.id], (err, diaryResult) => {
+    db.query(fetchSql, [diaryId, req.session.user.id], (err, diaryResult) => {
         if (err) {
-            return res.status(500).json({ message: err });
+            return res.status(500).json({ message: "Server error." });
         }
 
         if (diaryResult.length > 0) {
-            return res.json(diaryResult[0]);
+            return res.status(200).json(diaryResult[0]);
         } else {
             // Diary does not exist, create a new one
-            const insertSql = "INSERT INTO diaries (`diaryId`, `userId`, `date`) VALUES (?, ?, NOW())";
-            const values = [diaryId, req.user.id];
+            // it gives error that duplicate diary entry hence used ignore 
+            const insertSql = "INSERT IGNORE INTO diaries (`diaryId`, `userId`, `date`) VALUES (?, ?, ?)";
+            const values = [diaryId, req.session.user.id, getCurrentISTDate()];
 
             db.query(insertSql, values, (err) => {
                 if (err) {
-                    return res.status(500).json({ message: err });
+                    return res.status(500).json({ message: "Error occured. try after sometime.", error: err });
                 }
 
                 // Fetch the newly created diary
-                db.query(fetchSql, [diaryId, req.user.id], (err, newDiaryResult) => {
+                db.query(fetchSql, [diaryId, req.session.user.id], (err, newDiaryResult) => {
                     if (err) {
-                        return res.status(500).json({ message: err });
+                        return res.status(500).json({ message: "Error fetching." });
                     }
 
-                    return res.json(newDiaryResult[0]);
+                    return res.status(201).json(newDiaryResult[0]);
                 });
             });
         }
@@ -180,18 +176,18 @@ router.post('/diary/:diaryid', (req, res) => {
 router.put('/diary/:diaryid', (req, res) => {
 
     if (!req.session.user) {
-        return res.status(401).json({ message: "Unauthorized" });
+        return res.status(401).json({ message: "No user Found" });
     }
 
     const diaryId = req.params.diaryid;
-    const { content, heading } = req.body;
+    const { content, heading, tags } = req.body;
 
-    const updateSql = "UPDATE diaries SET date = NOW(), content = ?, heading = ? WHERE diaryId = ? AND userId = ?";
-    const values = [content, heading, diaryId, req.user.id];
+    const updateSql = "UPDATE diaries SET date = ?, content = ?, heading = ?, tags = ? WHERE diaryId = ? AND userId = ?";
+    const values = [getCurrentISTDate(), content, heading, tags, diaryId, req.session.user.id];
 
     db.query(updateSql, values, (err, result) => {
         if (err) {
-            return res.status(500).json({ message: "Error occurred while updating diary", error: err });
+            return res.status(500).json({ message: "Server error.", error: err });
         }
 
         if (result.affectedRows === 0) {
@@ -200,9 +196,9 @@ router.put('/diary/:diaryid', (req, res) => {
 
         // Fetch the updated diary entry
         const fetchSql = "SELECT * FROM diaries WHERE diaryId = ? AND userId = ?";
-        db.query(fetchSql, [diaryId, req.user.id], (err, diaryResult) => {
+        db.query(fetchSql, [diaryId, req.session.user.id], (err, diaryResult) => {
             if (err) {
-                return res.status(500).json({ message: "Error occurred while fetching updated diary", error: err });
+                return res.status(500).json({ message: "Server error while fetching updated diary" });
             }
 
             if (diaryResult.length === 0) {
@@ -210,33 +206,33 @@ router.put('/diary/:diaryid', (req, res) => {
             }
 
             // Return the updated diary entry
-            return res.json({ message: "Diary updated successfully", diary: diaryResult[0] });
+            return res.status(200).json({ message: "Diary updated successfully", diary: diaryResult[0] });
         });
     });
-})
+});
 
 // Delete a diary entry
 router.delete('/diary/:diaryid', (req, res) => {
     if (!req.session.user) {
-        return res.status(401).json({ message: "Unauthorized" });
+        return res.status(401).json({ message: "No user found." });
     }
 
     const diaryId = req.params.diaryid;
 
     const deleteSql = "DELETE FROM diaries WHERE diaryId = ? AND userId = ?";
-    const values = [diaryId, req.user.id];
+    const values = [diaryId, req.session.user.id];
 
     db.query(deleteSql, values, (err, result) => {
         if (err) {
-            return res.status(500).json({ message: "Error occurred while deleting diary", error: err });
+            return res.status(500).json({ message: "Server Error. Try after sometime.", error: err });
         }
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: "Diary not found or does not belong to the user" });
         }
 
-        return res.json({ message: "Diary deleted successfully" });
+        return res.status(200).json({ message: "Diary deleted successfully" });
     });
 });
 
-module.exports = router
+module.exports = router;
