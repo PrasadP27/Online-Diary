@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import React, { useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -8,6 +8,7 @@ import "react-quill/dist/quill.snow.css";
 const DetailDiary = () => {
   const params = useParams();
   const currentDiaryId = params.diaryid;
+  const navigate = useNavigate();
 
   const [values, setValues] = useState({
     heading: "",
@@ -26,6 +27,8 @@ const DetailDiary = () => {
   const [error, setError] = useState("");
   const [updateError, setUpdateError] = useState("");
   const [hedingError, setHeadingError] = useState("");
+  const [delError, setDelError] = useState("");
+  const [delPopup, setDelPopup] = useState(false);
 
   // create new entry or fetch entry details
   useEffect(() => {
@@ -179,6 +182,39 @@ const DetailDiary = () => {
     }
   };
 
+  // delete entry
+  const deleteEntry = async () => {
+    try {
+      await axios.delete(`http://localhost:8080/diary/${currentDiaryId}`, {
+        withCredentials: true,
+      });
+      navigate("/diaries");
+    } catch (err) {
+      setDelError(err.response ? err.response.data.message : "Error Occured");
+    }
+  };
+
+  // const location = useLocation();
+
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (allowSave) {
+  //       const confirmationMessage =
+  //         "You have unsaved changes. Are you sure you want to leave?";
+  //       event.returnValue = confirmationMessage; // For most browsers
+  //       return confirmationMessage; // For some browsers
+  //     }
+  //   };
+
+  //   // Add the event listener
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+  //   // Cleanup function to remove the event listener
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [navigate]);
+
   // if loading
   if (loading) {
     return (
@@ -236,7 +272,7 @@ const DetailDiary = () => {
           <div className="px-3 py-0 bg-indigo-100 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
             <span className="font-normal">
               {month} {day} ' {year}
-            </span>{" "}
+            </span>
             : {formattedTime}
           </div>
           <div className="px-3 py-0 bg-indigo-100 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
@@ -347,6 +383,80 @@ const DetailDiary = () => {
           />
         </div>
       </div>
+      <button
+        className="flex items-center justify-center flex-row bg-red-500 px-4 py-2 rounded-lg text-primary mx-auto my-5 text-lg font-nunito hover:bg-red-300 transition-all duration-500 hover:text-secondary"
+        onClick={() => setDelPopup(true)}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="size-7 p-1 mr-1"
+        >
+          <path
+            d="M10 11V17"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M14 11V17"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M4 7H20"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+        </svg>
+        Delete
+      </button>
+      <h4 className="error">{delError}</h4>
+
+      {delPopup && (
+        <div className="fixed h-dvh w-full top-0 left-0 bg-[#7b7f83a3] z-50 p-3 flex items-end lg:items-center">
+          <div className="bg-primary flex items-center justify-center flex-col relative rounded-xl border-2  shadow-xl py-8 px-2 sm:px-4 md:px-7 mx-auto">
+            <h2 className="font-unbounded font-semibold text-xl text-center text-red-500 mb-4">
+              Are you sure?
+            </h2>
+            <p className="font-nunito font-medium text-center text-secondary mb-7">
+              Your diary will be deleted permanently deleted. Are your sure?
+            </p>
+            <button
+              className="w-4/5 px-3 py-2 bg-indigo-300 hover:bg-indigo-500 border-2 m-2 text-primary rounded-lg transition-all duration-500 active:scale-[0.98]"
+              onClick={() => setDelPopup(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="w-4/5 px-3 py-2 bg-red-300 hover:bg-red-500 border-2 m-2 text-primary rounded-lg transition-all duration-500 active:scale-[0.98]"
+              onClick={deleteEntry}
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

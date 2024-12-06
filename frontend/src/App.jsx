@@ -12,13 +12,15 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <Routes location={location} key={location.pathname}>
-        {/* <Route index element={<Home />} /> */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/diaries" element={<Diaries />} />
-        <Route path="/diaries/:diaryid" element={<DetailDiary />} />
-      </Routes>
+      <body>
+        <Routes location={location} key={location.pathname}>
+          {/* <Route index element={<Home />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/diaries" element={<Diaries />} />
+          <Route path="/diaries/:diaryid" element={<DetailDiary />} />
+        </Routes>
+      </body>
     </>
   );
 };
