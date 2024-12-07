@@ -20,11 +20,28 @@ body {
   height: 100%;
   width: 100%;
   background: rgb(244, 251, 254);
-  background: linear-gradient(45deg, #d3dfe3 25%, #f1fcff 50%, #f7f0fc 80%);
+  background-image: linear-gradient(
+    45deg,
+    #d3dfe3 25%,
+    #f1fcff 50%,
+    #f7f0fc 80%
+  );
+  /* background: linear-gradient(45deg, #06181e 25%, #061220 50%, #13081a 80%); */
   background-attachment: fixed;
   background-size: cover;
   font-family: "Nunito", "sans-serif";
   @apply text-secondary;
+}
+
+body.dark {
+  background: #061220;
+  background-image: linear-gradient(
+    45deg,
+    #06181e 25%,
+    #061220 50%,
+    #13081a 80%
+  );
+  @apply text-[#e6e5e1];
 }
 
 section {
@@ -36,12 +53,12 @@ h1 {
 }
 
 .simple-btn {
-  @apply px-3 py-2 bg-secondary text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer;
+  @apply px-3 py-2 bg-secondary text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;
 }
 
 .notallowed {
   pointer-events: none;
-  @apply bg-indigo-200;
+  @apply opacity-55;
 }
 
 .underline-text,
@@ -71,6 +88,11 @@ h1 {
   transform-origin: bottom left;
 }
 
+body.dark .underline-text::after,
+body.dark .underline-text-highlight::after {
+  @apply bg-indigo-700;
+}
+
 .error {
   @apply font-nunito text-red-600 font-semibold text-base mt-2;
 }
@@ -78,11 +100,16 @@ h1 {
 /* quill editor styles  */
 .ql-toolbar {
   border: none !important;
-  border-bottom: 2px solid #d1d5db !important;
+  /* border-bottom: 2px solid #d1d5db !important; */
   background: #f9faff !important;
   padding: 20px !important;
   @apply shadow-inner text-center rounded-xl border-2 z-[5] sticky top-24 bg-gradient-to-tr from-[#d3dfe3] to-[#f7f0fc] w-full sm:w-4/5 sm:mx-auto;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+body.dark .ql-toolbar {
+  backdrop-filter: blur(5px) !important;
+  background: #ffffff1a !important;
 }
 
 .ql-toolbar button {
@@ -90,6 +117,18 @@ h1 {
   padding: 5px !important;
   border-radius: 8px;
   margin: 5px !important;
+}
+
+body.dark .ql-fill {
+  fill: whitesmoke;
+}
+
+body.dark .ql-stroke {
+  stroke: white;
+}
+
+body.dark .ql-picker-options {
+  background: #333333;
 }
 
 .ql-toolbar button.ql-active {
@@ -105,6 +144,81 @@ h1 {
   color: #333333;
 }
 
+body.dark .ql-container {
+  color: #e6e5e1;
+}
+
 .ql-container img {
   height: 300px;
+}
+
+/* theme toggle  */
+.st-sunMoonThemeToggleBtn .themeToggleInput {
+  opacity: 0;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.st-sunMoonThemeToggleBtn svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease;
+  transform: rotate(40deg);
+}
+
+.st-sunMoonThemeToggleBtn svg .sunMoon {
+  transform-origin: center center;
+  transition: inherit;
+  transform: scale(1);
+}
+
+.st-sunMoonThemeToggleBtn svg .sunRay {
+  transform-origin: center center;
+  transform: scale(0);
+}
+
+.st-sunMoonThemeToggleBtn svg mask > circle {
+  transition: transform 0.64s cubic-bezier(0.41, 0.64, 0.32, 1.575);
+  transform: translate(0px, 0px);
+}
+
+.st-sunMoonThemeToggleBtn svg .sunRay2 {
+  animation-delay: 0.05s !important;
+}
+.st-sunMoonThemeToggleBtn svg .sunRay3 {
+  animation-delay: 0.1s !important;
+}
+.st-sunMoonThemeToggleBtn svg .sunRay4 {
+  animation-delay: 0.17s !important;
+}
+.st-sunMoonThemeToggleBtn svg .sunRay5 {
+  animation-delay: 0.25s !important;
+}
+.st-sunMoonThemeToggleBtn svg .sunRay5 {
+  animation-delay: 0.29s !important;
+}
+
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg {
+  transform: rotate(90deg);
+}
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg mask > circle {
+  transform: translate(16px, -3px);
+}
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg .sunMoon {
+  transform: scale(0.55);
+}
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg .sunRay {
+  animation: showRay1832 0.4s ease 0s 1 forwards;
+}
+
+@keyframes showRay1832 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

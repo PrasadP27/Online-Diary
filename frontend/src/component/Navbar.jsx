@@ -43,8 +43,23 @@ const Navbar = () => {
     naviagte("/");
   };
 
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Effect to add/remove the dark class on body
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+
+  const handleToggle = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 flex items-center justify-between max-w-7xl mx-auto backdrop-blur-sm bg-white/30 rounded-b-xl drop-shadow-md px-14 py-5 z-50">
+    <header className="fixed top-0 left-0 right-0 flex items-center justify-between max-w-7xl mx-auto backdrop-blur-sm bg-white/30 dark:bg-white/10 rounded-b-xl drop-shadow-md px-14 py-5 z-50">
       <Link
         to={"/"}
         className="logo font-unbounded font-medium flex items-center text-xl"
@@ -79,6 +94,78 @@ const Navbar = () => {
           </li>
         )}
 
+        <li className="relative mr-8">
+          <label
+            className="themeToggle st-sunMoonThemeToggleBtn size-6 cursor-pointer relative block"
+            type="checkbox"
+          >
+            <input
+              type="checkbox"
+              id="themeToggle"
+              className="themeToggleInput"
+              checked={isDarkMode}
+              onChange={handleToggle}
+            />
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              stroke="none"
+            >
+              <mask id="moon-mask">
+                <rect x="0" y="0" width="20" height="20" fill="white"></rect>
+                <circle cx="11" cy="3" r="8" fill="black"></circle>
+              </mask>
+              <circle
+                className="sunMoon"
+                cx="10"
+                cy="10"
+                r="8"
+                mask="url(#moon-mask)"
+              ></circle>
+              <g>
+                <circle
+                  className="sunRay sunRay1"
+                  cx="18"
+                  cy="10"
+                  r="1.5"
+                ></circle>
+                <circle
+                  className="sunRay sunRay2"
+                  cx="14"
+                  cy="16.928"
+                  r="1.5"
+                ></circle>
+                <circle
+                  className="sunRay sunRay3"
+                  cx="6"
+                  cy="16.928"
+                  r="1.5"
+                ></circle>
+                <circle
+                  className="sunRay sunRay4"
+                  cx="2"
+                  cy="10"
+                  r="1.5"
+                ></circle>
+                <circle
+                  className="sunRay sunRay5"
+                  cx="6"
+                  cy="3.1718"
+                  r="1.5"
+                ></circle>
+                <circle
+                  className="sunRay sunRay6"
+                  cx="14"
+                  cy="3.1718"
+                  r="1.5"
+                ></circle>
+              </g>
+            </svg>
+          </label>
+        </li>
+
         {!user ? (
           <li className="mr-3">
             <Link to={"/register"} className="simple-btn">
@@ -107,9 +194,9 @@ const Navbar = () => {
             </svg>
 
             {profDropDown && (
-              <div className="profile-drown absolute top-20 right-0 rounded-xl bg-primary p-2 pt-7 text-center min-w-56 shadow-xl border-2">
+              <div className="profile-drown absolute top-20 right-0 rounded-xl bg-primary p-2 pt-7 text-center min-w-56 shadow-xl border-2 dark:backdrop-blur-sm dark:bg-gray-900">
                 {user && (
-                  <span className="id font-nunito px-2 py-1 bg-indigo-200 rounded-md">
+                  <span className="id font-nunito px-2 py-1 bg-indigo-200 rounded-md dark:bg-indigo-700">
                     ID: {user.id}
                   </span>
                 )}
@@ -117,7 +204,7 @@ const Navbar = () => {
                 <p className="p-2 my-2  border-b-2">{user?.email}</p>
                 <p
                   onClick={userLogout}
-                  className="flex items-center justify-center p-2 my-2 rounded-md text-red-500 cursor-pointer hover:bg-red-50 transition duration-150"
+                  className="flex items-center justify-center p-2 my-2 rounded-md text-red-500 cursor-pointer hover:bg-red-50 transition duration-150 dark:hover:bg-red-950"
                 >
                   <svg
                     viewBox="0 -0.5 25 25"

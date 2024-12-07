@@ -55,7 +55,11 @@ const DiaryCard = (props) => {
   const tagsArray = props.tags ? props.tags.split(",") : [];
 
   // Array of color options
-  const colors = ["bg-blue-100", "bg-green-100", "bg-red-100"];
+  const colors = [
+    "bg-blue-100 dark:bg-blue-700",
+    "bg-green-100 dark:bg-green-700",
+    "bg-red-100 dark:bg-red-700",
+  ];
 
   // Function to convert HTML to plain text
   const convertHtmlToPlainText = (html) => {
@@ -66,19 +70,19 @@ const DiaryCard = (props) => {
 
   return (
     <article
-      className=" w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-5 py-7 rounded-3xl shadow-xl bg-primary text-secondary cursor-pointer  active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4 hover:bg-[#f9faff]"
+      className=" w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-5 py-7 rounded-3xl shadow-xl bg-primary dark:bg-white/10 dark:backdrop-blur-sm text-secondary dark:text-darkPrimary cursor-pointer  active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4 hover:bg-[#f9faff] dark:hover:bg-gray-900"
       onClick={gotoDiaryPage}
     >
       <div className="text-center mr-3">
         <div className="border-2 flex flex-col items-center mr-3 p-1 rounded w-full shadow-md text-secondary">
-          <p className="text-sm uppercase font-nunito font-bold tracking-wider text-secondary">
+          <p className="text-sm uppercase font-nunito font-bold tracking-wider text-secondary dark:text-darkPrimary">
             {month}
           </p>
-          <p className="text-2xl font-unbounded font-medium text-secondary">
+          <p className="text-2xl font-unbounded font-medium text-secondary dark:text-darkPrimary">
             {day}
           </p>
         </div>
-        <p className="text-xs uppercase font-nunito font-semibold tracking-widest text-gray-500 mt-2">
+        <p className="text-xs uppercase font-nunito font-semibold tracking-widest text-gray-500 dark:text-gray-400 mt-2">
           {year}
         </p>
       </div>
@@ -87,11 +91,11 @@ const DiaryCard = (props) => {
         <h3 className="text-2xl font-unbounded font-medium mb-3">
           {highlightText(truncateText(props.heading, 15), props.query)}
         </h3>
-        <p className="text-base font-nunito font-medium tracking-tight text-gray-500 mb-3">
+        <p className="text-base font-nunito font-medium tracking-tight text-gray-500 dark:text-gray-400 mb-3">
           &emsp; {truncateText(convertHtmlToPlainText(props.content), 200)}
         </p>
 
-        <div className="flex items-center justify-start flex-wrap">
+        <div className="flex items-center justify-start flex-wrap dark:text-darkPrimary">
           {tagsArray.map((tag, index) => (
             <p
               key={index}

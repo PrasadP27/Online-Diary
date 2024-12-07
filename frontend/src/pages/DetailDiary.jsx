@@ -101,7 +101,11 @@ const DetailDiary = () => {
   };
 
   // tags logic
-  const colors = ["bg-blue-100", "bg-green-100", "bg-red-100"];
+  const colors = [
+    "bg-blue-100 dark:bg-blue-700",
+    "bg-green-100 dark:bg-green-700",
+    "bg-red-100 dark:bg-red-700",
+  ];
 
   const handleKeyDown = (e) => {
     if (e.key === " " && tagInput.trim() !== "") {
@@ -152,6 +156,7 @@ const DetailDiary = () => {
     setIsSaving(true);
 
     if (values.heading.length === 0) {
+      setIsSaving(false);
       return setHeadingError("Heading cannot be null");
     }
 
@@ -194,33 +199,12 @@ const DetailDiary = () => {
     }
   };
 
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event) => {
-  //     if (allowSave) {
-  //       const confirmationMessage =
-  //         "You have unsaved changes. Are you sure you want to leave?";
-  //       event.returnValue = confirmationMessage; // For most browsers
-  //       return confirmationMessage; // For some browsers
-  //     }
-  //   };
-
-  //   // Add the event listener
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   // Cleanup function to remove the event listener
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, [navigate]);
-
   // if loading
   if (loading) {
     return (
       <section className="flex items-center justify-center flex-col  h-full mt-10">
         <svg
-          className="animate-spin p-2 bg-indigo-400 size-14 rounded-full duration-500"
+          className="animate-spin p-2 bg-indigo-400 dark:bg-indigo-700 size-14 rounded-full duration-500"
           width="33"
           height="32"
           viewBox="0 0 33 32"
@@ -247,7 +231,7 @@ const DetailDiary = () => {
     return (
       <section className="mt-10">
         <div className="text-center mt-14 flex items-center justify-center">
-          <h3 className="text-2xl font-nunito font-bold text-secondary underline-text-highlight">
+          <h3 className="text-2xl font-nunito font-bold text-secondary dark:text-darkPrimary underline-text-highlight">
             {error}
           </h3>
           <svg
@@ -266,16 +250,16 @@ const DetailDiary = () => {
 
   return (
     <section>
-      <div className=" bg-primary rounded-2xl px-10 py-8 max-w-5xl mx-auto mt-8 border-2 shadow-lg">
+      <div className=" bg-primary dark:backdrop-blur-sm dark:bg-white/10 rounded-2xl px-10 py-8 max-w-5xl mx-auto mt-8 border-2 shadow-lg">
         {/* time and letters */}
         <div className="flex items-center justify-between mb-5">
-          <div className="px-3 py-0 bg-indigo-100 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
+          <div className="px-3 py-0 bg-indigo-100 dark:bg-indigo-700 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
             <span className="font-normal">
               {month} {day} ' {year}
             </span>
             : {formattedTime}
           </div>
-          <div className="px-3 py-0 bg-indigo-100 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
+          <div className="px-3 py-0 bg-indigo-100 dark:bg-indigo-700 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
             <span className="font-normal">{contentLength}</span> letters
           </div>
         </div>
@@ -292,7 +276,7 @@ const DetailDiary = () => {
               autoCorrect="true"
               autoComplete="true"
               rows={1}
-              className="font-unbounded font-medium text-3xl resize-none  w-full focus:outline-none border-b-2 border-solid border-gray-300 p-2 whitespace-nowrap overflow-hidden"
+              className="font-unbounded font-medium text-3xl resize-none  w-full focus:outline-none border-b-2 border-solid border-gray-300 p-2 whitespace-nowrap overflow-hidden bg-transparent"
             >
               {values.heading}
             </textarea>
@@ -300,7 +284,7 @@ const DetailDiary = () => {
           </div>
           <div className="flex flex-col items-center w-1/5 text-center">
             <button
-              className={`cursor-pointer mx-auto my-5 h-12 bg-indigo-400 font-semibold text-lg text-primary 
+              className={`cursor-pointer mx-auto my-5 h-12 bg-indigo-400 dark:bg-indigo-700 font-semibold text-lg text-primary 
                   hover:bg-indigo-500 transition-all 
                   ${
                     isSaving
@@ -347,7 +331,7 @@ const DetailDiary = () => {
               >
                 #{tag}
                 <button
-                  className="ml-2 text-secondary"
+                  className="ml-2 text-secondary dark:text-darkPrimary"
                   onClick={() => handleDelete(index)}
                 >
                   &times;
@@ -360,7 +344,7 @@ const DetailDiary = () => {
                 value={tagInput}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
-                className="border-b-2 border-gray-300 focus:outline-none px-2 py-1 w-full sm:w-2/4"
+                className="border-b-2 border-gray-300 focus:outline-none px-2 py-1 w-full sm:w-2/4 dark:bg-transparent"
                 placeholder="Enter 3 tag"
               />
             )}
@@ -434,22 +418,22 @@ const DetailDiary = () => {
       <h4 className="error">{delError}</h4>
 
       {delPopup && (
-        <div className="fixed h-dvh w-full top-0 left-0 bg-[#7b7f83a3] z-50 p-3 flex items-end lg:items-center">
-          <div className="bg-primary flex items-center justify-center flex-col relative rounded-xl border-2  shadow-xl py-8 px-2 sm:px-4 md:px-7 mx-auto">
+        <div className="fixed h-dvh w-full top-0 left-0 bg-[#7b7f83a3] dark:bg-[#191a1ba3] z-50 p-3 flex items-end lg:items-center">
+          <div className="bg-primary dark:bg-white/10 dark:backdrop-blur-sm flex items-center justify-center flex-col relative rounded-xl border-2  shadow-xl py-8 px-2 sm:px-4 md:px-7 mx-auto">
             <h2 className="font-unbounded font-semibold text-xl text-center text-red-500 mb-4">
               Are you sure?
             </h2>
-            <p className="font-nunito font-medium text-center text-secondary mb-7">
+            <p className="font-nunito font-medium text-center text-secondary dark:text-darkPrimary mb-7">
               Your diary will be deleted permanently deleted. Are your sure?
             </p>
             <button
-              className="w-4/5 px-3 py-2 bg-indigo-300 hover:bg-indigo-500 border-2 m-2 text-primary rounded-lg transition-all duration-500 active:scale-[0.98]"
+              className="w-4/5 px-3 py-2 bg-indigo-300 dark:bg-indigo-700 dark:border-0 dark:hover:bg-indigo-500 hover:bg-indigo-500 border-2 m-2 text-primary rounded-lg transition-all duration-500 active:scale-[0.98]"
               onClick={() => setDelPopup(false)}
             >
               Cancel
             </button>
             <button
-              className="w-4/5 px-3 py-2 bg-red-300 hover:bg-red-500 border-2 m-2 text-primary rounded-lg transition-all duration-500 active:scale-[0.98]"
+              className="w-4/5 px-3 py-2 bg-red-300 hover:bg-red-500 dark:bg-red-600 dark:hover:bg-red-400 dark:border-0 border-2 m-2 text-primary rounded-lg transition-all duration-500 active:scale-[0.98]"
               onClick={deleteEntry}
             >
               Confirm

@@ -61,7 +61,7 @@ const Diary = () => {
 
             <div className="flex items-center">
               <div
-                className="p-2 px-5 mx-3 border-2 rounded-full bg-primary shadow-lg flex items-center transition-all duration-500 hover:border-indigo-300 hover:text-indigo-400 hover:px-10 cursor-pointer active:scale-[0.98]"
+                className="p-2 px-5 mx-3 border-2 rounded-full bg-primary dark:bg-gray-600 shadow-lg flex items-center transition-all duration-500 hover:border-indigo-300 hover:text-indigo-400  hover:px-10 cursor-pointer active:scale-[0.98] "
                 onClick={handleNewEntryClick}
               >
                 <svg
@@ -100,7 +100,7 @@ const Diary = () => {
           ""
         )}
         <div className="text-center mt-14 flex items-center justify-center">
-          <h3 className="text-2xl font-nunito font-bold text-secondary underline-text-highlight">
+          <h3 className="text-2xl font-nunito font-bold text-secondary dark:text-darkPrimary underline-text-highlight">
             {error}
           </h3>
           <svg
@@ -124,7 +124,7 @@ const Diary = () => {
 
         <div className="flex items-center">
           <div
-            className="p-2 px-5 mx-3 border-2 rounded-full bg-primary shadow-lg flex items-center transition-all duration-500 hover:border-indigo-300 hover:text-indigo-400 hover:px-10 cursor-pointer active:scale-[0.98]"
+            className="p-2 px-5 mx-3 border-2 rounded-full bg-primary dark:bg-gray-600 shadow-lg flex items-center transition-all duration-500 hover:border-indigo-300 hover:text-indigo-400 hover:px-10 cursor-pointer active:scale-[0.98]"
             onClick={handleNewEntryClick}
           >
             <svg
@@ -158,8 +158,8 @@ const Diary = () => {
             <h4 className="ml-2 font-nunito font-semibold">New Entry</h4>
           </div>
 
-          <div className="relative text-primary">
-            <div className="text-secondary absolute top-2/4 left-[13px] size-7 pointer-events-none -translate-y-1/2">
+          <div className="relative text-primary dark:text-darkPrimary">
+            <div className="text-secondary dark:text-darkPrimary absolute top-2/4 left-[13px] size-7 pointer-events-none -translate-y-1/2">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -177,7 +177,7 @@ const Diary = () => {
             <input
               type="text"
               name="query"
-              className="text-lg border-2 text-secondary font-medium outline-none transition-all ease-in-out duration-500 bg-primary shadow-lg rounded-full cursor-pointer focus:w-[200px] xl:focus:w-[300px] focus:cursor-text size-12 p-2 pl-11 focus:shadow-md focus:border-indigo-300"
+              className="text-lg border-2 text-secondary dark:text-darkPrimary font-medium outline-none transition-all ease-in-out duration-500 bg-primary dark:bg-gray-600 shadow-lg rounded-full cursor-pointer focus:w-[200px] xl:focus:w-[300px] focus:cursor-text size-12 p-2 pl-11 focus:shadow-md focus:border-indigo-300"
               placeholder="Type to search..."
               spellCheck="false"
               onChange={(e) => setQuery(e.target.value)}
@@ -198,7 +198,7 @@ const Diary = () => {
               />
             ))
           ) : (
-            <h4 className="text-xl font-nunito font-bold text-secondary">
+            <h4 className="text-xl font-nunito font-bold text-secondary dark:text-darkPrimary">
               No diaries found for{" "}
               <span className="text-indigo-400">"{query}"</span>
             </h4>

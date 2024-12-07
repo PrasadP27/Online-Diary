@@ -9,6 +9,7 @@ export default {
       colors: {
         primary: "#ffffff",
         secondary: "#333333",
+        darkPrimary: "#e6e5e1"
       },
 
       fontFamily: {
@@ -18,5 +19,6 @@ export default {
     },
   },
   plugins: [],
+  darkMode: "class"
 }
 
