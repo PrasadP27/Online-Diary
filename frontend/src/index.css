@@ -20,28 +20,24 @@ body {
   height: 100%;
   width: 100%;
   background: rgb(244, 251, 254);
-  background-image: linear-gradient(
-    45deg,
-    #d3dfe3 25%,
-    #f1fcff 50%,
-    #f7f0fc 80%
-  );
+  background-image: linear-gradient(45deg,
+      #d3dfe3 25%,
+      #f1fcff 50%,
+      #f7f0fc 80%);
   /* background: linear-gradient(45deg, #06181e 25%, #061220 50%, #13081a 80%); */
   background-attachment: fixed;
   background-size: cover;
   font-family: "Nunito", "sans-serif";
-  @apply text-secondary;
+  @apply text-secondary transition duration-500;
 }
 
 body.dark {
   background: #061220;
-  background-image: linear-gradient(
-    45deg,
-    #06181e 25%,
-    #061220 50%,
-    #13081a 80%
-  );
-  @apply text-[#e6e5e1];
+  background-image: linear-gradient(45deg,
+      #06181e 25%,
+      #061220 50%,
+      #13081a 80%);
+  @apply text-[#e6e5e1] transition duration-500;
 }
 
 section {
@@ -100,7 +96,6 @@ body.dark .underline-text-highlight::after {
 /* quill editor styles  */
 .ql-toolbar {
   border: none !important;
-  /* border-bottom: 2px solid #d1d5db !important; */
   background: #f9faff !important;
   padding: 20px !important;
   @apply shadow-inner text-center rounded-xl border-2 z-[5] sticky top-24 bg-gradient-to-tr from-[#d3dfe3] to-[#f7f0fc] w-full sm:w-4/5 sm:mx-auto;
@@ -137,7 +132,8 @@ body.dark .ql-picker-options {
 
 .ql-container {
   border: none !important;
-  min-height: 100vh !important;
+  height: 100vh !important;
+  max-height: 1024px;
   font-size: 1.05rem !important;
   padding: 8px !important;
   font-family: "Nunito", "sans-serif" !important;
@@ -180,7 +176,7 @@ body.dark .ql-container {
   transform: scale(0);
 }
 
-.st-sunMoonThemeToggleBtn svg mask > circle {
+.st-sunMoonThemeToggleBtn svg mask>circle {
   transition: transform 0.64s cubic-bezier(0.41, 0.64, 0.32, 1.575);
   transform: translate(0px, 0px);
 }
@@ -188,29 +184,36 @@ body.dark .ql-container {
 .st-sunMoonThemeToggleBtn svg .sunRay2 {
   animation-delay: 0.05s !important;
 }
+
 .st-sunMoonThemeToggleBtn svg .sunRay3 {
   animation-delay: 0.1s !important;
 }
+
 .st-sunMoonThemeToggleBtn svg .sunRay4 {
   animation-delay: 0.17s !important;
 }
+
 .st-sunMoonThemeToggleBtn svg .sunRay5 {
   animation-delay: 0.25s !important;
 }
+
 .st-sunMoonThemeToggleBtn svg .sunRay5 {
   animation-delay: 0.29s !important;
 }
 
-.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg {
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked+svg {
   transform: rotate(90deg);
 }
-.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg mask > circle {
+
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked+svg mask>circle {
   transform: translate(16px, -3px);
 }
-.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg .sunMoon {
+
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked+svg .sunMoon {
   transform: scale(0.55);
 }
-.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg .sunRay {
+
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked+svg .sunRay {
   animation: showRay1832 0.4s ease 0s 1 forwards;
 }
 
@@ -218,6 +221,7 @@ body.dark .ql-container {
   0% {
     transform: scale(0);
   }
+
   100% {
     transform: scale(1);
   }
