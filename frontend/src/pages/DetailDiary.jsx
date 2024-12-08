@@ -271,6 +271,11 @@ const DetailDiary = () => {
               name="heading"
               value={values.heading}
               onChange={headingLimit}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                }
+              }}
               placeholder="Enter your heading"
               spellCheck="false"
               autoCorrect="true"
