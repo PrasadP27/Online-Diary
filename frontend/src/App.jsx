@@ -1,12 +1,13 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Route, Routes, useLocation } from "react-router";
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+const Home = lazy(() => import("./pages/Home"));
 import Navbar from "./component/Navbar";
-import Diaries from "./pages/Diaries";
-import DetailDiary from "./pages/DetailDiary";
-import Home from "./pages/Home";
+const Register = lazy(() => import("./pages/Register"));
+const Login = lazy(() => import("./pages/Login"));
+const Diaries = lazy(() => import("./pages/Diaries"));
+const DetailDiary = lazy(() => import("./pages/DetailDiary"));
+// const PageNotFound = lazy(() => import("./pages/pageNotFound"));
 
 const App = () => {
   const location = useLocation();
