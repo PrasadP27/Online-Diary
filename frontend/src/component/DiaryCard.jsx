@@ -74,7 +74,7 @@ const DiaryCard = (props) => {
       onClick={gotoDiaryPage}
     >
       <div className="text-center mr-3">
-        <div className="border-2 flex flex-col items-center mr-3 p-1 rounded w-full shadow-md text-secondary">
+        <div className="border-2 flex flex-col items-center mr-3 p-1 rounded-lg w-full shadow-md text-secondary">
           <p className="text-sm uppercase font-nunito font-bold tracking-wider text-secondary dark:text-darkPrimary">
             {month}
           </p>
