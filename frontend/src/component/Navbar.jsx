@@ -76,9 +76,9 @@ const Navbar = () => {
       </Link>
       <ul className="font-unbounded font-light text-base flex items-center ">
         <li className="mr-8">
-          <a href="#" className="underline-text">
+          <Link to={"/"} className="underline-text">
             Home
-          </a>
+          </Link>
         </li>
         <li className="mr-8">
           <a href="#" className="underline-text">

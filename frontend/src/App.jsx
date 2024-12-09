@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Navbar from "./component/Navbar";
 import Diaries from "./pages/Diaries";
 import DetailDiary from "./pages/DetailDiary";
+import Home from "./pages/Home";
 
 const App = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const App = () => {
       <Navbar />
       <main>
         <Routes location={location} key={location.pathname}>
-          {/* <Route index element={<Home />} /> */}
+          <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/diaries" element={<Diaries />} />
