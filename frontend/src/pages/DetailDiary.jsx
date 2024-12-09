@@ -202,7 +202,7 @@ const DetailDiary = () => {
   // if loading
   if (loading) {
     return (
-      <section className="flex items-center justify-center flex-col  h-full mt-10">
+      <section className="flex items-center justify-center flex-col h-dvh">
         <svg
           className="animate-spin p-2 bg-indigo-400 dark:bg-indigo-700 size-14 rounded-full duration-500"
           width="33"
