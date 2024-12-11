@@ -22,9 +22,6 @@ body {
   width: 100%;
   background: rgb(244, 251, 254);
   background: linear-gradient(45deg, #d3dfe3 25%, #f1fcff 50%, #f7f0fc 80%);
-  /* background: linear-gradient(45deg, #06181e 25%, #061220 50%, #13081a 80%); */
-  background-attachment: fixed;
-  background-size: cover;
   font-family: "Nunito", "sans-serif";
   @apply text-secondary transition duration-500;
 }
@@ -45,7 +42,7 @@ body.dark {
 }
 
 section {
-  @apply p-10 pt-24 max-w-7xl mx-auto;
+  @apply p-10 pt-24 pb-14 max-w-7xl mx-auto;
 }
 
 h1 {
