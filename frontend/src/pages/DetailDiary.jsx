@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import React, { useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PDFformat from "../component/PDFformat";
 
 const DetailDiary = () => {
   const params = useParams();
@@ -249,8 +252,8 @@ const DetailDiary = () => {
   }
 
   return (
-    <section>
-      <div className=" bg-primary dark:backdrop-blur-sm dark:bg-white/10 rounded-2xl px-10 py-8 max-w-5xl mx-auto mt-8 border-2 shadow-lg">
+    <section className="relative">
+      <div className="relative bg-primary dark:backdrop-blur-sm dark:bg-white/10 rounded-2xl px-10 py-8 max-w-5xl mx-auto mt-8 border-2 shadow-lg">
         {/* time and letters */}
         <div className="flex items-center justify-between mb-5">
           <div className="px-3 py-0 bg-indigo-100 dark:bg-indigo-700 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
@@ -371,56 +374,82 @@ const DetailDiary = () => {
             placeholder="Enter your content..."
           />
         </div>
+
+        <div className="other-btns bg-transparent absolute -right-16 top-20 flex items-center justify-center flex-col gap-5">
+          <PDFDownloadLink
+            document={
+              <PDFformat heading={values.heading} content={values.content} />
+            }
+            fileName={values.heading + "-Inkwell"}
+            className="inline-flex bg-indigo-400 p-2 rounded-xl text-primary hover:bg-indigo-500 dark:bg-indigo-700 dark:hover:bg-indigo-400 transition duration-500"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              className="size-8"
+            >
+              <path
+                stroke="currentcolor"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M8 17H5a1 1 0 01-1-1v-5a2 2 0 012-2h12a2 2 0 012 2v5a1 1 0 01-1 1h-3M8 4h8v5H8V4zm0 11h8v4H8v-4z"
+              ></path>
+              <circle cx="7" cy="12" r="1" fill="currentcolor"></circle>
+            </svg>
+          </PDFDownloadLink>
+
+          <button
+            className="inline-flex bg-red-400 p-2 rounded-xl text-primary hover:bg-red-500 dark:bg-red-700 dark:hover:bg-red-400 transition duration-500"
+            onClick={() => setDelPopup(true)}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="size-8 p-1"
+            >
+              <path
+                d="M10 11V17"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+              <path
+                d="M14 11V17"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+              <path
+                d="M4 7H20"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+              <path
+                d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+              <path
+                d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+            </svg>
+          </button>
+
+          {/* <h4 className="error">{delError}</h4> */}
+        </div>
       </div>
-      <button
-        className="flex items-center justify-center flex-row bg-red-500 px-4 py-2 rounded-lg text-primary mx-auto my-5 text-lg font-nunito hover:bg-red-300 transition-all duration-500 hover:text-secondary"
-        onClick={() => setDelPopup(true)}
-      >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="size-7 p-1 mr-1"
-        >
-          <path
-            d="M10 11V17"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></path>
-          <path
-            d="M14 11V17"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></path>
-          <path
-            d="M4 7H20"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></path>
-          <path
-            d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></path>
-          <path
-            d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></path>
-        </svg>
-        Delete
-      </button>
-      <h4 className="error">{delError}</h4>
 
       {delPopup && (
         <div className="fixed h-dvh w-full top-0 left-0 bg-[#7b7f83a3] dark:bg-[#191a1ba3] z-50 p-3 flex items-end lg:items-center">
