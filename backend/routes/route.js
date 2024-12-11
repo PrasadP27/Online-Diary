@@ -186,8 +186,8 @@ router.put('/diary/:diaryid', (req, res) => {
     const diaryId = req.params.diaryid;
     const { content, heading, tags } = req.body;
 
-    const updateSql = "UPDATE diaries SET date = ?, content = ?, heading = ?, tags = ? WHERE diaryId = ? AND userId = ?";
-    const values = [getCurrentISTDate(), content, heading, tags, diaryId, req.session.user.id];
+    const updateSql = "UPDATE diaries SET content = ?, heading = ?, tags = ? WHERE diaryId = ? AND userId = ?";
+    const values = [content, heading, tags, diaryId, req.session.user.id];
 
     db.query(updateSql, values, (err, result) => {
         if (err) {
