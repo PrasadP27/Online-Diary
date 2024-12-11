@@ -199,6 +199,10 @@ const DetailDiary = () => {
       navigate("/diaries");
     } catch (err) {
       setDelError(err.response ? err.response.data.message : "Error Occured");
+
+      setTimeout(() => {
+        setDelError("");
+      }, 10000);
     }
   };
 
@@ -472,6 +476,7 @@ const DetailDiary = () => {
             >
               Confirm
             </button>
+            <h4 className="error">{delError}</h4>
           </div>
         </div>
       )}
