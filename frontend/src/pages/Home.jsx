@@ -181,7 +181,7 @@ const Home = () => {
   return (
     <>
       {/* hero section */}
-      <section className="flex flex-col items-center justify-center h-dvh w-full max-h-[1000px] text-center">
+      <section className="flex flex-col items-center justify-center h-dvh w-full max-h-[900px] text-center">
         <h1 className="leading-snug text-6xl dark:text-darkPrimary">
           Your{" "}
           <span className=" text-indigo-400 dark:text-indigo-700">
@@ -201,7 +201,15 @@ const Home = () => {
         </Link>
       </section>
 
-      <section></section>
+      <section>
+        <h1>Write anything from anywhere</h1>
+        <p>
+          So often the diary is too far away in the shelf back home that you
+          can’t write when you actually want to and then you forget it or don’t
+          feel like writing anymore. But now you can write whenever you want and
+          from wherever you are.
+        </p>
+      </section>
 
       {/* Features  */}
       <section>
@@ -233,7 +241,7 @@ const Home = () => {
 
       {/* quote  */}
       <section>
-        <div className="relative max-w-5xl mx-auto bg-primary text-center rounded-3xl shadow-2xl border-2 px-4 py-10 text-gray-300 dark:bg-white/10 backdrop-blur-sm ">
+        <div className="relative max-w-5xl mx-auto bg-primary text-center rounded-3xl shadow-2xl border-2 px-4 py-10 text-gray-300 dark:bg-white/10 backdrop-blur-sm dark:border-gray-400">
           <svg
             fill="currentcolor"
             viewBox="0 0 24 24"
@@ -254,6 +262,70 @@ const Home = () => {
             <path d="M20.309 17.708C22.196 15.66 22.006 13.03 22 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292zm-11.007 0C11.19 15.66 10.999 13.03 10.993 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292z"></path>
           </svg>
         </div>
+      </section>
+
+      {/* timline */}
+      <section>
+        <h2 className="font-unbounded font-medium leading-snug text-4xl text-center dark:text-darkPrimary mb-10">
+          Start your journey today
+        </h2>
+        <ol className="border-s border-indigo-400 dark:border-indigo-700 md:flex md:justify-center md:gap-8 md:border-s-0 md:border-t-2">
+          <li>
+            <div className="flex-start flex items-center pt-2 md:block md:pt-0">
+              <div className="-ms-[5px] me-3 h-[12px] w-[12px] rounded-full bg-indigo-400 dark:bg-indigo-700 md:-mt-[5px] md:me-0 md:ms-0"></div>
+              <p className="text-xs uppercase font-nunito font-semibold tracking-widest text-gray-600 dark:text-gray-400 mt-2">
+                Register
+              </p>
+            </div>
+            <div className="ms-4 mt-2 pb-5 md:ms-0">
+              <h4 className="mb-1.5 text-xl font-medium font-unbounded">
+                Create Your Account
+              </h4>
+              <p className="mb-3 font-nunito font-light dark:text-gray-400">
+                Register for a new account to get started. Fill in your details
+                and choose a secure password. This will allow you to access your
+                diary from any device and keep your entries safe.
+              </p>
+            </div>
+          </li>
+          <li>
+            <div className="flex-start flex items-center pt-2 md:block md:pt-0">
+              <div className="-ms-[5px] me-3 h-[12px] w-[12px] rounded-full bg-indigo-400 dark:bg-indigo-700 md:-mt-[5px] md:me-0 md:ms-0"></div>
+              <p className="text-xs uppercase font-nunito font-semibold tracking-widest text-gray-600 dark:text-gray-400 mt-2">
+                Create
+              </p>
+            </div>
+            <div className="ms-4 mt-2 pb-5 md:ms-0">
+              <h4 className="mb-1.5 text-xl font-medium font-unbounded">
+                Start Your First Entry
+              </h4>
+              <p className="mb-3 font-nunito font-light dark:text-gray-400">
+                Start your journey by creating your first diary entry. Reflect
+                on your day, jot down your thoughts, or set goals for the
+                future.
+              </p>
+            </div>
+          </li>
+          <li>
+            <div className="flex-start flex items-center pt-2 md:block md:pt-0">
+              <div className="-ms-[5px] me-3 h-[12px] w-[12px] rounded-full bg-indigo-400 dark:bg-indigo-700 md:-mt-[5px] md:me-0 md:ms-0"></div>
+              <p className="text-xs uppercase font-nunito font-semibold tracking-widest text-gray-600 dark:text-gray-400 mt-2">
+                write
+              </p>
+            </div>
+            <div className="ms-4 mt-2 pb-5 md:ms-0">
+              <h4 className="mb-1.5 text-xl font-medium font-unbounded">
+                Your Journey Awaits!
+              </h4>
+              <p className="mb-3 font-nunito font-light dark:text-gray-400">
+                Incorporate journaling into your daily habits. Whether you jot
+                down a few sentences or fill an entire page, each entry brings
+                you closer to self-discovery. Embrace the journey and savor the
+                experience!
+              </p>
+            </div>
+          </li>
+        </ol>
       </section>
     </>
   );
