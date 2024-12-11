@@ -16,16 +16,12 @@
   font-style: normal;
 }
 
+html,
 body {
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
   background: rgb(244, 251, 254);
-  background-image: linear-gradient(
-    45deg,
-    #d3dfe3 25%,
-    #f1fcff 50%,
-    #f7f0fc 80%
-  );
+  background: linear-gradient(45deg, #d3dfe3 25%, #f1fcff 50%, #f7f0fc 80%);
   /* background: linear-gradient(45deg, #06181e 25%, #061220 50%, #13081a 80%); */
   background-attachment: fixed;
   background-size: cover;
@@ -34,13 +30,8 @@ body {
 }
 
 body.dark {
-  background: #061220;
-  background-image: linear-gradient(
-    45deg,
-    #06181e 25%,
-    #061220 50%,
-    #13081a 80%
-  );
+  background: #040d17;
+  background: linear-gradient(45deg, #041014 25%, #061220 50%, #13081a 80%);
   @apply text-[#e6e5e1] transition duration-500;
 }
 
@@ -117,7 +108,7 @@ body.dark .underline-text-highlight::after {
 
 body.dark .ql-toolbar {
   backdrop-filter: blur(5px) !important;
-  background: #ffffff1a !important;
+  background: #4c5057d5 !important;
 }
 
 .ql-toolbar button {
@@ -145,9 +136,8 @@ body.dark .ql-picker-options {
 
 .ql-container {
   border: none !important;
-  height: 100vh !important;
-  max-height: 1024px;
   font-size: 1.05rem !important;
+  min-height: 1024px;
   padding: 8px !important;
   font-family: "Nunito", "sans-serif" !important;
   color: #333333;
