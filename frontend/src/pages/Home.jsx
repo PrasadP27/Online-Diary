@@ -183,7 +183,11 @@ const Home = () => {
       {/* hero section */}
       <section className="flex flex-col items-center justify-center h-dvh w-full max-h-[1000px] text-center">
         <h1 className="leading-snug text-6xl dark:text-darkPrimary">
-          Your Personal Diary, Anytime, Anywhere
+          Your{" "}
+          <span className=" text-indigo-400 dark:text-indigo-700">
+            Personal Diary
+          </span>
+          , Anytime, Anywhere
         </h1>
         <h3 className="font-nunito font-light text-2xl mt-7 leading-relaxed dark:text-gray-400">
           Your Thoughts are Precious – Write Them Down, Reflect on Them, <br />
