@@ -229,7 +229,7 @@ const Home = () => {
 
       {/* quote  */}
       <section>
-        <div className="relative max-w-5xl mx-auto bg-primary text-center rounded-3xl shadow-2xl border-2 px-4 py-10 text-gray-300">
+        <div className="relative max-w-5xl mx-auto bg-primary text-center rounded-3xl shadow-2xl border-2 px-4 py-10 text-gray-300 dark:bg-white/10 backdrop-blur-sm ">
           <svg
             fill="currentcolor"
             viewBox="0 0 24 24"
@@ -238,7 +238,7 @@ const Home = () => {
           >
             <path d="M20.309 17.708C22.196 15.66 22.006 13.03 22 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292zm-11.007 0C11.19 15.66 10.999 13.03 10.993 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292z"></path>
           </svg>
-          <h2 className="text-3xl leading-relaxed font-unbounded font-medium text-secondary">
+          <h2 className="text-3xl leading-relaxed font-unbounded font-medium text-secondary dark:text-darkPrimary">
             Ink your thoughts, <br /> each page is a step to your true self.
           </h2>
           <svg

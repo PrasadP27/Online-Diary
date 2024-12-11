@@ -26,7 +26,6 @@ const Navbar = () => {
 
     fetchUser();
   }, [location]);
-  // console.log(user);
 
   // logout user
   const userLogout = () => {
@@ -79,11 +78,6 @@ const Navbar = () => {
           <Link to={"/"} className="underline-text">
             Home
           </Link>
-        </li>
-        <li className="mr-8">
-          <a href="#" className="underline-text">
-            About
-          </a>
         </li>
 
         {user && (
