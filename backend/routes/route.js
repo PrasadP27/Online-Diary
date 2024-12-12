@@ -105,7 +105,7 @@ router.get('/diary', (req, res) => {
     }
 
     // Fetch all diaries for the logged-in user
-    const fetchDiariesSql = "SELECT * FROM diaries WHERE userId = ?";
+    const fetchDiariesSql = "SELECT * FROM diaries WHERE userId = ? ORDER BY date DESC";
     db.query(fetchDiariesSql, [req.session.user.id], (err, diaries) => {
         if (err) {
             return res.status(500).json({ message: "Server error. Please try again later.", error: err });
