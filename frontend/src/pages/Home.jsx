@@ -202,16 +202,28 @@ const Home = () => {
         </Link>
       </section>
 
-      <section>
-        <h1>Write anything from anywhere</h1>
-        <p>
-          So often the diary is too far away in the shelf back home that you
-          can’t write when you actually want to and then you forget it or don’t
-          feel like writing anymore. But now you can write whenever you want and
-          from wherever you are.
-        </p>
+      {/* info */}
+      <section className="flex items-start justify-between">
+        <img src="assets/Frame 1.svg" alt="" className="w-[55%]" />
+        <div className="w-[45%] pt-6 px-3">
+          <h2 className="font-unbounded font-medium leading-snug text-4xl text-left mb-4 dark:text-darkPrimary">
+            Write <span className="underline-text-highlight">anything</span>{" "}
+            from anywhere
+          </h2>
+          <p className="font-nunito font-normal text-base dark:text-gray-400 mb-6">
+            So often the diary is too far away in the shelf back home that you
+            can’t write when you actually want to and then you forget it or
+            don’t feel like writing anymore. But now you can write whenever you
+            want and from wherever you are.
+          </p>
+          <Link
+            to={"/diaries"}
+            className=" px-6 py-3 bg-secondary font-unbounded font-light text-sm tracking-wide text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;"
+          >
+            Write now
+          </Link>
+        </div>
       </section>
-
       {/* Features  */}
       <section>
         <h2 className="font-unbounded font-medium leading-snug text-4xl text-center dark:text-darkPrimary">
@@ -239,13 +251,11 @@ const Home = () => {
           ))}
         </div>
       </section>
-
       {/* quote  */}
       <section className="py-32">
         <div className="relative max-w-5xl mx-auto bg-primary text-center rounded-lg shadow-2xl border-2 px-4 py-10 text-gray-300 dark:bg-white/10 backdrop-blur-sm dark:border-gray-400 -rotate-3 transition duration-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            xml:space="preserve"
             viewBox="0 0 20 20"
             className="absolute size-12 -top-[30px] left-2/4 fill-secondary dark:fill-darkPrimary transition duration-500"
           >
@@ -273,7 +283,6 @@ const Home = () => {
           </svg>
         </div>
       </section>
-
       {/* timline */}
       <section className="pt-22 pb-24">
         <h2 className="font-unbounded font-medium leading-snug text-4xl text-center dark:text-darkPrimary mb-10">
