@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router";
 
 const Home = lazy(() => import("./pages/Home"));
 import Navbar from "./component/Navbar";
+import Footer from "./component/Footer";
 const Register = lazy(() => import("./pages/Register"));
 const Login = lazy(() => import("./pages/Login"));
 const Diaries = lazy(() => import("./pages/Diaries"));
@@ -23,6 +24,9 @@ const App = () => {
           <Route path="/diaries/:diaryid" element={<DetailDiary />} />
         </Routes>
       </main>
+      {location.pathname !== "/register" &&
+        location.pathname !== "/login" &&
+        location.pathname !== "/diaries" && <Footer />}
     </>
   );
 };
