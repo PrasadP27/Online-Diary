@@ -130,7 +130,9 @@ const Diary = () => {
   return (
     <section>
       <div className="diaries-header flex items-center justify-between mt-10">
-        <h1>My Diaries</h1>
+        <h1>
+          My <span className="underline-text-highlight">Diaries</span>
+        </h1>
 
         <div className="flex items-center">
           <div

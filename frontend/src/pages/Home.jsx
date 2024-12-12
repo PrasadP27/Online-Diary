@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import Footer from "../component/Footer";
 
 const Home = () => {
   const features = [
@@ -214,7 +215,7 @@ const Home = () => {
       {/* Features  */}
       <section>
         <h2 className="font-unbounded font-medium leading-snug text-4xl text-center dark:text-darkPrimary">
-          All the features,
+          All the <span className="underline-text-highlight">features</span>,
           <br />
           none of the clutter.
         </h2>
@@ -265,9 +266,10 @@ const Home = () => {
       </section>
 
       {/* timline */}
-      <section>
+      <section className="pt-22 pb-24">
         <h2 className="font-unbounded font-medium leading-snug text-4xl text-center dark:text-darkPrimary mb-10">
-          Start your journey today
+          Start your <span className="underline-text-highlight">journey</span>{" "}
+          today
         </h2>
         <ol className="border-s border-indigo-400 dark:border-indigo-700 md:flex md:justify-center md:gap-8 md:border-s-0 md:border-t-2">
           <li>
