@@ -8,7 +8,7 @@ const Register = lazy(() => import("./pages/Register"));
 const Login = lazy(() => import("./pages/Login"));
 const Diaries = lazy(() => import("./pages/Diaries"));
 const DetailDiary = lazy(() => import("./pages/DetailDiary"));
-// const PageNotFound = lazy(() => import("./pages/pageNotFound"));
+const PageNotFound = lazy(() => import("./component/PageNotFound"));
 
 const App = () => {
   const location = useLocation();
@@ -22,6 +22,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/diaries" element={<Diaries />} />
           <Route path="/diaries/:diaryid" element={<DetailDiary />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>
       {location.pathname !== "/register" &&
