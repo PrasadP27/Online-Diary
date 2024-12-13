@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import axios from "axios";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const Navbar = () => {
   const [profDropDown, setProfDropDown] = useState(false);
@@ -8,6 +10,8 @@ const Navbar = () => {
 
   const naviagte = useNavigate();
   const location = useLocation();
+
+  const dropdownRef = useRef();
 
   // fetch user details
   useEffect(() => {
@@ -56,6 +60,19 @@ const Navbar = () => {
   const handleToggle = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
+
+  // Effect to handle dropdown animation
+  useGSAP(() => {
+    if (profDropDown) {
+      gsap.from(dropdownRef.current, {
+        opacity: 0,
+        scale: 0.9,
+        y: -10,
+        duration: 0.2,
+        ease: "back.out(1.7)",
+      });
+    }
+  }, [profDropDown]);
 
   return (
     <header className="fixed top-0 left-0 right-0 flex items-center justify-between max-w-7xl mx-auto backdrop-blur-sm bg-white/30 dark:bg-white/10 rounded-b-xl drop-shadow-md px-14 py-5 z-50">
@@ -188,7 +205,10 @@ const Navbar = () => {
             </svg>
 
             {profDropDown && (
-              <div className="profile-drown absolute top-20 right-0 rounded-xl bg-primary p-2 pt-7 text-center min-w-56 shadow-xl border-2 dark:backdrop-blur-sm dark:bg-gray-900">
+              <div
+                className="profile-drown absolute top-20 right-0 rounded-xl bg-primary p-2 pt-7 text-center min-w-56 shadow-xl border-2 dark:backdrop-blur-sm dark:bg-gray-900"
+                ref={dropdownRef}
+              >
                 {user && (
                   <span className="id font-nunito px-2 py-1 bg-indigo-200 rounded-md dark:bg-indigo-700">
                     ID: {user.id}

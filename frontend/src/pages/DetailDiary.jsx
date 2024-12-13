@@ -395,7 +395,7 @@ const DetailDiary = () => {
               <PDFformat heading={values.heading} content={values.content} />
             }
             fileName={values.heading + "-Inkwell"}
-            className="inline-flex bg-indigo-400 p-2 rounded-xl text-primary hover:bg-indigo-500 dark:bg-indigo-700 dark:hover:bg-indigo-400 transition duration-500"
+            className="diary-animation inline-flex bg-indigo-400 p-2 rounded-xl text-primary hover:bg-indigo-500 dark:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors duration-500"
           >
             <svg
               viewBox="0 0 24 24"
@@ -414,7 +414,7 @@ const DetailDiary = () => {
           </PDFDownloadLink>
 
           <button
-            className="inline-flex bg-red-400 p-2 rounded-xl text-primary hover:bg-red-500 dark:bg-red-700 dark:hover:bg-red-400 transition duration-500"
+            className="diary-animation inline-flex bg-red-400 p-2 rounded-xl text-primary hover:bg-red-500 dark:bg-red-700 dark:hover:bg-red-400 transition-colors duration-500"
             onClick={() => setDelPopup(true)}
           >
             <svg
@@ -460,14 +460,12 @@ const DetailDiary = () => {
               ></path>
             </svg>
           </button>
-
-          {/* <h4 className="error">{delError}</h4> */}
         </div>
       </div>
 
       {delPopup && (
-        <div className="fixed h-dvh w-full top-0 left-0 bg-[#7b7f83a3] dark:bg-[#191a1ba3] z-50 p-3 flex items-end lg:items-center">
-          <div className="bg-primary dark:bg-white/10 dark:backdrop-blur-sm flex items-center justify-center flex-col relative rounded-xl border-2  shadow-xl py-8 px-2 sm:px-4 md:px-7 mx-auto">
+        <div className="popup fixed h-dvh w-full top-0 left-0 bg-[#7b7f83a3] dark:bg-[#191a1ba3] z-50 p-3 flex items-end lg:items-center">
+          <div className="popup-container bg-primary dark:bg-white/10 dark:backdrop-blur-sm flex items-center justify-center flex-col relative rounded-xl border-2  shadow-xl py-8 px-2 sm:px-4 md:px-7 mx-auto">
             <h2 className="font-unbounded font-semibold text-xl text-center text-red-500 mb-4">
               Are you sure?
             </h2>
@@ -475,16 +473,16 @@ const DetailDiary = () => {
               Your diary will be deleted permanently deleted. Are your sure?
             </p>
             <button
-              className="w-4/5 px-3 py-2 bg-indigo-300 dark:bg-indigo-700 dark:border-0 dark:hover:bg-indigo-500 hover:bg-indigo-500 border-2 m-2 text-primary rounded-lg transition-all duration-500 active:scale-[0.98]"
-              onClick={() => setDelPopup(false)}
-            >
-              Cancel
-            </button>
-            <button
               className="w-4/5 px-3 py-2 bg-red-300 hover:bg-red-500 dark:bg-red-600 dark:hover:bg-red-400 dark:border-0 border-2 m-2 text-primary rounded-lg transition-all duration-500 active:scale-[0.98]"
               onClick={deleteEntry}
             >
               Confirm
+            </button>
+            <button
+              className="w-4/5 px-3 py-2 bg-indigo-300 dark:bg-indigo-700 dark:border-0 dark:hover:bg-indigo-500 hover:bg-indigo-500 border-2 m-2 text-primary rounded-lg transition-all duration-500 active:scale-[0.98]"
+              onClick={() => setDelPopup(false)}
+            >
+              Cancel
             </button>
             <h4 className="error">{delError}</h4>
           </div>

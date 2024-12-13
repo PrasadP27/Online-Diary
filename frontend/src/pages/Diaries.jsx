@@ -3,6 +3,9 @@ import axios from "axios";
 import DiaryCard from "../component/DiaryCard";
 import { Link, useLocation, useNavigate } from "react-router";
 
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 const Diary = () => {
   const [diaries, setDiaries] = useState([]);
   const [error, setError] = useState(null);
@@ -51,6 +54,20 @@ const Diary = () => {
   const filteredDiaries = diaries.filter((diary) =>
     diary.heading.toLowerCase().includes(query.toLowerCase())
   );
+
+  useGSAP(() => {
+    let diaryTl = gsap.timeline();
+    diaryTl
+      .from(".diaries-header h1", {
+        scale: 0.96,
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+      })
+      .from(".diaries-content .entries", {
+        opacity: 0,
+      });
+  });
 
   if (error) {
     return (
