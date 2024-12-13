@@ -1,8 +1,162 @@
 import React from "react";
 import { Link } from "react-router";
-import Footer from "../component/Footer";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 const Home = () => {
+  const heroHome = useRef();
+
+  // hero section
+  useGSAP(
+    () => {
+      const hero = gsap.timeline();
+      hero.from(".hero", {
+        scale: 0.96,
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.3,
+      });
+    },
+    { scope: heroHome }
+  );
+
+  // info section
+  useGSAP(() => {
+    let infoTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".info",
+        start: "top center",
+        end: "top top",
+        // markers: true,
+        scrub: false,
+      },
+    });
+
+    infoTl.from(
+      ".info img",
+      {
+        xPercent: -20,
+        opacity: 0,
+        ease: "back.out(1)",
+        duration: 1,
+      },
+      "same"
+    );
+
+    infoTl.from(
+      ".info .info-div",
+      {
+        xPercent: 20,
+        opacity: 0,
+        ease: "back.out(1)",
+        duration: 1,
+      },
+      "same"
+    );
+  });
+
+  // features section
+  useGSAP(() => {
+    let featuresTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".features",
+        start: "top center",
+        end: "top top",
+        // markers: true,
+        scrub: false,
+      },
+    });
+
+    featuresTl
+      .from(".features h2", {
+        scale: 0.96,
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.3,
+      })
+      .from(".features .features-img", {
+        scale: 0,
+      })
+      .from(
+        ".features .features-h3",
+        {
+          y: 50,
+          opacity: 0,
+          duration: 0.6,
+        },
+        "-=0.2"
+      )
+      .from(
+        ".features .features-info",
+        {
+          y: 50,
+          opacity: 0,
+          duration: 0.6,
+        },
+        "-=0.1"
+      );
+  });
+
+  // quote section
+  useGSAP(() => {
+    let quoteTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".quote",
+        start: "top 60%",
+        end: "top top",
+        // markers: true,
+        scrub: false,
+      },
+    });
+
+    quoteTl
+      .from(".quote", {
+        scale: 0,
+      })
+      .to(".quote", {
+        rotate: -3,
+        ease: "power4.out",
+      })
+      .from(".quote .pin", {
+        scale: 0,
+        ease: "power4.out",
+      });
+  });
+
+  // timeline section
+  useGSAP(() => {
+    let timelineTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".timeline",
+        start: "top center",
+        end: "top top",
+        // markers: true,
+        scrub: false,
+      },
+    });
+
+    timelineTl
+      .from(".timeline h2", {
+        scale: 0.96,
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.3,
+      })
+      .from(".timeline li", {
+        y: 50,
+        opacity: 0,
+        stagger: 0.3,
+      });
+  });
+
   const features = [
     {
       icon: (
@@ -182,30 +336,33 @@ const Home = () => {
   return (
     <>
       {/* hero section */}
-      <section className="flex flex-col items-center justify-center h-dvh w-full max-h-[900px] text-center">
-        <h1 className="leading-snug text-6xl dark:text-darkPrimary">
+      <section
+        className="flex flex-col items-center justify-center h-dvh w-full max-h-[900px] text-center"
+        ref={heroHome}
+      >
+        <h1 className="hero leading-snug text-6xl dark:text-darkPrimary">
           Your{" "}
           <span className=" text-indigo-400 dark:text-indigo-700">
             Personal Diary
           </span>
           , Anytime, Anywhere
         </h1>
-        <h3 className="font-nunito font-light text-2xl mt-7 leading-relaxed dark:text-gray-400">
+        <h3 className="hero font-nunito font-light text-2xl mt-7 leading-relaxed dark:text-gray-400">
           Your Thoughts are Precious – Write Them Down, Reflect on Them, <br />
           and Create a Space Just for You!
         </h3>
         <Link
           to={"/diaries"}
-          className="px-8 py-2 mt-6 bg-secondary font-unbounded font-light text-lg tracking-wide text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;"
+          className="hero px-8 py-2 mt-6 bg-secondary font-unbounded font-light text-lg tracking-wide text-primary rounded-lg transition-colors duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;"
         >
           Star today
         </Link>
       </section>
 
       {/* info */}
-      <section className="flex items-start justify-between">
+      <section className="info flex items-start justify-between overflow-hidden">
         <img src="assets/Frame 1.svg" alt="" className="w-[55%]" />
-        <div className="w-[45%] pt-6 px-3">
+        <div className="info-div w-[45%] pt-6 px-3">
           <h2 className="font-unbounded font-medium leading-snug text-4xl text-left mb-4 dark:text-darkPrimary">
             Write <span className="underline-text-highlight">anything</span>{" "}
             from anywhere
@@ -224,8 +381,9 @@ const Home = () => {
           </Link>
         </div>
       </section>
+
       {/* Features  */}
-      <section>
+      <section className="features">
         <h2 className="font-unbounded font-medium leading-snug text-4xl text-center dark:text-darkPrimary">
           All the <span className="underline-text-highlight">features</span>,
           <br />
@@ -238,26 +396,27 @@ const Home = () => {
               key={index}
               className="text-center flex flex-1 basis-80 items-center flex-col p-4"
             >
-              <div className="p-3 rounded-2xl bg-indigo-400 mb-5 dark:bg-indigo-700 text-primary">
+              <div className="features-img p-3 rounded-2xl bg-indigo-400 mb-5 dark:bg-indigo-700 text-primary">
                 {feature.icon}
               </div>
-              <h3 className="font-unbounded font-medium text-xl mb-2">
+              <h3 className="features-h3 font-unbounded font-medium text-xl mb-2">
                 {feature.feature}
               </h3>
-              <p className="font-nunito font-normal text-base dark:text-gray-400">
+              <p className="features-info font-nunito font-normal text-base dark:text-gray-400">
                 {feature.featureText}
               </p>
             </div>
           ))}
         </div>
       </section>
+
       {/* quote  */}
       <section className="py-32">
-        <div className="relative max-w-5xl mx-auto bg-primary text-center rounded-lg shadow-2xl border-2 px-4 py-10 text-gray-300 dark:bg-white/10 backdrop-blur-sm dark:border-gray-400 -rotate-3 transition duration-500">
+        <div className="quote relative max-w-5xl mx-auto bg-primary text-center rounded-lg shadow-2xl border-2 px-4 py-10 text-gray-300 dark:bg-white/10 backdrop-blur-sm dark:border-gray-400 transition-colors duration-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
-            className="absolute size-12 -top-[30px] left-2/4 fill-secondary dark:fill-darkPrimary transition duration-500"
+            className="pin absolute size-12 -top-[30px] left-2/4 fill-secondary dark:fill-darkPrimary transition-colors duration-500 z-10"
           >
             <path d="m4.774 15.287-2.105 3.25.224 1.063 1.06-.227 2.104-3.248a8.352 8.352 0 0 1-1.283-.838zm8.912-1.135c.014-.029.023-.061.036-.092.053-.117.1-.234.138-.357.006-.022.009-.044.016-.064a4.48 4.48 0 0 0 .098-.408v-.021c.195-1.169-.145-2.473-.923-3.651l1.11-1.714c1.279.163 2.385-.159 2.917-.982.923-1.423-.2-3.792-2.505-5.293C12.266.068 9.65.005 8.729 1.426c-.534.824-.378 1.967.293 3.073L7.91 6.213c-1.389-.233-2.716-.016-3.703.64-.006.002-.013.004-.017.008a3.735 3.735 0 0 0-.332.254c-.017.014-.037.027-.051.041a3.024 3.024 0 0 0-.271.272c-.02.024-.048.045-.067.07a3.102 3.102 0 0 0-.29.385c-1.384 2.133-.203 5.361 2.633 7.209 2.838 1.848 6.26 1.614 7.641-.519.087-.135.167-.276.233-.421zm-.815-9.958c-.887-.577-1.32-1.487-.965-2.036.354-.547 1.361-.522 2.246.055.889.577 1.318 1.489.965 2.036-.353.547-1.358.522-2.246-.055z"></path>
           </svg>
@@ -266,7 +425,7 @@ const Home = () => {
             fill="currentcolor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            className="size-12 rotate-180 absolute top-4 left-5"
+            className="quotes-1 size-12 rotate-180 absolute top-4 left-5"
           >
             <path d="M20.309 17.708C22.196 15.66 22.006 13.03 22 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292zm-11.007 0C11.19 15.66 10.999 13.03 10.993 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292z"></path>
           </svg>
@@ -277,14 +436,15 @@ const Home = () => {
             fill="currentcolor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            className="size-12 absolute bottom-4 right-5"
+            className="quotes-2 size-12 absolute bottom-4 right-5"
           >
             <path d="M20.309 17.708C22.196 15.66 22.006 13.03 22 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292zm-11.007 0C11.19 15.66 10.999 13.03 10.993 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292z"></path>
           </svg>
         </div>
       </section>
+
       {/* timline */}
-      <section className="pt-22 pb-24">
+      <section className="timeline pt-22 pb-24">
         <h2 className="font-unbounded font-medium leading-snug text-4xl text-center dark:text-darkPrimary mb-10">
           Start your <span className="underline-text-highlight">journey</span>{" "}
           today
