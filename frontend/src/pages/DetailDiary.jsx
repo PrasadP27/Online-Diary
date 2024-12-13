@@ -268,6 +268,79 @@ const DetailDiary = () => {
   return (
     <section className="relative">
       <div className="relative bg-primary dark:backdrop-blur-sm dark:bg-white/10 rounded-2xl px-10 py-8 max-w-5xl mx-auto mt-8 border-2 shadow-lg">
+        <div className="other-btns bg-transparent md:flex md:flex-row md:justify-between md:mb-8 lg:justify-end xl:absolute xl:-right-16 xl:top-20  xl:flex xl:items-center xl:justify-center xl:flex-col gap-5">
+          <PDFDownloadLink
+            document={
+              <PDFformat heading={values.heading} content={values.content} />
+            }
+            fileName={values.heading + "-Inkwell"}
+            className="diary-animation inline-flex bg-indigo-400 p-2 rounded-xl text-primary hover:bg-indigo-500 dark:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors duration-500"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              className="size-8"
+            >
+              <path
+                stroke="currentcolor"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M8 17H5a1 1 0 01-1-1v-5a2 2 0 012-2h12a2 2 0 012 2v5a1 1 0 01-1 1h-3M8 4h8v5H8V4zm0 11h8v4H8v-4z"
+              ></path>
+              <circle cx="7" cy="12" r="1" fill="currentcolor"></circle>
+            </svg>
+          </PDFDownloadLink>
+
+          <button
+            className="diary-animation inline-flex bg-red-400 p-2 rounded-xl text-primary hover:bg-red-500 dark:bg-red-700 dark:hover:bg-red-400 transition-colors duration-500"
+            onClick={() => setDelPopup(true)}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="size-8 p-1"
+            >
+              <path
+                d="M10 11V17"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+              <path
+                d="M14 11V17"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+              <path
+                d="M4 7H20"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+              <path
+                d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+              <path
+                d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
         {/* time and letters */}
         <div className="flex items-center justify-between mb-5">
           <div className="px-3 py-0 bg-indigo-100 dark:bg-indigo-700 rounded-full inline-block font-unbounded font-light text-xs tracking-widest">
@@ -387,79 +460,6 @@ const DetailDiary = () => {
             }}
             placeholder="Enter your content..."
           />
-        </div>
-
-        <div className="other-btns bg-transparent absolute -right-16 top-20 flex items-center justify-center flex-col gap-5">
-          <PDFDownloadLink
-            document={
-              <PDFformat heading={values.heading} content={values.content} />
-            }
-            fileName={values.heading + "-Inkwell"}
-            className="diary-animation inline-flex bg-indigo-400 p-2 rounded-xl text-primary hover:bg-indigo-500 dark:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors duration-500"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              className="size-8"
-            >
-              <path
-                stroke="currentcolor"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-                d="M8 17H5a1 1 0 01-1-1v-5a2 2 0 012-2h12a2 2 0 012 2v5a1 1 0 01-1 1h-3M8 4h8v5H8V4zm0 11h8v4H8v-4z"
-              ></path>
-              <circle cx="7" cy="12" r="1" fill="currentcolor"></circle>
-            </svg>
-          </PDFDownloadLink>
-
-          <button
-            className="diary-animation inline-flex bg-red-400 p-2 rounded-xl text-primary hover:bg-red-500 dark:bg-red-700 dark:hover:bg-red-400 transition-colors duration-500"
-            onClick={() => setDelPopup(true)}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-8 p-1"
-            >
-              <path
-                d="M10 11V17"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-              <path
-                d="M14 11V17"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-              <path
-                d="M4 7H20"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-              <path
-                d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-              <path
-                d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-            </svg>
-          </button>
         </div>
       </div>
 
