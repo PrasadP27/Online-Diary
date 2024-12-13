@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import axios from "axios";
 
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({ email: "", password: "" });
@@ -68,6 +71,23 @@ const Login = () => {
       return true;
     }
   };
+
+  useGSAP(() => {
+    gsap.from(".login-container .login-left", {
+      scale: 0.96,
+      y: 150,
+      opacity: 0,
+      duration: 0.6,
+      delay: 0.4,
+    });
+
+    gsap.from(".login-container .login-right .login-ani", {
+      xPercent: -120,
+      stagger: 0.3,
+      ease: "back.out(1)",
+      duration: 1,
+    });
+  });
 
   return (
     <section className="h-dvh">
@@ -194,8 +214,8 @@ const Login = () => {
           </Link>
         </div>
 
-        <div className="login-left border-s-8 border-secondary w-2/4 py-5 dark:border-darkPrimary">
-          <div className="logo mb-3 ml-4 flex items-center font-unbounded text-gray-700 dark:text-gray-400">
+        <div className="login-right overflow-hidden border-s-8 border-secondary w-2/4 py-5 dark:border-darkPrimary">
+          <div className="login-ani logo mb-3 ml-4 flex items-center font-unbounded text-gray-700 dark:text-gray-400">
             <svg
               viewBox="0 0 512 512"
               xmlns="http://www.w3.org/2000/svg"
@@ -206,8 +226,8 @@ const Login = () => {
             </svg>
             Inkwell
           </div>
-          <h1 className="mb-3 ml-4">Login</h1>
-          <h4 className="font-nunito text-xl font-medium ml-4 dark:text-gray-400">
+          <h1 className="login-ani mb-3 ml-4">Login</h1>
+          <h4 className="login-ani font-nunito text-xl font-medium ml-4 dark:text-gray-400">
             Take a moment to reflect. Log in to revisit your thoughts.
           </h4>
         </div>

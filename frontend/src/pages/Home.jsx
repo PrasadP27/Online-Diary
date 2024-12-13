@@ -4,9 +4,8 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
   const heroHome = useRef();
@@ -14,8 +13,7 @@ const Home = () => {
   // hero section
   useGSAP(
     () => {
-      const hero = gsap.timeline();
-      hero.from(".hero", {
+      gsap.from(".hero", {
         scale: 0.96,
         y: 50,
         opacity: 0,
