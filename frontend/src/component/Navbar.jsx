@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 
 const Navbar = () => {
   const [profDropDown, setProfDropDown] = useState(false);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
 
   const naviagte = useNavigate();
   const location = useLocation();
