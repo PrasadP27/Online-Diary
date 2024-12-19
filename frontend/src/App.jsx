@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -12,6 +12,11 @@ const PageNotFound = lazy(() => import("./component/PageNotFound"));
 
 const App = () => {
   const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
     <>
       <Navbar />
