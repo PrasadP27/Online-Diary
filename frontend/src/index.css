@@ -42,11 +42,15 @@ body.dark {
 }
 
 section {
-  @apply p-10 pt-24 pb-14 max-w-7xl mx-auto;
+  @apply p-3 py-10 pb-10 sm:p-10 sm:pb-14 md:pt-24 md:pb-14 max-w-7xl mx-auto;
 }
 
 h1 {
-  @apply font-unbounded text-7xl font-extrabold;
+  @apply font-unbounded text-4xl leading-snug md:text-5xl lg:text-6xl lg:leading-normal md:leading-normal font-extrabold;
+}
+
+h2 {
+  @apply text-3xl sm:text-4xl font-medium leading-snug text-left font-unbounded text-secondary dark:text-darkPrimary;
 }
 
 .simple-btn {

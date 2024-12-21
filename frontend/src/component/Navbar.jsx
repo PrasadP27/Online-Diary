@@ -75,7 +75,7 @@ const Navbar = () => {
   }, [profDropDown]);
 
   return (
-    <header className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between w-11/12 max-w-xl px-3 py-4 mx-auto mb-10 shadow-md md:mb-0 lg:py-5 rounded-xl sm:px-10 bg-white/30 backdrop-blur-xl drop-shadow-md md:py-5 md:top-0 md:bottom-auto md:max-w-7xl dark:bg-white/10 md:rounded-b-xl md:rounded-none lg:px-14">
+    <header className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between w-11/12 max-w-xl px-3 py-4 mx-auto mb-5 shadow-md sm:mb-10 md:mb-0 lg:py-5 rounded-xl sm:px-10 bg-white/30 backdrop-blur-xl drop-shadow-md md:py-5 md:top-0 md:bottom-auto md:max-w-7xl dark:bg-white/10 md:rounded-b-xl md:rounded-none lg:px-14">
       <Link
         to={"/"}
         className="items-center hidden text-lg font-medium md:text-xl logo font-unbounded sm:flex"
