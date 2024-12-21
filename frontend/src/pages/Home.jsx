@@ -107,8 +107,8 @@ const Home = () => {
     let quoteTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".quote",
-        start: "top 60%",
-        end: "top top",
+        start: "top bottom",
+        end: "top bottom",
         // markers: true,
         scrub: false,
       },
@@ -162,7 +162,7 @@ const Home = () => {
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="size-8"
+          className="size-5 md:size-7 lg:size-8"
         >
           <path
             d="M14 11H8M10 15H8M16 7H8M20 10V6.8C20 5.11984 20 4.27976 19.673 3.63803C19.3854 3.07354 18.9265 2.6146 18.362 2.32698C17.7202 2 16.8802 2 15.2 2H8.8C7.11984 2 6.27976 2 5.63803 2.32698C5.07354 2.6146 4.6146 3.07354 4.32698 3.63803C4 4.27976 4 5.11984 4 6.8V17.2C4 18.8802 4 19.7202 4.32698 20.362C4.6146 20.9265 5.07354 21.3854 5.63803 21.673C6.27976 22 7.11984 22 8.8 22H12.5M18 21C18 21 21 19.5701 21 17.4252V14.9229L18.8124 14.1412C18.2868 13.9529 17.712 13.9529 17.1864 14.1412L15 14.9229V17.4252C15 19.5701 18 21 18 21Z"
@@ -183,7 +183,7 @@ const Home = () => {
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="size-8"
+          className="size-5 md:size-7 lg:size-8"
         >
           <path
             d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11.8125"
@@ -211,7 +211,7 @@ const Home = () => {
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="size-8"
+          className="size-5 md:size-7 lg:size-8"
         >
           <path
             d="M9.5 19.5V18H4.5C3.95 18 3.45 17.78 3.09 17.41C2.72 17.05 2.5 16.55 2.5 16C2.5 14.97 3.3 14.11 4.31 14.01C4.37 14 4.43 14 4.5 14H19.5C19.57 14 19.63 14 19.69 14.01C20.17 14.05 20.59 14.26 20.91 14.59C21.32 14.99 21.54 15.56 21.49 16.18C21.4 17.23 20.45 18 19.39 18H14.5V19.5C14.5 20.88 13.38 22 12 22C10.62 22 9.5 20.88 9.5 19.5Z"
@@ -253,7 +253,7 @@ const Home = () => {
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
-          className="size-8"
+          className="size-5 md:size-7 lg:size-8"
         >
           <path
             fill="currentcolor"
@@ -271,7 +271,7 @@ const Home = () => {
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="size-8"
+          className="size-5 md:size-7 lg:size-8"
         >
           <path
             d="M2.66992 7.17003V5.35003C2.66992 4.20003 3.59992 3.28003 4.73992 3.28003H19.2599C20.4099 3.28003 21.3299 4.21003 21.3299 5.35003V7.17003"
@@ -306,7 +306,7 @@ const Home = () => {
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
-          className="size-8"
+          className="size-5 md:size-7 lg:size-8"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
           <g
@@ -335,10 +335,10 @@ const Home = () => {
     <>
       {/* hero section */}
       <section
-        className="flex flex-col items-center justify-center h-dvh w-full max-h-[900px] text-center"
+        className="flex flex-col items-center justify-center h-dvh w-full max-h-[900px] text-center pb-0"
         ref={heroHome}
       >
-        <h1 className="text-4xl leading-snug md:text-5xl lg:text-6xl lg:leading-normal md:leading-normal hero dark:text-darkPrimary">
+        <h1 className=" hero dark:text-darkPrimary">
           Your{" "}
           <span className="text-indigo-400 dark:text-indigo-700">
             Personal Diary
@@ -351,21 +351,25 @@ const Home = () => {
         </h3>
         <Link
           to={"/diaries"}
-          className="hero px-8 py-2 mt-6 bg-secondary font-unbounded font-light text-sm md:text-base lg:text-lg tracking-wide text-primary rounded-lg transition-colors duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;"
+          className="hero px-6 sm:px-8 py-2 mt-6 bg-secondary font-unbounded font-light text-sm md:text-base lg:text-lg tracking-wide text-primary rounded-lg transition-colors duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;"
         >
           Star today
         </Link>
       </section>
 
       {/* info */}
-      <section className="flex items-start justify-between overflow-hidden info">
-        <img src="assets/Frame 1.svg" alt="" className="w-[55%]" />
-        <div className="info-div w-[45%] pt-6 px-3">
-          <h2 className="mb-4 text-4xl font-medium leading-snug text-left font-unbounded dark:text-darkPrimary">
+      <section className="flex flex-col-reverse items-start justify-between overflow-hidden md:flex-row info">
+        <img
+          src="assets/Frame 1.svg"
+          alt=""
+          className="md:w-[55%] mt-16 md:mt-0"
+        />
+        <div className="info-div md:w-[45%] pt-6 px-3">
+          <h2 className="mb-4 ">
             Write <span className="underline-text-highlight">anything</span>{" "}
             from anywhere
           </h2>
-          <p className="mb-6 text-base font-normal font-nunito dark:text-gray-400">
+          <p className="mb-6 text-sm font-normal sm:text-base font-nunito dark:text-gray-400">
             So often the diary is too far away in the shelf back home that you
             can’t write when you actually want to and then you forget it or
             don’t feel like writing anymore. But now you can write whenever you
@@ -373,7 +377,7 @@ const Home = () => {
           </p>
           <Link
             to={"/diaries"}
-            className=" px-6 py-3 bg-secondary font-unbounded font-light text-sm tracking-wide text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;"
+            className="px-6 py-2 sm:py-3 bg-secondary font-unbounded font-light text-xs sm:text-sm tracking-wide text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;"
           >
             Write now
           </Link>
@@ -382,7 +386,7 @@ const Home = () => {
 
       {/* Features  */}
       <section className="features">
-        <h2 className="text-4xl font-medium leading-snug text-center font-unbounded dark:text-darkPrimary">
+        <h2 className="text-center ">
           All the <span className="underline-text-highlight">features</span>,
           <br />
           none of the clutter.
@@ -392,15 +396,15 @@ const Home = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="flex flex-col items-center flex-1 p-4 text-center basis-80"
+              className="flex flex-col items-center flex-1 px-2 py-1 text-center sm:p-4 basis-80"
             >
               <div className="p-3 mb-5 bg-indigo-400 features-img rounded-2xl dark:bg-indigo-700 text-primary">
                 {feature.icon}
               </div>
-              <h3 className="mb-2 text-xl font-medium features-h3 font-unbounded">
+              <h3 className="mb-2 text-lg font-medium sm:text-xl features-h3 font-unbounded">
                 {feature.feature}
               </h3>
-              <p className="text-base font-normal features-info font-nunito dark:text-gray-400">
+              <p className="text-sm font-normal sm:text-base features-info font-nunito dark:text-gray-400">
                 {feature.featureText}
               </p>
             </div>
@@ -409,12 +413,12 @@ const Home = () => {
       </section>
 
       {/* quote  */}
-      <section className="py-32">
-        <div className="relative max-w-5xl px-4 py-10 mx-auto text-center text-gray-300 transition-colors duration-500 border-2 rounded-lg shadow-2xl quote bg-primary dark:bg-white/10 backdrop-blur-sm dark:border-gray-400">
+      <section className="px-8 py-32">
+        <div className="relative max-w-5xl px-4 py-10 mx-auto text-center text-gray-300 transition-colors duration-500 border-2 rounded-lg shadow-2xl bg-primary dark:bg-white/10 backdrop-blur-sm dark:border-gray-400 quote">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
-            className="pin absolute size-12 -top-[30px] left-2/4 fill-secondary dark:fill-darkPrimary transition-colors duration-500 z-10"
+            className="pin absolute size-7 md:size-12 -top-[10px] md:-top-[30px] left-2/4 fill-secondary dark:fill-darkPrimary transition-colors duration-500 z-10"
           >
             <path d="m4.774 15.287-2.105 3.25.224 1.063 1.06-.227 2.104-3.248a8.352 8.352 0 0 1-1.283-.838zm8.912-1.135c.014-.029.023-.061.036-.092.053-.117.1-.234.138-.357.006-.022.009-.044.016-.064a4.48 4.48 0 0 0 .098-.408v-.021c.195-1.169-.145-2.473-.923-3.651l1.11-1.714c1.279.163 2.385-.159 2.917-.982.923-1.423-.2-3.792-2.505-5.293C12.266.068 9.65.005 8.729 1.426c-.534.824-.378 1.967.293 3.073L7.91 6.213c-1.389-.233-2.716-.016-3.703.64-.006.002-.013.004-.017.008a3.735 3.735 0 0 0-.332.254c-.017.014-.037.027-.051.041a3.024 3.024 0 0 0-.271.272c-.02.024-.048.045-.067.07a3.102 3.102 0 0 0-.29.385c-1.384 2.133-.203 5.361 2.633 7.209 2.838 1.848 6.26 1.614 7.641-.519.087-.135.167-.276.233-.421zm-.815-9.958c-.887-.577-1.32-1.487-.965-2.036.354-.547 1.361-.522 2.246.055.889.577 1.318 1.489.965 2.036-.353.547-1.358.522-2.246-.055z"></path>
           </svg>
@@ -423,18 +427,18 @@ const Home = () => {
             fill="currentcolor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute rotate-180 quotes-1 size-12 top-4 left-5"
+            className="absolute rotate-180 quotes-1 size-6 sm:size-12 top-4 left-5"
           >
             <path d="M20.309 17.708C22.196 15.66 22.006 13.03 22 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292zm-11.007 0C11.19 15.66 10.999 13.03 10.993 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292z"></path>
           </svg>
-          <h2 className="text-3xl font-medium leading-relaxed font-unbounded text-secondary dark:text-darkPrimary">
+          <h2 className="text-xl font-medium text-center sm:leading-relaxed md:leading-relaxed lg:leading-relaxed md:text-2xl lg:text-3xl font-unbounded text-secondary dark:text-darkPrimary">
             Ink your thoughts, <br /> each page is a step to your true self.
           </h2>
           <svg
             fill="currentcolor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute quotes-2 size-12 bottom-4 right-5"
+            className="absolute quotes-2 size-6 sm:size-12 bottom-4 right-5"
           >
             <path d="M20.309 17.708C22.196 15.66 22.006 13.03 22 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292zm-11.007 0C11.19 15.66 10.999 13.03 10.993 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292z"></path>
           </svg>
@@ -442,8 +446,8 @@ const Home = () => {
       </section>
 
       {/* timline */}
-      <section className="pb-24 timeline pt-22">
-        <h2 className="mb-10 text-4xl font-medium leading-snug text-center font-unbounded dark:text-darkPrimary">
+      <section className="px-8 pb-24 timeline pt-22">
+        <h2 className="mb-10 text-center">
           Start your <span className="underline-text-highlight">journey</span>{" "}
           today
         </h2>
