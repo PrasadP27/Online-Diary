@@ -338,34 +338,34 @@ const Home = () => {
         className="flex flex-col items-center justify-center h-dvh w-full max-h-[900px] text-center"
         ref={heroHome}
       >
-        <h1 className="hero leading-snug text-6xl dark:text-darkPrimary">
+        <h1 className="text-4xl leading-snug md:text-5xl lg:text-6xl lg:leading-normal md:leading-normal hero dark:text-darkPrimary">
           Your{" "}
-          <span className=" text-indigo-400 dark:text-indigo-700">
+          <span className="text-indigo-400 dark:text-indigo-700">
             Personal Diary
           </span>
           , Anytime, Anywhere
         </h1>
-        <h3 className="hero font-nunito font-light text-2xl mt-7 leading-relaxed dark:text-gray-400">
+        <h3 className="font-light text-md sm:text-lg lg:leading-relaxed lg:text-2xl hero font-nunito mt-7 dark:text-gray-400">
           Your Thoughts are Precious – Write Them Down, Reflect on Them, <br />
           and Create a Space Just for You!
         </h3>
         <Link
           to={"/diaries"}
-          className="hero px-8 py-2 mt-6 bg-secondary font-unbounded font-light text-lg tracking-wide text-primary rounded-lg transition-colors duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;"
+          className="hero px-8 py-2 mt-6 bg-secondary font-unbounded font-light text-sm md:text-base lg:text-lg tracking-wide text-primary rounded-lg transition-colors duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;"
         >
           Star today
         </Link>
       </section>
 
       {/* info */}
-      <section className="info flex items-start justify-between overflow-hidden">
+      <section className="flex items-start justify-between overflow-hidden info">
         <img src="assets/Frame 1.svg" alt="" className="w-[55%]" />
         <div className="info-div w-[45%] pt-6 px-3">
-          <h2 className="font-unbounded font-medium leading-snug text-4xl text-left mb-4 dark:text-darkPrimary">
+          <h2 className="mb-4 text-4xl font-medium leading-snug text-left font-unbounded dark:text-darkPrimary">
             Write <span className="underline-text-highlight">anything</span>{" "}
             from anywhere
           </h2>
-          <p className="font-nunito font-normal text-base dark:text-gray-400 mb-6">
+          <p className="mb-6 text-base font-normal font-nunito dark:text-gray-400">
             So often the diary is too far away in the shelf back home that you
             can’t write when you actually want to and then you forget it or
             don’t feel like writing anymore. But now you can write whenever you
@@ -382,25 +382,25 @@ const Home = () => {
 
       {/* Features  */}
       <section className="features">
-        <h2 className="font-unbounded font-medium leading-snug text-4xl text-center dark:text-darkPrimary">
+        <h2 className="text-4xl font-medium leading-snug text-center font-unbounded dark:text-darkPrimary">
           All the <span className="underline-text-highlight">features</span>,
           <br />
           none of the clutter.
         </h2>
 
-        <div className="gap-7 flex flex-wrap mt-12">
+        <div className="flex flex-wrap mt-12 gap-7">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="text-center flex flex-1 basis-80 items-center flex-col p-4"
+              className="flex flex-col items-center flex-1 p-4 text-center basis-80"
             >
-              <div className="features-img p-3 rounded-2xl bg-indigo-400 mb-5 dark:bg-indigo-700 text-primary">
+              <div className="p-3 mb-5 bg-indigo-400 features-img rounded-2xl dark:bg-indigo-700 text-primary">
                 {feature.icon}
               </div>
-              <h3 className="features-h3 font-unbounded font-medium text-xl mb-2">
+              <h3 className="mb-2 text-xl font-medium features-h3 font-unbounded">
                 {feature.feature}
               </h3>
-              <p className="features-info font-nunito font-normal text-base dark:text-gray-400">
+              <p className="text-base font-normal features-info font-nunito dark:text-gray-400">
                 {feature.featureText}
               </p>
             </div>
@@ -410,7 +410,7 @@ const Home = () => {
 
       {/* quote  */}
       <section className="py-32">
-        <div className="quote relative max-w-5xl mx-auto bg-primary text-center rounded-lg shadow-2xl border-2 px-4 py-10 text-gray-300 dark:bg-white/10 backdrop-blur-sm dark:border-gray-400 transition-colors duration-500">
+        <div className="relative max-w-5xl px-4 py-10 mx-auto text-center text-gray-300 transition-colors duration-500 border-2 rounded-lg shadow-2xl quote bg-primary dark:bg-white/10 backdrop-blur-sm dark:border-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -423,18 +423,18 @@ const Home = () => {
             fill="currentcolor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            className="quotes-1 size-12 rotate-180 absolute top-4 left-5"
+            className="absolute rotate-180 quotes-1 size-12 top-4 left-5"
           >
             <path d="M20.309 17.708C22.196 15.66 22.006 13.03 22 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292zm-11.007 0C11.19 15.66 10.999 13.03 10.993 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292z"></path>
           </svg>
-          <h2 className="text-3xl leading-relaxed font-unbounded font-medium text-secondary dark:text-darkPrimary">
+          <h2 className="text-3xl font-medium leading-relaxed font-unbounded text-secondary dark:text-darkPrimary">
             Ink your thoughts, <br /> each page is a step to your true self.
           </h2>
           <svg
             fill="currentcolor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            className="quotes-2 size-12 absolute bottom-4 right-5"
+            className="absolute quotes-2 size-12 bottom-4 right-5"
           >
             <path d="M20.309 17.708C22.196 15.66 22.006 13.03 22 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292zm-11.007 0C11.19 15.66 10.999 13.03 10.993 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.89 2.89 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292z"></path>
           </svg>
@@ -442,24 +442,24 @@ const Home = () => {
       </section>
 
       {/* timline */}
-      <section className="timeline pt-22 pb-24">
-        <h2 className="font-unbounded font-medium leading-snug text-4xl text-center dark:text-darkPrimary mb-10">
+      <section className="pb-24 timeline pt-22">
+        <h2 className="mb-10 text-4xl font-medium leading-snug text-center font-unbounded dark:text-darkPrimary">
           Start your <span className="underline-text-highlight">journey</span>{" "}
           today
         </h2>
-        <ol className="border-s border-indigo-400 dark:border-indigo-700 md:flex md:justify-center md:gap-8 md:border-s-0 md:border-t-2">
+        <ol className="border-indigo-400 border-s dark:border-indigo-700 md:flex md:justify-center md:gap-8 md:border-s-0 md:border-t-2">
           <li>
-            <div className="flex-start flex items-center pt-2 md:block md:pt-0">
+            <div className="flex items-center pt-2 flex-start md:block md:pt-0">
               <div className="-ms-[5px] me-3 h-[12px] w-[12px] rounded-full bg-indigo-400 dark:bg-indigo-700 md:-mt-[5px] md:me-0 md:ms-0"></div>
-              <p className="text-xs uppercase font-nunito font-semibold tracking-widest text-gray-600 dark:text-gray-400 mt-2">
+              <p className="mt-2 text-xs font-semibold tracking-widest text-gray-600 uppercase font-nunito dark:text-gray-400">
                 Register
               </p>
             </div>
-            <div className="ms-4 mt-2 pb-5 md:ms-0">
+            <div className="pb-5 mt-2 ms-4 md:ms-0">
               <h4 className="mb-1.5 text-xl font-medium font-unbounded">
                 Create Your Account
               </h4>
-              <p className="mb-3 font-nunito font-light dark:text-gray-400">
+              <p className="mb-3 font-light font-nunito dark:text-gray-400">
                 Register for a new account to get started. Fill in your details
                 and choose a secure password. This will allow you to access your
                 diary from any device and keep your entries safe.
@@ -467,17 +467,17 @@ const Home = () => {
             </div>
           </li>
           <li>
-            <div className="flex-start flex items-center pt-2 md:block md:pt-0">
+            <div className="flex items-center pt-2 flex-start md:block md:pt-0">
               <div className="-ms-[5px] me-3 h-[12px] w-[12px] rounded-full bg-indigo-400 dark:bg-indigo-700 md:-mt-[5px] md:me-0 md:ms-0"></div>
-              <p className="text-xs uppercase font-nunito font-semibold tracking-widest text-gray-600 dark:text-gray-400 mt-2">
+              <p className="mt-2 text-xs font-semibold tracking-widest text-gray-600 uppercase font-nunito dark:text-gray-400">
                 Create
               </p>
             </div>
-            <div className="ms-4 mt-2 pb-5 md:ms-0">
+            <div className="pb-5 mt-2 ms-4 md:ms-0">
               <h4 className="mb-1.5 text-xl font-medium font-unbounded">
                 Start Your First Entry
               </h4>
-              <p className="mb-3 font-nunito font-light dark:text-gray-400">
+              <p className="mb-3 font-light font-nunito dark:text-gray-400">
                 Start your journey by creating your first diary entry. Reflect
                 on your day, jot down your thoughts, or set goals for the
                 future.
@@ -485,17 +485,17 @@ const Home = () => {
             </div>
           </li>
           <li>
-            <div className="flex-start flex items-center pt-2 md:block md:pt-0">
+            <div className="flex items-center pt-2 flex-start md:block md:pt-0">
               <div className="-ms-[5px] me-3 h-[12px] w-[12px] rounded-full bg-indigo-400 dark:bg-indigo-700 md:-mt-[5px] md:me-0 md:ms-0"></div>
-              <p className="text-xs uppercase font-nunito font-semibold tracking-widest text-gray-600 dark:text-gray-400 mt-2">
+              <p className="mt-2 text-xs font-semibold tracking-widest text-gray-600 uppercase font-nunito dark:text-gray-400">
                 write
               </p>
             </div>
-            <div className="ms-4 mt-2 pb-5 md:ms-0">
+            <div className="pb-5 mt-2 ms-4 md:ms-0">
               <h4 className="mb-1.5 text-xl font-medium font-unbounded">
                 Your Journey Awaits!
               </h4>
-              <p className="mb-3 font-nunito font-light dark:text-gray-400">
+              <p className="mb-3 font-light font-nunito dark:text-gray-400">
                 Incorporate journaling into your daily habits. Whether you jot
                 down a few sentences or fill an entire page, each entry brings
                 you closer to self-discovery. Embrace the journey and savor the
