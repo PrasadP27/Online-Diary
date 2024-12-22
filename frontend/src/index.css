@@ -23,7 +23,7 @@ body {
   background: rgb(244, 251, 254);
   background: linear-gradient(45deg, #d3dfe3 25%, #f1fcff 50%, #f7f0fc 80%);
   font-family: "Nunito", "sans-serif";
-  @apply text-secondary transition duration-500;
+  @apply transition duration-500 text-secondary;
 }
 
 body.dark {
@@ -42,19 +42,19 @@ body.dark {
 }
 
 section {
-  @apply p-3 py-10 pb-10 sm:p-10 sm:pb-14 md:pt-24 md:pb-14 max-w-7xl mx-auto;
+  @apply p-3 py-10 pb-10 mx-auto sm:p-10 sm:pb-14 md:pt-24 md:pb-14 max-w-7xl;
 }
 
 h1 {
-  @apply font-unbounded text-4xl leading-snug md:text-5xl lg:text-6xl lg:leading-normal md:leading-normal font-extrabold;
+  @apply text-4xl font-extrabold leading-snug font-unbounded md:text-5xl lg:text-6xl lg:leading-normal md:leading-normal;
 }
 
 h2 {
-  @apply text-3xl sm:text-4xl font-medium leading-snug text-left font-unbounded text-secondary dark:text-darkPrimary;
+  @apply text-3xl font-medium leading-snug text-left sm:text-4xl font-unbounded text-secondary dark:text-darkPrimary;
 }
 
 .simple-btn {
-  @apply px-3 py-2 bg-secondary text-primary rounded-lg transition duration-300 hover:bg-indigo-400 active:bg-indigo-300 cursor-pointer dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500;
+  @apply px-3 py-2 text-sm transition duration-300 rounded-lg cursor-pointer bg-secondary text-primary hover:bg-indigo-400 active:bg-indigo-300 dark:bg-darkPrimary dark:text-secondary dark:hover:bg-indigo-700 dark:hover:text-darkPrimary dark:active:bg-indigo-500 md:text-base;
 }
 
 .notallowed {
@@ -95,7 +95,7 @@ body.dark .underline-text-highlight::after {
 }
 
 .error {
-  @apply font-nunito text-red-600 font-semibold text-base mt-2;
+  @apply mt-2 text-base font-semibold text-red-600 font-nunito;
 }
 
 /* quill editor styles  */
@@ -180,7 +180,7 @@ body.dark .ql-container {
   transform: scale(0);
 }
 
-.st-sunMoonThemeToggleBtn svg mask > circle {
+.st-sunMoonThemeToggleBtn svg mask>circle {
   transition: transform 0.64s cubic-bezier(0.41, 0.64, 0.32, 1.575);
   transform: translate(0px, 0px);
 }
@@ -205,19 +205,19 @@ body.dark .ql-container {
   animation-delay: 0.29s !important;
 }
 
-.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg {
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked+svg {
   transform: rotate(90deg);
 }
 
-.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg mask > circle {
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked+svg mask>circle {
   transform: translate(16px, -3px);
 }
 
-.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg .sunMoon {
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked+svg .sunMoon {
   transform: scale(0.55);
 }
 
-.st-sunMoonThemeToggleBtn .themeToggleInput:checked + svg .sunRay {
+.st-sunMoonThemeToggleBtn .themeToggleInput:checked+svg .sunRay {
   animation: showRay1832 0.4s ease 0s 1 forwards;
 }
 

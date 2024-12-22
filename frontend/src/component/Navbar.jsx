@@ -204,7 +204,7 @@ const Navbar = () => {
 
         {!user ? (
           <li className="sm:mr-3">
-            <Link to={"/register"} className="text-sm simple-btn">
+            <Link to={"/register"} className="simple-btn">
               Register
             </Link>
           </li>
