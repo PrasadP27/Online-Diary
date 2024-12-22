@@ -97,36 +97,36 @@ const Register = () => {
   });
 
   return (
-    <section className="h-dvh">
-      <div className="register-container flex items-center justify-around h-full w-full">
-        <div className="register-left overflow-hidden border-s-8 border-secondary w-2/4 py-5 dark:border-darkPrimary">
-          <div className="logo register-ani mb-3 ml-4 flex items-center font-unbounded text-gray-700 dark:text-gray-400">
+    <section className="min-h-full pb-32 md:pb-14 md:h-dvh">
+      <div className="flex flex-col items-center justify-around w-full h-full md:flex-row register-container">
+        <div className="relative w-full py-5 mb-8 overflow-hidden text-center border-b-4 sm:w-11/12 md:w-2/4 register-left md:border-b-0 md:border-s-8 border-secondary dark:border-darkPrimary md:text-left">
+          <div className="flex items-center justify-center mb-2 text-sm text-gray-700 md:ml-4 md:text-base md:mb-3 logo register-ani font-unbounded dark:text-gray-400 md:justify-normal">
             <svg
               viewBox="0 0 512 512"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
-              className="size-9 mr-1.5"
+              className="size-5 sm:size-7 md:size-9 mr-1.5"
             >
               <path d="M470.7 20L368.2 49.81l41.5-28.09c-26.2 5.92-59.3 17.5-100.9 36.19l-67.9 70.79L265 79.25c-23.3 12.96-48 29.95-71.8 49.85l-15.8 64.3-3.4-47.6c-23.5 21.6-45.6 45.6-63.9 70.9-19.23 26.5-34.26 54.5-41.79 82.4l-28.12-18.8c2.52 23.7 10.31 44.3 23.09 63.2l-33.62-10.3c7.64 23.5 20.13 38.7 41.25 51-11.83 33.3-17.38 68.1-23.34 102.8l18.4 3.1C87.31 277.4 237.9 141.8 374 81.72l6.9 17.38c-121.7 54.5-216.3 146.5-265.8 279.1 18.1.1 35.8-2.1 52.2-6.3l4.9-60.9 13.1 55.5c10.9-4 20.9-8.8 29.8-14.4l-20.7-43.5 32.8 34.8c8-6.4 14.6-13.6 19.6-21.5 30.4-47.5 62.2-94.7 124.8-134.2l-45.7-16.2 70.1 2.1c11.4-5.8 23.4-12.9 32.5-19.6l-49.7-4 74.7-17.6c5.8-5.8 11.2-11.9 16.1-18 17.3-21.94 29-44.78 26.2-65.55-1.3-10.39-7.5-20.16-17.6-25.63-2.5-1.3-5.2-2.45-7.5-3.22z"></path>
             </svg>
             Inkwell
           </div>
-          <h1 className="register-ani mb-3 ml-4">Register</h1>
-          <h4 className="register-ani font-nunito text-xl font-medium ml-4 dark:text-gray-400">
+          <h1 className="md:ml-4 md:mb-3 register-ani">Register</h1>
+          <h4 className="text-sm font-medium md:ml-4 sm:text-base md:text-xl register-ani font-nunito dark:text-gray-400">
             Every great journey begins with a single step. Let's get started!
           </h4>
         </div>
 
-        <div className="register-right shadow-2xl w-5/12 p-3 bg-primary dark:bg-white/10 dark:backdrop-blur-sm rounded-3xl text-center">
+        <div className="w-11/12 p-3 text-center shadow-2xl md:w-5/12 register-right bg-primary dark:bg-white/10 dark:backdrop-blur-sm rounded-3xl">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col border-b-2 py-3 relative"
+            className="relative flex flex-col py-3 border-b-2"
           >
             <input
               type="text"
               name="name"
               placeholder="Enter Name"
-              className="font-nunito px-5 py-3 m-3 border-2 rounded-lg shadow-sm focus:outline-indigo-200 outline-2 dark:bg-gray-600 dark:text-darkPrimary dark:border-0 dark:focus:outline-indigo-700"
+              className="px-5 py-3 m-3 border-2 rounded-lg shadow-sm font-nunito focus:outline-indigo-200 outline-2 dark:bg-gray-600 dark:text-darkPrimary dark:border-0 dark:focus:outline-indigo-700"
               required
               value={values.name}
               onChange={(e) => setValues({ ...values, name: e.target.value })}
@@ -136,18 +136,18 @@ const Register = () => {
               name="email"
               placeholder="Enter your Email"
               autoComplete="username"
-              className="font-nunito px-5 py-3 m-3 border-2 rounded-lg shadow-sm focus:outline-indigo-200 outline-2 dark:bg-gray-600 dark:text-darkPrimary dark:border-0 dark:focus:outline-indigo-700"
+              className="px-5 py-3 m-3 border-2 rounded-lg shadow-sm font-nunito focus:outline-indigo-200 outline-2 dark:bg-gray-600 dark:text-darkPrimary dark:border-0 dark:focus:outline-indigo-700"
               required
               value={values.email}
               onChange={(e) => setValues({ ...values, email: e.target.value })}
             />
-            <div className="password relative m-3">
+            <div className="relative m-3 password">
               <input
                 type={passVisible ? "text" : "password"}
                 name="password"
                 placeholder="Password"
                 autoComplete="current-password"
-                className="w-full font-nunito px-5 py-3 border-2 rounded-lg shadow-sm focus:outline-indigo-200 outline-2 dark:bg-gray-600 dark:text-darkPrimary dark:border-0 dark:focus:outline-indigo-700"
+                className="w-full px-5 py-3 border-2 rounded-lg shadow-sm font-nunito focus:outline-indigo-200 outline-2 dark:bg-gray-600 dark:text-darkPrimary dark:border-0 dark:focus:outline-indigo-700"
                 required
                 value={values.password}
                 onChange={(e) =>
@@ -160,7 +160,7 @@ const Register = () => {
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute right-4 top-0 translate-y-2/4 size-6 cursor-pointer z-10"
+                    className="absolute top-0 z-10 cursor-pointer right-4 translate-y-2/4 size-6"
                   >
                     <path
                       d="M21.25 9.14969C18.94 5.51969 15.56 3.42969 12 3.42969C10.22 3.42969 8.49 3.94969 6.91 4.91969C5.33 5.89969 3.91 7.32969 2.75 9.14969C1.75 10.7197 1.75 13.2697 2.75 14.8397C5.06 18.4797 8.44 20.5597 12 20.5597C13.78 20.5597 15.51 20.0397 17.09 19.0697C18.67 18.0897 20.09 16.6597 21.25 14.8397C22.25 13.2797 22.25 10.7197 21.25 9.14969ZM12 16.0397C9.76 16.0397 7.96 14.2297 7.96 11.9997C7.96 9.76969 9.76 7.95969 12 7.95969C14.24 7.95969 16.04 9.76969 16.04 11.9997C16.04 14.2297 14.24 16.0397 12 16.0397Z"
@@ -176,7 +176,7 @@ const Register = () => {
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute right-4 top-0 translate-y-2/4 size-6 cursor-pointer z-10"
+                    className="absolute top-0 z-10 cursor-pointer right-4 translate-y-2/4 size-6"
                   >
                     <path
                       d="M21.2714 9.17834C20.9814 8.71834 20.6714 8.28834 20.3514 7.88834C19.9814 7.41834 19.2814 7.37834 18.8614 7.79834L15.8614 10.7983C16.0814 11.4583 16.1214 12.2183 15.9214 13.0083C15.5714 14.4183 14.4314 15.5583 13.0214 15.9083C12.2314 16.1083 11.4714 16.0683 10.8114 15.8483C10.8114 15.8483 9.38141 17.2783 8.35141 18.3083C7.85141 18.8083 8.01141 19.6883 8.68141 19.9483C9.75141 20.3583 10.8614 20.5683 12.0014 20.5683C13.7814 20.5683 15.5114 20.0483 17.0914 19.0783C18.7014 18.0783 20.1514 16.6083 21.3214 14.7383C22.2714 13.2283 22.2214 10.6883 21.2714 9.17834Z"
@@ -237,14 +237,14 @@ const Register = () => {
               </span>
             </button>
 
-            <h4 className="font-nunito text-red-600 font-semibold ">{error}</h4>
-            <h4 className="font-nunito text-green-600 font-semibold ">
+            <h4 className="font-semibold text-red-600 font-nunito ">{error}</h4>
+            <h4 className="font-semibold text-green-600 font-nunito ">
               {successMessage}
             </h4>
           </form>
           <Link
             to={"/login"}
-            className="block mx-auto my-5 w-3/5 px-3 py-3 text-lg cursor-pointer font-semibold bg-green-400  text-primary rounded-lg transition duration-500 hover:bg-green-500 hover:text-white active:bg-green-200 dark:bg-green-600 dark:hover:bg-green-500"
+            className="block w-3/5 px-3 py-3 mx-auto my-5 text-lg font-semibold transition duration-500 bg-green-400 rounded-lg cursor-pointer text-primary hover:bg-green-500 hover:text-white active:bg-green-200 dark:bg-green-600 dark:hover:bg-green-500"
           >
             Login
           </Link>
