@@ -209,7 +209,7 @@ const Register = () => {
                   hover:bg-indigo-500 transition-all dark:bg-indigo-700 dark:hover:bg-indigo-500
                   ${
                     isLoading
-                      ? "w-11 h-11 rounded-full duration-500"
+                      ? "w-11 h-11 rounded-full duration-500 pointer-events-none"
                       : "w-3/5 rounded-lg duration-500"
                   }`}
             >
