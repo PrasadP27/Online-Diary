@@ -70,36 +70,53 @@ const DiaryCard = (props) => {
 
   return (
     <article
-      className=" w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-5 py-7 rounded-3xl shadow-xl bg-primary dark:bg-white/10 dark:backdrop-blur-sm text-secondary dark:text-darkPrimary cursor-pointer  active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4 hover:bg-[#f9faff] dark:hover:bg-gray-900 dark:border-gray-400 dark:hover:border-indigo-700"
+      className=" w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-3 sm:px-5 py-5 sm:py-7 rounded-3xl shadow-xl bg-primary dark:bg-white/10 dark:backdrop-blur-sm text-secondary dark:text-darkPrimary cursor-pointer active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4 hover:bg-[#f9faff] dark:hover:bg-gray-900 dark:border-indigo-900 dark:hover:border-indigo-700"
       onClick={gotoDiaryPage}
     >
-      <div className="text-center mr-3">
-        <div className="border-2 flex flex-col items-center mr-3 p-1 rounded-lg w-full shadow-md text-secondary">
-          <p className="text-sm uppercase font-nunito font-bold tracking-wider text-secondary dark:text-darkPrimary">
+      {/* date  */}
+      <div className="hidden mr-3 text-center md:block">
+        <div className="flex flex-col items-center w-full p-1 mr-3 border-2 rounded-lg shadow-md dark:border-gray-400 text-secondary">
+          <p className="text-sm font-bold tracking-wider uppercase font-nunito text-secondary dark:text-darkPrimary">
             {month}
           </p>
-          <p className="text-2xl font-unbounded font-medium text-secondary dark:text-darkPrimary">
+          <p className="text-2xl font-medium font-unbounded text-secondary dark:text-darkPrimary">
             {day}
           </p>
         </div>
-        <p className="text-xs uppercase font-nunito font-semibold tracking-widest text-gray-500 dark:text-gray-400 mt-2">
+        <p className="mt-2 text-xs font-semibold tracking-widest text-gray-500 uppercase font-nunito dark:text-gray-400">
           {year}
         </p>
       </div>
 
-      <div className="entry-content border-2w-5/6 px-2 w-full overflow-hidden">
-        <h3 className="text-2xl font-unbounded font-medium mb-3">
+      <div className="w-full overflow-hidden sm:px-2 entry-content">
+        {/* mobile device date div */}
+        <div className="block float-left mb-2 mr-3 text-center md:hidden">
+          <div className="flex flex-col items-center w-full p-1 mr-3 border-2 rounded-lg shadow-lg dark:border-gray-400 text-secondary">
+            <p className="text-xs font-bold tracking-wider uppercase font-nunito text-secondary dark:text-darkPrimary">
+              {month}
+            </p>
+            <p className="text-xl font-medium font-unbounded text-secondary dark:text-darkPrimary">
+              {day}
+            </p>
+            <p className="text-xs font-semibold tracking-widest text-gray-500 uppercase font-nunito dark:text-gray-400">
+              {year}
+            </p>
+          </div>
+        </div>
+
+        {/* content  */}
+        <h3 className="mb-3 text-xl font-medium md:text-2xl font-unbounded">
           {highlightText(truncateText(props.heading, 15), props.query)}
         </h3>
-        <p className="text-base font-nunito font-medium tracking-tight text-gray-500 dark:text-gray-400 mb-3">
+        <p className="mb-3 ml-2 text-sm font-medium tracking-tight text-gray-500 md:ml-0 md:text-base text-pretty font-nunito dark:text-gray-400">
           &emsp; {truncateText(convertHtmlToPlainText(props.content), 200)}
         </p>
 
-        <div className="flex items-center justify-start flex-wrap dark:text-darkPrimary">
+        <div className="flex flex-wrap items-center justify-center md:justify-start dark:text-darkPrimary">
           {tagsArray.map((tag, index) => (
             <p
               key={index}
-              className={`${colors[index]} px-3 py-[2px] rounded-full font-semibold text-sm inline m-1`}
+              className={`${colors[index]} px-3 py-[2px] rounded-full font-semibold text-xs md:text-sm inline m-1`}
             >
               #{truncateText(tag.trim(), 7)}
             </p>
