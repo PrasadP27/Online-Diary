@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 
 const DiaryCard = (props) => {
@@ -70,7 +70,7 @@ const DiaryCard = (props) => {
 
   return (
     <article
-      className=" w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-3 sm:px-5 py-5 sm:py-7 rounded-3xl shadow-xl bg-primary dark:bg-white/10 dark:backdrop-blur-sm text-secondary dark:text-darkPrimary cursor-pointer active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4 hover:bg-[#f9faff] dark:hover:bg-gray-900 dark:border-indigo-900 dark:hover:border-indigo-700"
+      className="article w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-3 sm:px-5 py-5 sm:py-7 rounded-3xl shadow-xl bg-primary dark:bg-white/10 dark:backdrop-blur-sm text-secondary dark:text-darkPrimary cursor-pointer active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4 hover:bg-[#f9faff] dark:hover:bg-gray-900 dark:border-indigo-900 dark:hover:border-indigo-700"
       onClick={gotoDiaryPage}
     >
       {/* date  */}
@@ -90,8 +90,8 @@ const DiaryCard = (props) => {
 
       <div className="w-full overflow-hidden sm:px-2 entry-content">
         {/* mobile device date div */}
-        <div className="block float-left mb-2 mr-3 text-center md:hidden">
-          <div className="flex flex-col items-center w-full p-1 mr-3 border-2 rounded-lg shadow-lg dark:border-gray-400 text-secondary">
+        <div className="block float-left mb-3 mr-3 text-center md:hidden">
+          <div className="flex flex-col items-center w-full p-1 mr-3 border-[1px] rounded-lg shadow-lg dark:border-gray-400 text-secondary">
             <p className="text-xs font-bold tracking-wider uppercase font-nunito text-secondary dark:text-darkPrimary">
               {month}
             </p>
