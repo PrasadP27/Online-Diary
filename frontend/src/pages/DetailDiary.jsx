@@ -284,7 +284,7 @@ const DetailDiary = () => {
 
   return (
     <section className="relative">
-      <div className="relative max-w-5xl px-3 py-8 mx-auto border-2 shadow-lg sm:px-6 md:px-10 bg-primary dark:backdrop-blur-sm dark:bg-white/10 rounded-2xl md:mt-8">
+      <div className="relative max-w-5xl px-3 py-8 mx-auto border-2 shadow-lg sm:px-6 md:px-10 bg-primary dark:bg-gray-900 rounded-2xl md:mt-8">
         {/* print & delete button  */}
         <div className="hidden gap-5 bg-transparent other-btns md:flex md:flex-row md:justify-between md:mb-8 lg:justify-end xl:absolute xl:-right-16 xl:top-20 xl:flex xl:items-center xl:justify-center xl:flex-col">
           <PDFDownloadLink
@@ -594,7 +594,7 @@ const DetailDiary = () => {
       {delPopup && (
         <div className="popup fixed h-dvh w-full top-0 left-0 bg-[#7b7f83a3] dark:bg-[#191a1ba3] z-50 p-3 flex items-end lg:items-center">
           <div
-            className="relative flex flex-col items-center justify-center px-2 py-8 mx-auto border-2 shadow-xl popup-container bg-primary dark:bg-white/10 dark:backdrop-blur-sm rounded-xl sm:px-4 md:px-7"
+            className="relative flex flex-col items-center justify-center px-2 py-8 mx-auto border-2 shadow-xl popup-container bg-primary dark:bg-gray-900 rounded-xl sm:px-4 md:px-7"
             ref={delPopupRef}
           >
             <h2 className="mb-4 text-xl font-semibold text-center text-red-500 font-unbounded">

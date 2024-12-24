@@ -414,7 +414,7 @@ const Home = () => {
 
       {/* quote  */}
       <section className="px-8 py-32">
-        <div className="relative max-w-5xl px-4 py-10 mx-auto text-center text-gray-300 transition-colors duration-500 border-2 rounded-lg shadow-2xl bg-primary dark:bg-white/10 backdrop-blur-sm dark:border-gray-400 quote">
+        <div className="relative max-w-5xl px-4 py-10 mx-auto text-center text-gray-300 transition-colors duration-500 border-2 rounded-lg shadow-2xl bg-primary dark:bg-gray-900 dark:border-gray-400 quote">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
