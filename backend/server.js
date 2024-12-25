@@ -7,7 +7,7 @@ const session = require('express-session');
 require('dotenv').config()
 
 app.use(cors({
-    origin: process.env.REQUEST_ORIGIN,
+    origin: 'http://localhost:3000',
     credentials: true
 }));
 
@@ -16,7 +16,7 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 60 * 1000 }, //one day 24hrs
     resave: true,
     saveUninitialized: false,
-    name: "Inkwell.user"
+    name: "Inkwell.user",
 }))
 
 app.use(express.json()); // Middleware for parsing JSON
