@@ -7,7 +7,7 @@ const session = require('express-session');
 require('dotenv').config()
 
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://online-diary-yry4.onrender.com'],
+    origin: process.env.REQUEST_ORIGIN,
     credentials: true
 }));
 
