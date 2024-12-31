@@ -112,6 +112,7 @@ const DiaryCard = (props) => {
           &emsp; {truncateText(convertHtmlToPlainText(props.content), 200)}
         </p>
 
+        {/* tags */}
         <div className="flex flex-wrap items-center justify-center md:justify-start dark:text-darkPrimary">
           {tagsArray.map((tag, index) => (
             <p
