@@ -205,7 +205,7 @@ const Register = () => {
 
             <button
               type="submit"
-              className={`cursor-pointer mx-auto my-5 h-10 am:h-12 bg-indigo-400 font-semibold text-lg text-primary 
+              className={`cursor-pointer mx-auto my-5 h-10 sm:h-12 bg-indigo-400 font-semibold text-lg text-primary 
                   hover:bg-indigo-500 transition-all dark:bg-indigo-700 dark:hover:bg-indigo-500
                   ${
                     isLoading
