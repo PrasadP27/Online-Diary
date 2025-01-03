@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 
 const DiaryCard = (props) => {
-  const [pin, setPin] = useState(false);
-
   const navigate = useNavigate();
 
   const formatDate = () => {
@@ -70,14 +68,18 @@ const DiaryCard = (props) => {
     return tempElement.innerText || tempElement.textContent;
   };
 
-  const logclick = () => {
-    setPin(!pin);
+  const pinClick = () => {
+    // setPin(!pin);
+
+    // get the diaryId of that diary that is clicked
+    props.onTogglePin(props.diaryId);
+
     console.log(props.diaryId);
   };
 
   return (
     <article
-      className="article w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-3 sm:px-5 py-5 sm:py-7 rounded-3xl shadow-xl bg-primary dark:bg-gray-900 text-secondary dark:text-darkPrimary cursor-pointer active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-4 hover:bg-[#f9faff] dark:hover:bg-gray-900 dark:border-indigo-900 dark:hover:border-indigo-700 relative group/pinToggle"
+      className="article w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-3 sm:px-5 py-5 sm:py-7 rounded-3xl shadow-xl bg-primary dark:bg-gray-900 text-secondary dark:text-darkPrimary cursor-pointer active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-3 md:my-4 hover:bg-[#f9faff] dark:hover:bg-gray-900 dark:border-indigo-900 dark:hover:border-indigo-700 relative group/pinToggle"
       onClick={gotoDiaryPage}
     >
       {/* date  */}
@@ -135,13 +137,13 @@ const DiaryCard = (props) => {
       {/* pin */}
       <div
         className={`absolute top-0 right-0 z-20 p-2 mt-3 mr-3 group hover:scale-[1.08] active:scale-[0.98] transition duration-150 rounded-full  shadow-md ${
-          pin
+          props.isPinned
             ? "block bg-indigo-50 dark:bg-slate-700"
             : "block md:group-hover/pinToggle:block md:hidden bg-indigo-50 dark:bg-slate-800"
         }`}
         onClick={(event) => {
           event.stopPropagation();
-          logclick();
+          pinClick();
         }}
       >
         <svg
@@ -156,7 +158,7 @@ const DiaryCard = (props) => {
           <path
             strokeWidth={1}
             stroke="currentcolor"
-            fill={pin ? "currentcolor" : "none"}
+            fill={props.isPinned ? "currentcolor" : "none"}
             className="md:group-hover:fill-slate-500"
             d="M16.2188 4.83755L19.1835 7.80516C21.1954 9.81905 22.2014 10.826 21.9667 11.9115C21.7319 12.9969 20.4 13.4973 17.7362 14.4981L15.8922 15.191C15.1788 15.459 14.8221 15.593 14.5468 15.8314C14.4262 15.9358 14.3184 16.054 14.2254 16.1835C14.013 16.4795 13.9119 16.8472 13.7095 17.5825C13.2493 19.2551 13.0192 20.0914 12.4713 20.4041C12.2404 20.5358 11.9792 20.6049 11.7134 20.6045C11.0827 20.6036 10.4699 19.9902 9.24441 18.7635L7.77841 17.2961L6.69935 16.2163L5.28476 14.8C4.06698 13.581 3.45809 12.9715 3.45413 12.3446C3.45242 12.0735 3.5228 11.8069 3.65804 11.5721C3.97088 11.0289 4.80107 10.8 6.46145 10.3423C7.19811 10.1392 7.56644 10.0377 7.86251 9.82451C7.99536 9.72887 8.11619 9.61754 8.22239 9.49292C8.45908 9.2152 8.59063 8.85617 8.85373 8.1381L9.5217 6.31506C10.5086 3.62155 11.0021 2.2748 12.0904 2.03468C13.1788 1.79457 14.1921 2.8089 16.2188 4.83755Z"
           ></path>

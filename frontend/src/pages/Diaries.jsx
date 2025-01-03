@@ -11,6 +11,7 @@ const Diary = () => {
   const [diaries, setDiaries] = useState([]);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
+  const [pinnedDiaries, setPinnedDiaries] = useState([]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -58,6 +59,21 @@ const Diary = () => {
     diary.heading.toLowerCase().includes(query.toLowerCase())
   );
 
+  // pin and unpin
+  const togglePin = (diaryId) => {
+    // function creates an array which contains all pinned diarieId
+    setPinnedDiaries((prevPinned) => {
+      if (prevPinned.includes(diaryId)) {
+        // If already pinned, unpin it
+        return prevPinned.filter((id) => id !== diaryId);
+      } else {
+        // If not pinned, pin it
+        return [...prevPinned, diaryId];
+      }
+    });
+  };
+
+  // animation
   useGSAP(() => {
     let diaryTl = gsap.timeline();
     diaryTl.from(".diaries-header h1", {
@@ -68,6 +84,7 @@ const Diary = () => {
     });
   });
 
+  // error code
   if (error) {
     return (
       <section>
@@ -163,6 +180,8 @@ const Diary = () => {
       </section>
     );
   }
+
+  console.log(pinnedDiaries);
 
   return (
     <section className="p-5 pt-10 pb-32 md:pt-24 md:pb-14 ">
@@ -282,18 +301,54 @@ const Diary = () => {
             </span>
           </div>
         ) : (
-          <div className="flex flex-wrap items-center justify-around gap-3 md:mt-12 md:px-4 entries">
+          <div className="md:mt-12 md:px-4 entries">
             {filteredDiaries.length > 0 ? (
-              filteredDiaries.map((diary) => (
-                <DiaryCard
-                  key={diary.diaryId}
-                  query={query}
-                  link={`/diaries/${diary.diaryId}`}
-                  {...diary}
-                />
-              ))
+              <>
+                {/* pinned diaries  */}
+                <h3 className="mb-2 text-lg font-medium sm:text-xl features-h3 font-unbounded">
+                  <span className="text-indigo-400 dark:text-indigo-700">
+                    Pinned
+                  </span>{" "}
+                  diaries
+                </h3>
+                <div className="flex flex-wrap items-center justify-around gap-3">
+                  {filteredDiaries
+                    .filter((diary) => pinnedDiaries.includes(diary.diaryId))
+                    .map((diary) => (
+                      <DiaryCard
+                        key={diary.diaryId}
+                        query={query}
+                        link={`/diaries/${diary.diaryId}`}
+                        {...diary}
+                        isPinned={pinnedDiaries.includes(diary.diaryId)}
+                        onTogglePin={togglePin}
+                      />
+                    ))}
+                </div>
+
+                {/* all diaries  */}
+                <div className="mt-10">
+                  <h3 className="mb-2 text-lg font-medium sm:text-xl features-h3 font-unbounded">
+                    All diaries
+                  </h3>
+                  <div className="flex flex-wrap items-center justify-around gap-3">
+                    {filteredDiaries
+                      .filter((diary) => !pinnedDiaries.includes(diary.diaryId))
+                      .map((diary) => (
+                        <DiaryCard
+                          key={diary.diaryId}
+                          query={query}
+                          link={`/diaries/${diary.diaryId}`}
+                          {...diary}
+                          isPinned={pinnedDiaries.includes(diary.diaryId)}
+                          onTogglePin={togglePin}
+                        />
+                      ))}
+                  </div>
+                </div>
+              </>
             ) : (
-              <h4 className="mt-10 text-xl font-bold md:mt-4 font-nunito text-secondary dark:text-darkPrimary">
+              <h4 className="mx-auto mt-10 text-xl font-bold md:mt-4 font-nunito text-secondary dark:text-darkPrimary">
                 No diaries found for
                 <span className="text-indigo-400">"{query}"</span>
               </h4>
