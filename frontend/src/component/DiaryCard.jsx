@@ -136,7 +136,7 @@ const DiaryCard = (props) => {
       <div
         className={`absolute top-0 right-0 z-20 p-2 mt-3 mr-3 group hover:scale-[1.08] active:scale-[0.98] transition duration-150 rounded-full  shadow-md ${
           pin
-            ? "block bg-indigo-100 dark:bg-slate-700"
+            ? "block bg-indigo-50 dark:bg-slate-700"
             : "block md:group-hover/pinToggle:block md:hidden bg-indigo-50 dark:bg-slate-800"
         }`}
         onClick={(event) => {
