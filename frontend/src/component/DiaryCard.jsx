@@ -68,15 +68,6 @@ const DiaryCard = (props) => {
     return tempElement.innerText || tempElement.textContent;
   };
 
-  const pinClick = () => {
-    // setPin(!pin);
-
-    // get the diaryId of that diary that is clicked
-    props.onTogglePin(props.diaryId);
-
-    console.log(props.diaryId);
-  };
-
   return (
     <article
       className="article w-full lg:w-[45%] min-h-[150px] border-2 flex items-start justify-evenly px-3 sm:px-5 py-5 sm:py-7 rounded-3xl shadow-xl bg-primary dark:bg-gray-900 text-secondary dark:text-darkPrimary cursor-pointer active:scale-[0.99] transition duration-500 underline-text overflow-hidden hover:border-indigo-300 my-3 md:my-4 hover:bg-[#f9faff] dark:hover:bg-gray-900 dark:border-indigo-900 dark:hover:border-indigo-700 relative group/pinToggle"
@@ -143,7 +134,8 @@ const DiaryCard = (props) => {
         }`}
         onClick={(event) => {
           event.stopPropagation();
-          pinClick();
+          // get the diaryId of that diary that is clicked
+          props.onTogglePin(props.diaryId);
         }}
       >
         <svg
