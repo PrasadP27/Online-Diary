@@ -568,7 +568,7 @@ const DetailDiary = () => {
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 className="w-auto px-2 py-1 text-sm border-b-2 border-gray-300 md:text-base focus:outline-none sm:w-2/4 dark:bg-transparent"
-                placeholder="Enter 3 tag"
+                placeholder={`Enter ${3 - tags.length} tag`}
               />
             )}
           </div>
