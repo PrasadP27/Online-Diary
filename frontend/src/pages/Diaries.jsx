@@ -310,7 +310,7 @@ const Diary = () => {
                     <svg
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
-                      className="mr-2 size-3 md:size-5"
+                      className="mr-2 size-4 md:size-5"
                     >
                       <path
                         d="M3.30236 21.7764L7.77841 17.2961L6.69935 16.2163L2.22345 20.6965C1.92552 20.9947 1.92552 21.4782 2.22345 21.7764C2.52138 22.0747 3.00443 22.0747 3.30236 21.7764Z"
@@ -331,7 +331,7 @@ const Diary = () => {
                       diaries
                     </h3>
                   </div>
-                  <div className="flex flex-wrap items-center justify-around gap-3">
+                  <div className="flex flex-wrap items-center justify-around gap-3 pt-5 pb-10 border-b-2 border-gray-300 dark:border-gray-800">
                     {filteredDiaries
                       .filter((diary) => pinnedDiaries.includes(diary.diaryId))
                       .map((diary) => (
@@ -353,7 +353,7 @@ const Diary = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="mr-2 size-3 md:size-5"
+                        className="mr-2 size-4 md:size-5"
                       >
                         <path
                           fillRule="evenodd"
@@ -369,7 +369,7 @@ const Diary = () => {
                         diaries
                       </h3>
                     </div>
-                    <div className="flex flex-wrap items-center justify-around gap-3">
+                    <div className="flex flex-wrap items-center justify-around gap-3 pt-5 ">
                       {filteredDiaries
                         .filter(
                           (diary) => !pinnedDiaries.includes(diary.diaryId)
