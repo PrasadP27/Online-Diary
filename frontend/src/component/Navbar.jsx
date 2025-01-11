@@ -46,10 +46,16 @@ const Navbar = () => {
     naviagte("/");
   };
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme ? JSON.parse(savedTheme) : false;
+  });
 
   // Effect to add/remove the dark class on body
   useEffect(() => {
+    //update in localstorage
+    localStorage.setItem("theme", JSON.stringify(isDarkMode));
+
     if (isDarkMode) {
       document.body.classList.add("dark");
     } else {
