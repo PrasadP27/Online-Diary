@@ -83,6 +83,7 @@ router.post('/login', (req, res) => {
     });
 });
 
+// logout 
 router.post('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
@@ -156,7 +157,7 @@ router.post('/diary/:diaryid', (req, res) => {
         } else {
             // Diary does not exist, create a new one
             // it gives error that duplicate diary entry hence used ignore 
-            const insertSql = "INSERT IGNORE INTO diaries (`diaryId`, `userId`, `date`) VALUES (?, ?, ?)";
+            const insertSql = "INSERT IGNORE INTO diaries (`diaryId`, `userId`, `date`, `pin`) VALUES (?, ?, ?, false)";
             const values = [diaryId, req.session.user.id, getCurrentISTDate()];
 
             db.query(insertSql, values, (err) => {
@@ -177,6 +178,7 @@ router.post('/diary/:diaryid', (req, res) => {
     });
 });
 
+// update entry 
 router.put('/diary/:diaryid', (req, res) => {
 
     if (!req.session.user) {
@@ -238,5 +240,14 @@ router.delete('/diary/:diaryid', (req, res) => {
         return res.status(200).json({ message: "Diary deleted successfully" });
     });
 });
+
+// update pin status 
+router.put('/diary/pinUpdate', (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({ message: "No user Found" });
+    }
+
+    const pinUpdateSql = "UPATE "
+})
 
 module.exports = router;
