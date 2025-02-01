@@ -2,6 +2,7 @@ const express = require('express');
 const db = require("../server");
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 
 router.get('/', (req, res) => {
 
@@ -242,12 +243,24 @@ router.delete('/diary/:diaryid', (req, res) => {
 });
 
 // update pin status 
-router.put('/diary/pinUpdate', (req, res) => {
+router.put('/pinUpdate', (req, res) => {
+    // console.log(req.session.user);
+
     if (!req.session.user) {
         return res.status(401).json({ message: "No user Found" });
     }
 
-    const pinUpdateSql = "UPATE "
+    const pinUpdateSql = "UPDATE diaries SET pin = NOT pin WHERE diaryId = ? "
+
+    const diaryId = req.body.diaryId;
+
+    db.query(pinUpdateSql, [diaryId], (err, results) => {
+        if (err) {
+            return res.status(500).json({ message: "Error pinning." });
+        }
+
+        return res.status(200).json({ message: "Pin updated successfully." });
+    })
 })
 
 module.exports = router;
