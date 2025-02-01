@@ -84,7 +84,7 @@ const DiaryCard = (props) => {
         }
       );
     } catch (err) {
-      console.log(err);
+      console.log("Unable to pin");
       setPinError(true);
     } finally {
       setPinLoading(false);
@@ -154,9 +154,11 @@ const DiaryCard = (props) => {
             ${
               pinLoading
                 ? "block pointer-events-none bg-indigo-50 dark:bg-slate-700"
+                : pinError
+                ? "block pointer-events-none bg-red-200 dark:bg-red-950"
                 : props.isPinned
                 ? "block bg-indigo-50 dark:bg-slate-700"
-                : "block md:group-hover/pinToggle:block md:hidden  bg-indigo-50 dark:bg-slate-800"
+                : "block md:group-hover/pinToggle:block md:hidden bg-indigo-50 dark:bg-slate-800"
             }
           `}
         onClick={(event) => {
@@ -183,6 +185,21 @@ const DiaryCard = (props) => {
               d="M19.563 1.38627V2.67967L19.7078 2.71615C20.8768 3.01463 21.7527 3.32968 22.6723 3.78071C24.8249 4.84528 26.6878 6.467 28.042 8.47011C29.248 10.251 29.9858 12.2375 30.2654 14.4562C30.3126 14.831 30.326 15.1792 30.326 16.0149C30.326 17.169 30.2923 17.5869 30.1205 18.5022C29.7365 20.575 28.8404 22.5681 27.5266 24.2761C26.8158 25.2014 25.8019 26.2029 24.862 26.9027C23.3056 28.0634 21.7324 28.7997 19.7078 29.3137L19.563 29.3502V30.6436V31.9403L19.691 31.9204C20.0616 31.8541 21.1362 31.5689 21.6516 31.4031C24.8216 30.365 27.6041 28.3951 29.6152 25.7652C30.2789 24.8996 30.7337 24.1667 31.2356 23.1618C31.8959 21.8419 32.3102 20.6479 32.5999 19.2318C33.4354 15.1394 32.6606 10.9441 30.417 7.40886C28.4126 4.24833 25.3067 1.8373 21.692 0.640079C21.1867 0.470943 20.038 0.169149 19.7078 0.112772L19.563 0.0895557V1.38627Z"
               fill="currentcolor"
             ></path>
+          </svg>
+        ) : pinError ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="firebrick"
+            className="size-4 md:size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+            />
           </svg>
         ) : (
           <svg
