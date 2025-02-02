@@ -341,7 +341,7 @@ const Diary = () => {
               pindiaries.length !== 0 ? (
                 <div className="flex flex-col items-center justify-center">
                   {/* pinned diaries  */}
-                  <div className="flex items-center">
+                  <div className="flex items-center w-full">
                     <svg
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
@@ -366,19 +366,17 @@ const Diary = () => {
                       diaries
                     </h3>
                   </div>
-                  <div className="flex flex-wrap items-center justify-around gap-3 pt-5 pb-10 border-b-2 border-gray-300 dark:border-gray-800">
-                    {filteredPinDiaries
-                      // .filter((diary) => pinnedDiaries.includes(diary.diaryId))
-                      .map((diary) => (
-                        <DiaryCard
-                          key={diary.diaryId}
-                          query={query}
-                          link={`/diaries/${diary.diaryId}`}
-                          {...diary}
-                          onTogglePin={togglePin}
-                          isPinned={pindiaries.includes(diary.diaryId)}
-                        />
-                      ))}
+                  <div className="flex flex-wrap items-center justify-around w-full gap-3 pt-5 pb-10 border-b-2 border-gray-300 dark:border-gray-800">
+                    {filteredPinDiaries.map((diary) => (
+                      <DiaryCard
+                        key={diary.diaryId}
+                        query={query}
+                        link={`/diaries/${diary.diaryId}`}
+                        {...diary}
+                        onTogglePin={togglePin}
+                        isPinned={true}
+                      />
+                    ))}
                   </div>
 
                   {/* all diaries  */}
@@ -405,20 +403,16 @@ const Diary = () => {
                       </h3>
                     </div>
                     <div className="flex flex-wrap items-center justify-around gap-3 pt-5 ">
-                      {filteredDiaries
-                        // .filter(
-                        //   (diary) => !pindiaries.includes(diary.diaryId)
-                        // )
-                        .map((diary) => (
-                          <DiaryCard
-                            key={diary.diaryId}
-                            query={query}
-                            link={`/diaries/${diary.diaryId}`}
-                            {...diary}
-                            onTogglePin={togglePin}
-                            isPinned={pindiaries.includes(diary.diaryId)}
-                          />
-                        ))}
+                      {filteredDiaries.map((diary) => (
+                        <DiaryCard
+                          key={diary.diaryId}
+                          query={query}
+                          link={`/diaries/${diary.diaryId}`}
+                          {...diary}
+                          onTogglePin={togglePin}
+                          isPinned={pindiaries.includes(diary.diaryId)}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
