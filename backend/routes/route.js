@@ -117,7 +117,14 @@ router.get('/diary', (req, res) => {
             return res.status(404).json({ message: "No diaries avaliable." });
         }
 
-        return res.status(200).json({ diary: diaries, user: req.session.user });
+        const pinnedDiaries = diaries.filter(diary => diary.pin === 1);
+        const unpinnedDiaries = diaries.filter(diary => diary.pin === 0);
+
+        return res.status(200).json({
+            diary: unpinnedDiaries,
+            pindiary: pinnedDiaries,
+            user: req.session.user
+        });
     });
 });
 
