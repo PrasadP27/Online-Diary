@@ -7,16 +7,15 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 const Diary = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [loading, setLoading] = useState(true);
   const [diaries, setDiaries] = useState([]);
   const [pindiaries, setPinDiaries] = useState([]);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [tempPinnedDiaries, setTempPinnedDiaries] = useState([]);
-  const [tempDiary, setTempDiary] = useState([]);
-
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const fetchDiaries = async () => {
@@ -325,19 +324,6 @@ const Diary = () => {
         ) : (
           <div className="flex flex-wrap items-center justify-around gap-3 md:mt-12 md:px-4 entries">
             {filteredAllDiaries.length > 0 ? (
-              // (
-              //   filteredDiaries.map((diary) => (
-              //     <DiaryCard
-              //       key={diary.diaryId}
-              //       query={query}
-              //       link={`/diaries/${diary.diaryId}`}
-              //       {...diary}
-              //       onTogglePin={togglePin}
-              //       isPinned={pindiaries.includes(diary.diaryId)}
-              //     />
-              //   ))
-              // )
-
               pindiaries.length !== 0 ? (
                 <div className="flex flex-col items-center justify-center">
                   {/* pinned diaries  */}
@@ -410,7 +396,10 @@ const Diary = () => {
                           link={`/diaries/${diary.diaryId}`}
                           {...diary}
                           onTogglePin={togglePin}
-                          isPinned={pindiaries.includes(diary.diaryId)}
+                          isPinned={
+                            tempPinnedDiaries.includes(diary.diaryId) ||
+                            pindiaries.includes(diary.diaryId)
+                          }
                         />
                       ))}
                     </div>
@@ -424,7 +413,7 @@ const Diary = () => {
                     link={`/diaries/${diary.diaryId}`}
                     {...diary}
                     onTogglePin={togglePin}
-                    isPinned={pindiaries.includes(diary.diaryId)}
+                    isPinned={tempPinnedDiaries.includes(diary.diaryId)}
                   />
                 ))
               )
