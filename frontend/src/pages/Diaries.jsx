@@ -7,13 +7,15 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 const Diary = () => {
-  const [loading, setLoading] = useState(true);
-  const [diaries, setDiaries] = useState([]);
-  const [error, setError] = useState(null);
-  const [query, setQuery] = useState("");
-
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [loading, setLoading] = useState(true);
+  const [diaries, setDiaries] = useState([]);
+  const [pindiaries, setPinDiaries] = useState([]);
+  const [error, setError] = useState(null);
+  const [query, setQuery] = useState("");
+  const [tempPinnedDiaries, setTempPinnedDiaries] = useState([]);
 
   useEffect(() => {
     const fetchDiaries = async () => {
@@ -22,6 +24,16 @@ const Diary = () => {
           withCredentials: true,
         });
         setDiaries(response.data.diary);
+        setPinDiaries(response.data.pindiary);
+
+        // get the pindiairy and normal diary IDS
+        const diaryIds = [...response.data.diary.map((diary) => diary.diaryId)];
+        const pinDiaryIds = [
+          ...response.data.pindiary.map((pinnedDiary) => pinnedDiary.diaryId),
+        ];
+
+        console.log(diaryIds);
+        console.log(pinDiaryIds);
       } catch (err) {
         setError(
           err.response ? err.response.data.message : "An error occurred"
@@ -33,6 +45,9 @@ const Diary = () => {
 
     fetchDiaries();
   }, [location]);
+
+  console.log(diaries);
+  console.log(pindiaries);
 
   // random string generate
   const generateRandomString = () => {
@@ -53,11 +68,35 @@ const Diary = () => {
     navigate(`/diaries/${randomString}`);
   };
 
-  // filter diaries
+  // filter diaries for all diaries
+  const filteredAllDiaries = [...diaries, ...pindiaries].filter((diary) =>
+    diary.heading.toLowerCase().includes(query.toLowerCase())
+  );
+
   const filteredDiaries = diaries.filter((diary) =>
     diary.heading.toLowerCase().includes(query.toLowerCase())
   );
 
+  const filteredPinDiaries = pindiaries.filter((diary) =>
+    diary.heading.toLowerCase().includes(query.toLowerCase())
+  );
+
+  // pin and unpin
+  const togglePin = (diaryId) => {
+    // function creates an array which contains all pinned diarieId
+    setTempPinnedDiaries((prevPinned) => {
+      if (prevPinned.includes(diaryId)) {
+        // If already pinned, unpin it
+        return prevPinned.filter((id) => id !== diaryId);
+      } else {
+        // If not pinned, pin it
+        return [...prevPinned, diaryId];
+      }
+    });
+  };
+  console.log(tempPinnedDiaries);
+
+  // animation
   useGSAP(() => {
     let diaryTl = gsap.timeline();
     diaryTl.from(".diaries-header h1", {
@@ -68,6 +107,7 @@ const Diary = () => {
     });
   });
 
+  // error code
   if (error) {
     return (
       <section>
@@ -283,18 +323,103 @@ const Diary = () => {
           </div>
         ) : (
           <div className="flex flex-wrap items-center justify-around gap-3 md:mt-12 md:px-4 entries">
-            {filteredDiaries.length > 0 ? (
-              filteredDiaries.map((diary) => (
-                <DiaryCard
-                  key={diary.diaryId}
-                  query={query}
-                  link={`/diaries/${diary.diaryId}`}
-                  {...diary}
-                />
-              ))
+            {filteredAllDiaries.length > 0 ? (
+              pindiaries.length !== 0 ? (
+                <div className="flex flex-col items-center justify-center">
+                  {/* pinned diaries  */}
+                  <div className="flex items-center w-full">
+                    <svg
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mr-2 size-4 md:size-5"
+                    >
+                      <path
+                        d="M3.30236 21.7764L7.77841 17.2961L6.69935 16.2163L2.22345 20.6965C1.92552 20.9947 1.92552 21.4782 2.22345 21.7764C2.52138 22.0747 3.00443 22.0747 3.30236 21.7764Z"
+                        fill="currentcolor"
+                      ></path>
+                      <path
+                        strokeWidth={1}
+                        stroke="currentcolor"
+                        fill="currentcolor"
+                        className="md:group-hover:fill-slate-500"
+                        d="M16.2188 4.83755L19.1835 7.80516C21.1954 9.81905 22.2014 10.826 21.9667 11.9115C21.7319 12.9969 20.4 13.4973 17.7362 14.4981L15.8922 15.191C15.1788 15.459 14.8221 15.593 14.5468 15.8314C14.4262 15.9358 14.3184 16.054 14.2254 16.1835C14.013 16.4795 13.9119 16.8472 13.7095 17.5825C13.2493 19.2551 13.0192 20.0914 12.4713 20.4041C12.2404 20.5358 11.9792 20.6049 11.7134 20.6045C11.0827 20.6036 10.4699 19.9902 9.24441 18.7635L7.77841 17.2961L6.69935 16.2163L5.28476 14.8C4.06698 13.581 3.45809 12.9715 3.45413 12.3446C3.45242 12.0735 3.5228 11.8069 3.65804 11.5721C3.97088 11.0289 4.80107 10.8 6.46145 10.3423C7.19811 10.1392 7.56644 10.0377 7.86251 9.82451C7.99536 9.72887 8.11619 9.61754 8.22239 9.49292C8.45908 9.2152 8.59063 8.85617 8.85373 8.1381L9.5217 6.31506C10.5086 3.62155 11.0021 2.2748 12.0904 2.03468C13.1788 1.79457 14.1921 2.8089 16.2188 4.83755Z"
+                      ></path>
+                    </svg>
+                    <h3 className="text-xl font-medium sm:text-2xl features-h3 font-unbounded">
+                      <span className="text-indigo-400 dark:text-indigo-700">
+                        Pinned
+                      </span>{" "}
+                      diaries
+                    </h3>
+                  </div>
+                  <div className="flex flex-wrap items-center justify-around w-full gap-3 pt-5 pb-10 border-b-2 border-gray-300 dark:border-gray-800">
+                    {filteredPinDiaries.map((diary) => (
+                      <DiaryCard
+                        key={diary.diaryId}
+                        query={query}
+                        link={`/diaries/${diary.diaryId}`}
+                        {...diary}
+                        onTogglePin={togglePin}
+                        isPinned={true}
+                      />
+                    ))}
+                  </div>
+
+                  {/* all diaries  */}
+                  <div className="mt-20">
+                    <div className="flex items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="mr-2 size-4 md:size-5"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M2.25 4.125c0-1.036.84-1.875 1.875-1.875h5.25c1.036 0 1.875.84 1.875 1.875V17.25a4.5 4.5 0 1 1-9 0V4.125Zm4.5 14.25a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z"
+                          clipRule="evenodd"
+                        />
+                        <path d="M10.719 21.75h9.156c1.036 0 1.875-.84 1.875-1.875v-5.25c0-1.036-.84-1.875-1.875-1.875h-.14l-8.742 8.743c-.09.089-.18.175-.274.257ZM12.738 17.625l6.474-6.474a1.875 1.875 0 0 0 0-2.651L15.5 4.787a1.875 1.875 0 0 0-2.651 0l-.1.099V17.25c0 .126-.003.251-.01.375Z" />
+                      </svg>
+                      <h3 className="text-xl font-medium sm:text-2xl features-h3 font-unbounded">
+                        <span className="text-indigo-400 dark:text-indigo-700">
+                          All
+                        </span>{" "}
+                        diaries
+                      </h3>
+                    </div>
+                    <div className="flex flex-wrap items-center justify-around gap-3 pt-5 ">
+                      {filteredDiaries.map((diary) => (
+                        <DiaryCard
+                          key={diary.diaryId}
+                          query={query}
+                          link={`/diaries/${diary.diaryId}`}
+                          {...diary}
+                          onTogglePin={togglePin}
+                          isPinned={
+                            tempPinnedDiaries.includes(diary.diaryId) ||
+                            pindiaries.includes(diary.diaryId)
+                          }
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                filteredAllDiaries.map((diary) => (
+                  <DiaryCard
+                    key={diary.diaryId}
+                    query={query}
+                    link={`/diaries/${diary.diaryId}`}
+                    {...diary}
+                    onTogglePin={togglePin}
+                    isPinned={tempPinnedDiaries.includes(diary.diaryId)}
+                  />
+                ))
+              )
             ) : (
               <h4 className="mt-10 text-xl font-bold md:mt-4 font-nunito text-secondary dark:text-darkPrimary">
-                No diaries found for
+                No diaries found for{" "}
                 <span className="text-indigo-400">"{query}"</span>
               </h4>
             )}

@@ -2,6 +2,7 @@ const express = require('express');
 const db = require("../server");
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 
 router.get('/', (req, res) => {
 
@@ -83,6 +84,7 @@ router.post('/login', (req, res) => {
     });
 });
 
+// logout 
 router.post('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
@@ -115,7 +117,14 @@ router.get('/diary', (req, res) => {
             return res.status(404).json({ message: "No diaries avaliable." });
         }
 
-        return res.status(200).json({ diary: diaries, user: req.session.user });
+        const pinnedDiaries = diaries.filter(diary => diary.pin === 1);
+        const unpinnedDiaries = diaries.filter(diary => diary.pin === 0);
+
+        return res.status(200).json({
+            diary: unpinnedDiaries,
+            pindiary: pinnedDiaries,
+            user: req.session.user
+        });
     });
 });
 
@@ -156,7 +165,7 @@ router.post('/diary/:diaryid', (req, res) => {
         } else {
             // Diary does not exist, create a new one
             // it gives error that duplicate diary entry hence used ignore 
-            const insertSql = "INSERT IGNORE INTO diaries (`diaryId`, `userId`, `date`) VALUES (?, ?, ?)";
+            const insertSql = "INSERT IGNORE INTO diaries (`diaryId`, `userId`, `date`, `pin`) VALUES (?, ?, ?, false)";
             const values = [diaryId, req.session.user.id, getCurrentISTDate()];
 
             db.query(insertSql, values, (err) => {
@@ -177,6 +186,7 @@ router.post('/diary/:diaryid', (req, res) => {
     });
 });
 
+// update entry 
 router.put('/diary/:diaryid', (req, res) => {
 
     if (!req.session.user) {
@@ -238,5 +248,26 @@ router.delete('/diary/:diaryid', (req, res) => {
         return res.status(200).json({ message: "Diary deleted successfully" });
     });
 });
+
+// update pin status 
+router.put('/pinUpdate', (req, res) => {
+    // console.log(req.session.user);
+
+    if (!req.session.user) {
+        return res.status(401).json({ message: "No user Found" });
+    }
+
+    const pinUpdateSql = "UPDATE diaries SET pin = NOT pin WHERE diaryId = ? "
+
+    const diaryId = req.body.diaryId;
+
+    db.query(pinUpdateSql, [diaryId], (err, results) => {
+        if (err) {
+            return res.status(500).json({ message: "Error pinning." });
+        }
+
+        return res.status(200).json({ message: "Pin updated successfully." });
+    })
+})
 
 module.exports = router;
