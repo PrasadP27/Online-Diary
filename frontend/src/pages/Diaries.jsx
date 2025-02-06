@@ -31,9 +31,6 @@ const Diary = () => {
         const pinDiaryIds = [
           ...response.data.pindiary.map((pinnedDiary) => pinnedDiary.diaryId),
         ];
-
-        console.log(diaryIds);
-        console.log(pinDiaryIds);
       } catch (err) {
         setError(
           err.response ? err.response.data.message : "An error occurred"
@@ -45,9 +42,6 @@ const Diary = () => {
 
     fetchDiaries();
   }, [location]);
-
-  console.log(diaries);
-  console.log(pindiaries);
 
   // random string generate
   const generateRandomString = () => {
@@ -94,7 +88,6 @@ const Diary = () => {
       }
     });
   };
-  console.log(tempPinnedDiaries);
 
   // animation
   useGSAP(() => {
@@ -325,7 +318,7 @@ const Diary = () => {
           <div className="flex flex-wrap items-center justify-around gap-3 md:mt-12 md:px-4 entries">
             {filteredAllDiaries.length > 0 ? (
               pindiaries.length !== 0 ? (
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center w-full">
                   {/* pinned diaries  */}
                   <div className="flex items-center w-full">
                     <svg
@@ -366,7 +359,7 @@ const Diary = () => {
                   </div>
 
                   {/* all diaries  */}
-                  <div className="mt-20">
+                  <div className="w-full mt-20">
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
