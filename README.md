@@ -23,21 +23,21 @@ This is a full-stack online diary application that allows users to write and man
 
 ### Frontend
 
-- **HTML5**, **CSS3**, **JavaScript**
-- **React.js** (for dynamic and responsive UI)
-- **Tailwind CSS** (for styling and responsiveness)
+- `HTML5`, `CSS3`, `JavaScript`
+- `React.js` (for dynamic and responsive UI)
+- `Tailwind CSS` (for styling and responsiveness)
 
 ### Backend
 
-- **Node.js** (for server-side logic)
-- **Express.js** (for API routes)
-- **MySQL** (for data storage)
-- **bcryptjs** (for password hashing)
+- `Node.js` (for server-side logic)
+- `Express.js` (for API routes)
+- `MySQL` (for data storage)
+- `bcryptjs` (for password hashing)
 
 ### Other
 
-- **Express Sessions** for user authentication
-- **LocalStorage** for saving user preferences (e.g., dark/light mode)
+- `Express Sessions` for user authentication
+- `LocalStorage` for saving user preferences (e.g., dark/light mode)
 
 ## Security Considerations
 
