@@ -6,27 +6,18 @@ This is a full-stack online diary application that allows users to write and man
 
 ## Features
 
-- **Full-Stack Application:** Built with modern web technologies (Frontend: HTML, CSS, JavaScript, Backend: Node.js, Express, MongoDB).
-- **Responsive UI:** The app is fully responsive and optimized for both desktop and mobile devices.
-- **Dark and Light Mode:** Switch between dark and light themes, with the user's preference saved for future visits.
-- **User Authentication & Session Management:** Secure user authentication with session tracking, allowing for personalized entries.
-- **Diary Entry Features:**
-  Pin Diary Entries: Mark entries as important by pinning them to the top of the list.
-- **Export Diary Entries as PDF:** Save your diary entries as PDFs for offline reading or printing.
-- **Rich Text Editor:** Write diary entries using a rich text editor with support for text formatting.
-- **CRUD Operations:** Create, Read, Update, and Delete diary entries with ease.
-- **Password Security:** All passwords are hashed and securely stored in the database using industry-standard encryption methods.
-- **Search Feature:** Easily search through your diary entries by keyword or date.
-- **Error Handling:** Comprehensive error handling to ensure a smooth user experience.
-
-## Security Considerations
-
-- **Password Hashing:**
-  Ensure that passwords are stored securely in the database using hashing algorithms like bcrypt.
-- **Session Management:**
-  Secure the session cookies using HTTPS, and consider setting a session expiration time to minimize security risks.
-- **Input Validation:**
-  Sanitize inputs to prevent attacks and unauthorized entries.
+- **Full-Stack Application:** Built with HTML, CSS, JavaScript (Frontend), Node.js, Express, MongoDB (Backend).
+- **Responsive UI:** Optimized for both desktop and mobile devices.
+- **Dark/Light Mode:** Toggle themes with saved preferences.
+- **User Authentication:** Secure login with session management.
+- **Diary Features:**
+  - Pin entries to the top.
+  - Export entries as PDFs.
+  - Rich text editor with formatting.
+  - CRUD operations for managing entries.
+- **Password Security:** Passwords are hashed and stored securely.
+- **Search:** Find entries by keyword or date.
+- **Error Handling:** Ensures a smooth user experience.
 
 ## Technologies Used
 
@@ -47,6 +38,15 @@ This is a full-stack online diary application that allows users to write and man
 
 - **Express Sessions** for user authentication
 - **LocalStorage** for saving user preferences (e.g., dark/light mode)
+
+## Security Considerations
+
+- **Password Hashing:**
+  Ensure that passwords are stored securely in the database using hashing algorithms like bcrypt.
+- **Session Management:**
+  Secure the session cookies using HTTPS, and consider setting a session expiration time to minimize security risks.
+- **Input Validation:**
+  Sanitize inputs to prevent attacks and unauthorized entries.
 
 <!-- ## Installation
 
