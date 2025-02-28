@@ -48,11 +48,9 @@ This is a full-stack online diary application that allows users to write and man
 - **Input Validation:**
   Sanitize inputs to prevent attacks and unauthorized entries.
 
-<!-- ## Installation
+## Local setup / Installation
 
-Install my-project with npm
-
-vist this website  -->
+visit my website [CoderDev](https://pp-coderdev.netlify.app/) to get the detail instruction how to setup and run the project locally
 
 ## Usage Guide
 
@@ -78,5 +76,7 @@ vist this website  -->
 Feel free to fork the repository and submit pull requests for improvements or bug fixes. Contributions are always welcome!
 
 <br >
+
+LocalSetup visit [CoderDev](https://pp-coderdev.netlify.app/)
 
 To reach me visit [Prasad Panchal](https://prasadp.netlify.app/)
