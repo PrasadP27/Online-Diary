@@ -50,7 +50,7 @@ This is a full-stack online diary application that allows users to write and man
 
 ## Local setup / Installation
 
-visit my website [CoderDev](https://pp-coderdev.netlify.app/) to get the detail instruction how to setup and run the project locally
+visit my website [CoderDev](https://pp-coderdev.netlify.app/online-diary) to get the detail instruction how to setup and run the project locally
 
 ## Usage Guide
 
