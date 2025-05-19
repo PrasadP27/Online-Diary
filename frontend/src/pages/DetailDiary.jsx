@@ -65,6 +65,7 @@ const DetailDiary = () => {
         setTags(fetchedTags);
       } catch (err) {
         setError(err.response ? err.response.data.message : "Error");
+        console.log(err);
       } finally {
         setLoading(false);
         setAllowSave(false);
