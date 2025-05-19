@@ -6,7 +6,7 @@ This is a full-stack online diary application that allows users to write and man
 
 ## Features
 
-- **Full-Stack Application:** Built with HTML, CSS, JavaScript (Frontend), Node.js, Express, MongoDB (Backend).
+- **Full-Stack Application:** Built with React, Node.js, Express, MySql.
 - **Responsive UI:** Optimized for both desktop and mobile devices.
 - **Dark/Light Mode:** Toggle themes with saved preferences.
 - **User Authentication:** Secure login with session management.
@@ -23,7 +23,6 @@ This is a full-stack online diary application that allows users to write and man
 
 ### Frontend
 
-- `HTML5`, `CSS3`, `JavaScript`
 - `React.js` (for dynamic and responsive UI)
 - `Tailwind CSS` (for styling and responsiveness)
 
